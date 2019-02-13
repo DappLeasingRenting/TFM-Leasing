@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>AHORRO COOPERATIVO</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  <div class="container ">
+    <div class="panel panel-primary" id="content0" style="display: none;">
+      <div class="panel panel-primary">
+        <div class="row ">
+          <div class="col-md-12">
+            <h1 class="text-center">AHORRO COOPERATIVO</h1>
+            <hr />
+            <br />
+          </div>
+          <div id="content" class="col-md-12">
+            <p id="accountAddress" class="text-center bg-warning"></p>
+            <h5 class="text-center bg-primary"><dt>Ingrese su nombre, y seleccione el botón alta</dt></h5>
+            <form class="form-horizontal" onSubmit="App.crearAhorrador(); return false;">
+              <div class="form-group">
+                <label class="control-label col-sm-4 text-right" for="fname">Nombre de Usuario</label>
+                <div class="col-sm-4">
+                  <input class="form-control" type="text" name="fname" id="fname">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4 text-right" for="idUsuario">ID Usuario</label>
+                <div class="col-sm-4">
+                  <input class="form-control" type="text" name="Id Usuario" id="idUsuario">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12 text-center">
+                  <button type="submit" class="btn">Alta</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-md-12">
+        <div class="panel panel-primary" id="contentOwner" style="display: none;">
+          <h4 class="text-center bg-primary">Traspaso incial de Tokens (Only Owner)</h4>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-12 text-left">
+                  <div style="margin: 5px">
+                <button id="transferenciainicial" onclick="App.TranferenciaInicialTokens()" class="btn btn-info">Inicializar contrato</button>
+              </div>
+              <div class="col-sm-12 text-left">
+                <div style="margin: 5px">
+              <button id="DetenerContrato" onclick="App.detenerContrato()" class="btn btn-danger">Detener contrato</button>
+            </div>
+              </div>
+              <div class="col-sm-12 text-left">
+                <div style="margin: 5px">
+              <button id="DetenerContrato" onclick="App.activarContrato()" class="btn btn-success">Activar contrato</button>
+            </div>
+              </div>
+              <h3 class="text-center bg-warninng">
+                ¿Contrato Desactivado?: <span id="estadoContrato" class="estadoContrato"></span>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-md-12">
+        <div class="panel panel-primary" id="content1" style="display: none;">
+          <h4 class="text-center bg-primary">Consulta Ahorrador</h4>
+          <div class="form-group">
+            <div class="row">
+              <div class="col-sm-12 text-left">
+                <div style="margin: 5px">
+                  <button id="envioConsulta" onclick="App.infoAhorrador()" class="btn btn-info">Consuta</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <table class="table table-bordered table-responsive">
+            <div style="margin: 5px">
+              <thead>
+                <tr class="info">
+                  <th scope="col">Address</th>
+                  <th scope="col">Id Usuario</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Solicitud de Ahorro</th>
+                  <th scope="col">Balance Ahorro</th>
+                  <th scope="col">Balance Usuario</th>
+                  <th scope="col">Periodo solicitud Ahorro</th>
+                  <th scope="col">Score Puntualidad</th>
+                </tr>
+              </thead>
+              <tbody id="Ahorrador" class="success">
+                <tr class="success"></tr>
+              </tbody>
+            </div>
+          </table>
+          <table class="table table-bordered table-responsive">
+            <div style="margin: 5px">
+              <thead>
+                <tr class="danger">
+                  <th scope="col">Pagos</th>
+                  <th scope="col">Fecha de Pago</th>
+                </tr>
+              </thead>
+              <tbody class="success" id="fechasDepositos">
+              </tbody>
+          </table>
+          <p id="accountAddress"></p>
+        </div>
+        <div class="panel panel-primary" id="content2" class="text-center" style="display: none;">
+          <h4 class="text-center bg-primary">Gestionar Ahorro</h4>
+          <form onSubmit="App.depositarTokens(); return false;" role="form1">
+            <div class="form-group">
+              <label for="depositoTokens" class="col-lg-2 control-label">Deposito</label>
+              <div class="input-group">
+                <input id="depositoTokens" class="form-control input-lg" type="number" name="number" value="50" min="50"
+                  max="50" pattern="[0-9]">
+                <br>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-danger btn-lg">Deposito Tokens</button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <form onSubmit="App.retiroTokens(); return false;" role="form2">
+            <div class="form-group">
+              <label for="retiroTokens" class="col-lg-2 control-label">Prestamo</label>
+              <div class="input-group">
+                <input id="retiroTokens" class="form-control input-lg" type="number" name="number" value="300" min="300"
+                  max="300" pattern="[0-9]">
+                <br>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-success btn-lg">Retiro Tokens</button>
+                </span>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="row ">
+      <div class="col-md-12">
+        <div class="panel panel-primary" id="content3" class="text-center" style="display: none;">
+          <h4 class="text-center bg-primary">
+            Bienvenido "Token Ahorro Cooperativo" (TAC)!
+          </h4>
+          <h4 class="text-center">
+            El precio de este token es <span class="token-price"></span> Ether. Actualmente posees <span class="dapp-balance"></span>&nbsp;TAC.
+          </h4>
+          <form onSubmit="App.ComprarTokens(); return false;" role="form">
+
+            <div class="form-group">
+              <div class="input-group">
+                <input id="numeroTokens" class="form-control input-lg" type="number" name="number" value="1" min="1"
+                  pattern="[0-9]"><br>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-success btn-lg">Comprar Tokens</button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <br>
+          <div class="progress text-center">
+            <div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0"
+              aria-valuemax="100">
+            </div>
+          </div>
+          <p class="text-center"><span class="tokens-vendidos"></span> / <span class="tokens-disponibles"></span>
+            tokens
+            vendidos</p>
+          <hr>
+          <h4 class="text-center bg-primary">
+            El Saldo de la Cuenta Común es <span class="contrato-balance text-center"></span>&nbsp;TAC.
+          </h4>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
