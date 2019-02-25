@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>Alta de usuario</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+  <div class="container " style="margin-top:100px;">
+    <div class="panel panel-primary" id="content0" style="display: none;">
+        <div class="row ">
+          <div class="col-md-12">
+            <h1 class="text-center">Registro de datos de usuario</h1>
+            <hr />
+            <br />
+          </div>
+          <div id="content" class="col-md-12">
+            <h5 class="text-center bg-primary"><dt>Introduzca sus datos de registro</dt></h5>
+            <form class="form-horizontal">
+              <div class="form-group">
+                <label class="control-label col-sm-4 text-right" for="UsuarioLabelAlta">Nombre de Usuario</label>
+                <div class="col-sm-4">
+                  <input class="form-control" type="text" name="IdUsuarioAlta" id="IdUsuarioAlta">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-4 text-right" for="ContraseñaLabel">Contraseña</label>
+                <div class="col-sm-4">
+                  <input class="form-control" type="password" value="FakePSW" id="ContraseñaAlta">
+                </div>
+              </div>
+              <div class="form-group">
+                  <label class="control-label col-sm-4 text-right" for="ContraseñaRepeatLabel">Repetir Contraseña</label>
+                  <div class="col-sm-4">
+                    <input class="form-control" type="password" onchange="ComparePass(this);" value="FakePSW" id="ContraseñaAltaRepeat">
+                  </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4 text-right" for="TipoUsuarioLabel" >Tipo Usuario</label>
+                    <div class="col-sm-4">
+                        <select id="ListaTipoUsuario" name="ListaTipoUsuario" onchange="TypeUser(this);">
+                            <option value="" selected disabled hidden>Elija opción</option>
+                            <option value="Cliente">Cliente</option>
+                            <option value="Empresa Aseguradora">Empresa Aseguradora</option>
+                            <option value="Empresa Financiera">Empresa Financiera</option>
+                          </select>
+        
+                    </div>
+                  </div>
+                  <div class="form-group col-sm-8 text-left">
+                      <label class="control-label col-sm-4" for="NombreLabelAlta">Nombre</label>
+                      <div class="col-sm-4">
+                        <input class="form-control" type="text-left" name="Nombre" id="Nombre">
+                      </div>
+                  </div>
+
+                  <div class="form-group col-sm-8 text-left">
+                      <label class="control-label col-sm-4" for="ApellidosLabelAlta">Apellidos</label>
+                      <div class="col-sm-4">
+                        <input class="form-control" type="text-left" name="Apellidos" id="Apellidos">
+                      </div>
+                  </div>
+                  <div class="form-group col-sm-8 text-left">
+                        <label class="control-label col-sm-4" for="TelefonoLabelAlta">Teléfono</label>
+                        <div class="col-sm-4">
+                          <input class="form-control" type="text-left" name="Telefono" id="Telefono">
+                        </div>
+                  </div>
+                  <div class="form-group col-sm-8 text-left">
+                          <label class="control-label col-sm-4" for="EmailLabelAlta">Email</label>
+                          <div class="col-sm-4">
+                            <input class="form-control" type="text-left" name="Email" id="Email">
+                          </div>
+                  </div>
+                  <div class="form-group col-sm-8 text-left">
+                            <label class="control-label col-sm-4" for="DNILabelAlta">DNI</label>
+                            <div class="col-sm-4">
+                              <input class="form-control" type="text-left" name="DNI" id="DNI">
+                            </div>
+                  </div>
+
+                  <div class="form-group col-sm-8 text-left">
+                      <label class="control-label col-sm-4" for="NombreEmpresaLabelAlta">Nombre empresa</label>
+                      <div class="col-sm-4">
+                        <input class="form-control" type="text-left" name="NombreEmpresa" id="NombreEmpresa">
+                      </div>
+                  </div>
+
+                  <div class="form-group col-sm-8 text-left">
+                      <label class="control-label col-sm-4" for="VatNumberLabel">VAT Number</label>
+                      <div class="col-sm-4">
+                        <input class="form-control" type="text-left" name="VATNumber" id="VATNumber">
+                      </div>
+                  </div>
+
+                  <div class="form-group col-sm-8 text-left">
+                      <label class="control-label col-sm-4" for="LinkLabelAlta">Link site empresa</label>
+                      <div class="col-sm-4">
+                        <input class="form-control" type="text-left" name="LinkAlta" id="LinkAlta">
+                      </div>
+                  </div>
+
+
+              <div class="form-group">
+                <div class="col-sm-12 text-center">
+                  <input type="checkbox" id="TC"> ¿Acepta los términos y condiciones?<br><a href="T_C.html">Consultar T&C</a>
+                  <button id="Registro" onclick="ComprobarCheck()" class="btn">Registro</button> 
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+    </div>
+
+    <script>
+        function ComprobarCheck() {
+          
+          if (document.getElementById("TC").checked == false)
+          {
+            
+            
+          alert("Debe aceptar los términos y condiciones (T&C) antes de registrarse.");
+          }
+          else
+          {
+            App.RegistroUsuario(); 
+          }
+        }
+      </script>
+
+    <script>
+        function ComparePass(input) {
+          if ((input.value != document.getElementById("ContraseñaAlta").value))
+          {
+          alert("Las contraseñas no coinciden");
+          }
+        }
+      </script>
+
+<script>
+    function TypeUser(input) {
+      if (input.value != 'Cliente')
+      {
+        document.getElementById("Nombre").value='';
+        document.getElementById("Apellidos").value='';
+        document.getElementById("Telefono").value='';
+        document.getElementById("Email").value='';
+        document.getElementById("DNI").value='';
+        document.getElementById("NombreEmpresa").value='';
+        document.getElementById("VATNumber").value='';
+        document.getElementById("LinkAlta").value='';
+
+        document.getElementById("Nombre").setAttribute("disabled","disabled");
+        document.getElementById("Apellidos").setAttribute("disabled","disabled");
+        document.getElementById("Telefono").setAttribute("disabled","disabled");
+        document.getElementById("Email").setAttribute("disabled","disabled");
+        document.getElementById("DNI").setAttribute("disabled","disabled");
+        document.getElementById("NombreEmpresa").removeAttribute("disabled");
+        document.getElementById("VATNumber").removeAttribute("disabled");
+        document.getElementById("LinkAlta").removeAttribute("disabled");
+      }
+      else
+      {
+        document.getElementById("Nombre").value='';
+        document.getElementById("Apellidos").value='';
+        document.getElementById("Telefono").value='';
+        document.getElementById("Email").value='';
+        document.getElementById("DNI").value='';
+        document.getElementById("NombreEmpresa").value='';
+        document.getElementById("VATNumber").value='';
+        document.getElementById("LinkAlta").value='';
+
+        document.getElementById("NombreEmpresa").setAttribute("disabled","disabled");
+        document.getElementById("VATNumber").setAttribute("disabled","disabled");
+        document.getElementById("LinkAlta").setAttribute("disabled","disabled");
+        document.getElementById("Nombre").removeAttribute("disabled");
+        document.getElementById("Apellidos").removeAttribute("disabled");
+        document.getElementById("Telefono").removeAttribute("disabled");
+        document.getElementById("Email").removeAttribute("disabled");
+        document.getElementById("DNI").removeAttribute("disabled");
+      }
+    }
+  </script>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

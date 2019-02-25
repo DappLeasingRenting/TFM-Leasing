@@ -337,7 +337,11 @@ App = {
       
     });
   },
+ 
 
+
+
+  
 };
 
 $(function () {
@@ -345,4 +349,4 @@ $(function () {
     console.log("entrando reinicio")
     App.init();
   });
-});
+})
