@@ -25,16 +25,16 @@ App = {
   },
 
   initContracts: function () {
-    $.getJSON("CompraToken.json", function (CompraToken) {
-      App.contracts.CompraToken = TruffleContract(CompraToken);
-      App.contracts.CompraToken.setProvider(App.web3Provider);
-      App.contracts.CompraToken.deployed().then(function (CompraToken) {
+    $.getJSON("Asegurador.json", function (Asegurador) {
+      App.contracts.Asegurador = TruffleContract(Asegurador);
+      App.contracts.Asegurador.setProvider(App.web3Provider);
+      App.contracts.Asegurador.deployed().then(function (Asegurador) {
       });
     }).done(function () {
-      $.getJSON("Token.json", function (Token) {
-        App.contracts.Token = TruffleContract(Token);
-        App.contracts.Token.setProvider(App.web3Provider);
-        App.contracts.Token.deployed().then(function (Token) {
+      $.getJSON("Cliente.json", function (Cliente) {
+        App.contracts.Cliente = TruffleContract(Cliente);
+        App.contracts.Cliente.setProvider(App.web3Provider);
+        App.contracts.Cliente.deployed().then(function (Cliente) {
           App.listenForEvents();
           return App.render();
         });
@@ -45,49 +45,12 @@ App = {
 
   // Escuchando a los eventos que se emiten en los contratos
   listenForEvents: function () {
-    App.contracts.Token.deployed().then(function (instance) {
-      
-      instance.nuevoAhorrador({}, {
+    App.contracts.Cliente.deployed().then(function (instance) {
+      instance.nuevoCliente({}, {
         fromBlock: 0,
         toBlock: 'latest'
       }).watch(function (error, event) {
         console.log("event triggered", event)
-        App.render();
-      });
-    });
-    App.contracts.Token.deployed().then(function (instance) {
-      instance.TransferInicial({}, {
-        fromBlock: 0,
-        toBlock: 'latest'
-      }).watch(function (error, event) {
-        console.log("event triggered", event)
-        App.render();
-      });
-    });
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      instance.Venta({}, {
-        fromBlock: 0,
-        toBlock: 'latest',
-      }).watch(function (error, event) {
-        console.log("event triggered", event);
-        App.render();
-      });
-    });
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      instance.Retiro({}, {
-        fromBlock: 0,
-        toBlock: 'latest',
-      }).watch(function (error, event) {
-        console.log("event triggered", event);
-        App.render();
-      });
-    });
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      instance.Deposito({}, {
-        fromBlock: 0,
-        toBlock: 'latest',
-      }).watch(function (error, event) {
-        console.log("event triggered", event);
         App.render();
       });
     });
@@ -100,7 +63,6 @@ App = {
     }
 
     App.loading = true;
-    console.log('#startValuesAndTargetExample .progress_bar');
     // Función que muestra el address en el Metamask
     web3.eth.getCoinbase(function (err, account) {
       console.log("entrando");
@@ -112,7 +74,7 @@ App = {
 
     //Función para recargar la Daap cada vez que cambie de address en Metamask
     account = web3.eth.accounts[0];
-    setInterval(function() {
+    setInterval(function () {
       if (web3.eth.accounts[0] !== account) {
         account = web3.eth.accounts[0];
         window.location.reload();
@@ -122,81 +84,86 @@ App = {
 
     App.admin = web3.eth.accounts[0];
 
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      CompraTokenInstance = instance;
-      return CompraTokenInstance.PrecioToken();
-    }).then(function (PrecioToken) {
-      App.PrecioToken = PrecioToken;
-      $('.token-price').html(web3.fromWei(App.PrecioToken, "ether").toNumber());
-      return CompraTokenInstance.tokensVendidos();
-    }).then(function (tokensVendidos) {
-      App.tokensVendidos = tokensVendidos.toNumber();
-      $('.tokens-vendidos').html(App.tokensVendidos);
-      $('.tokens-disponibles').html(App.tokensDisponibles);
-
-      var progressPercent = (Math.ceil(App.tokensVendidos) / App.tokensDisponibles) * 100;
-      $('#progress').css('width', progressPercent + '%');
-
-      // Load token contract
-      App.contracts.Token.deployed().then(function (instance) {
-        TokenInstance = instance;
-        return TokenInstance.balanceOf(App.account);
-      }).then(function (balance) {
-        $('.dapp-balance').html(balance.toNumber());
-        App.loading = false;
-      })
-    }).then(function () { //esta parte del códgio permite que se 
-      //asigne los tokens Disponibles al contrato una vez se cargue y un
-      //una única vez impidiendo que se puedan generar tokens al gusto del
-      //creador
-      App.contracts.Token.deployed().then(function (instance) {
-        TokenInstance = instance;
-        return App.contracts.CompraToken.deployed();
-      }).then(function (instance) {
-        CompraTokenInstance = instance;
-        return TokenInstance.balanceOf(CompraTokenInstance.address);
-      }).then(function (balance) {
-        $('.contrato-balance').html(balance.toNumber());
-        App.loading = false;
-      })
-    }).then(function () {
-      App.contracts.Token.deployed().then(function (instance) {
-        TokenInstance = instance;
-        return TokenInstance.Ahorradores(App.account);
-      }).then(function (verificar) {
-        registrado = verificar[8];
-        if (registrado) {
-          $("#loader").hide();
-          $("#contentOwner").hide();          
-          $("#content").hide();
-          $("#content0").show();
-          $("#content1").show();
-          $("#content2").show();
-          $("#content3").show();
-        } else {
-          $("#loader").show();
-          $("#contentOwner").show();
-          $("#content").show();
-          $("#content0").show();
-          $("#content1").show();
-          $("#content2").show();
-          $("#content3").show();
-          return TokenInstance.Activo();
-        }
-      }).then(function (Activo) {
-        Estado = Activo;
-        $('.estadoContrato').html(Activo.toString());
-      })
-    })
+    $("#loader").show();
+    $("#contentOwner").show();
+    $("#content").show();
+    $("#content0").show();
+    $("#content1").show();
+    $("#content2").show();
+    $("#content3").show();
   },
-  crearAhorrador: function () {
-    let fecha = (new Date()).getTime();
-    let fechaParaSolidity = fecha / 1000;
-    let fechaSolidity = parseInt(fechaParaSolidity);
+  /*
+      App.contracts.CompraToken.deployed().then(function (instance) {
+        CompraTokenInstance = instance;
+        return CompraTokenInstance.PrecioToken();
+      }).then(function (PrecioToken) {
+        App.PrecioToken = PrecioToken;
+        $('.token-price').html(web3.fromWei(App.PrecioToken, "ether").toNumber());
+        return CompraTokenInstance.tokensVendidos();
+      }).then(function (tokensVendidos) {
+        App.tokensVendidos = tokensVendidos.toNumber();
+        $('.tokens-vendidos').html(App.tokensVendidos);
+        $('.tokens-disponibles').html(App.tokensDisponibles);
+  
+        var progressPercent = (Math.ceil(App.tokensVendidos) / App.tokensDisponibles) * 100;
+        $('#progress').css('width', progressPercent + '%');
+  
+        // Load token contract
+        App.contracts.Token.deployed().then(function (instance) {
+          TokenInstance = instance;
+          return TokenInstance.balanceOf(App.account);
+        }).then(function (balance) {
+          $('.dapp-balance').html(balance.toNumber());
+          App.loading = false;
+        })
+      }).then(function () { //esta parte del códgio permite que se 
+        //asigne los tokens Disponibles al contrato una vez se cargue y un
+        //una única vez impidiendo que se puedan generar tokens al gusto del
+        //creador
+        App.contracts.Token.deployed().then(function (instance) {
+          TokenInstance = instance;
+          return App.contracts.CompraToken.deployed();
+        }).then(function (instance) {
+          CompraTokenInstance = instance;
+          return TokenInstance.balanceOf(CompraTokenInstance.address);
+        }).then(function (balance) {
+          $('.contrato-balance').html(balance.toNumber());
+          App.loading = false;
+        })
+        
+      })
+    },/*
+            $("#loader").hide();
+            $("#contentOwner").hide();          
+            $("#content").hide();
+            $("#content0").show();
+            $("#content1").show();
+            $("#content2").show();
+            $("#content3").show();
+          } else {
+            $("#loader").show();
+            $("#contentOwner").show();
+            $("#content").show();
+            $("#content0").show();
+            $("#content1").show();
+            $("#content2").show();
+            $("#content3").show();
+            return TokenInstance.Activo();
+          }
+        }).then(function (Activo) {
+          Estado = Activo;
+          $('.estadoContrato').html(Activo.toString());
+        })
+      })
+    },*/
+  crearCliente: function () {
+    console.log("entrando contrato")
     var name = $("#fname").val();
-    var idUsuario = $("#idUsuario").val();
-    App.contracts.Token.deployed().then(function (instance) {
-      return instance._crearAhorrador(name, idUsuario, fechaSolidity, { from: App.account });
+    var edad = $("#edad").val();
+    var idLicencia = $("#idLicencia").val();
+    var antiguedadLicencia = $("#antiguedadLicencia").val();
+    App.contracts.Cliente.deployed().then(function (instance) {
+      return instance.crearCliente(name, edad, idLicencia, antiguedadLicencia, { from: App.account });
     }).then(function (result) {
       $("#content").show();
       $("#loader").show();
@@ -204,88 +171,99 @@ App = {
       console.error(err);
     });
   },
-  infoAhorrador: function () {
-    var htmlahorrador = $("#Ahorrador").empty();
+  infoCliente: function () {
+    var htmlclienteDatos = $("#clienteDatos").empty();
     var persona = {};
-    App.contracts.Token.deployed().then(function (instance) {
+    App.contracts.Cliente.deployed().then(function (instance) {
       infoInstance = instance;
-      infoInstance.Ahorradores(App.account)
-        .then(function (ahorrador) {
+      infoInstance.clientes(App.account)
+        .then(function (cliente) {
             persona = {
-            direccion: ahorrador[0],
-            id: ahorrador[1],
-            nombre: ahorrador[2],
-            prestamo: ahorrador[3],
-            ahorro: ahorrador[4],
-            balance: ahorrador[5],
-            mes: ahorrador[6],
-            puntualidad: ahorrador[7],
+            nombre: cliente[0],
+            edad: cliente[1],
+            idLicencia: cliente[2],
+            AntiguedadLicencia: cliente[3],
+            seguro: cliente[4],
+            idCoche: cliente[5],
+            credito: cliente[6],
+            recordCliente: cliente[7],
+            leasing: cliente[8],
           };
           var usuarioTemplate =
-            "<tr><th>" + persona.direccion +
-            "</td><td>" + persona.id +
-            "</td><td>" + persona.nombre +
-            "</td><td>" + persona.prestamo +
-            "</td><td>" + persona.ahorro +
-            "</td><td>" + persona.balance +
-            "</td><td>" + persona.mes +
-            "</td><td>" + persona.puntualidad +
+            "<tr><th>" + persona.leasing +
+            "</td><td>" + persona.seguro +
+            "</td><td>" + persona.credito +
             "</td></tr>";
-          htmlahorrador.append(usuarioTemplate);
-        })
-      App.contracts.Token.deployed().then(function (instance) {
-        infoInstanceFecha = instance;
-        return infoInstanceFecha.fechaComienzoAhorro();
-      }).then(function (fechaComienzoAhorro) { 
-        
-        fechaInicioContrato = new Date(fechaComienzoAhorro * 1000);
-        fecha1 = new Date(fechaInicioContrato);
-        fecha2 = new Date(fechaInicioContrato.setMinutes(fechaInicioContrato.getMinutes() + (2)));
-        fecha3 = new Date(fechaInicioContrato.setMinutes(fechaInicioContrato.getMinutes() + (2)));
-        fecha4 = new Date(fechaInicioContrato.setMinutes(fechaInicioContrato.getMinutes() + (2)));
-        fecha5 = new Date(fechaInicioContrato.setMinutes(fechaInicioContrato.getMinutes() + (2)));
-        fecha6 = new Date(fechaInicioContrato.setMinutes(fechaInicioContrato.getMinutes() + (2)));
-        fechaRetiroAhorro = new Date(fechaInicioContrato.setMinutes(fechaInicioContrato.getMinutes() + (2)*persona.mes));
-
-        var Fechas = $("#fechasDepositos").empty();
-        var fechaPago =
-          "<tr><td>Primer Pago</td><td>" + fecha1 + "</td></tr>" +
-          "<tr><td>Segundo Pago</td><td>" + fecha2 + "</td></tr>" +
-          "<tr><td>Tercero Pago</td><td>" + fecha3 + "</td></tr>" +
-          "<tr><td>Cuarto Pago</td><td>" + fecha4 + "</td></tr>" +
-          "<tr><td>Quinto Pago</td><td>" + fecha5 + "</td></tr>" +
-          "<tr><td>Sexto Pago</td><td>" + fecha6 + "</td></tr>" +
-          "<tr><td>Retiro Ahorro</td><td>" + fechaRetiroAhorro + "</td></tr>";
-        Fechas.append(fechaPago);
-      })
+          htmlclienteDatos.append(usuarioTemplate);
+        })      
     })
   },
 
-  detenerContrato: function () {   
+  infoAsegurador: function () {
+    var htmlAparcado = $("#Aparcado").empty();
+    var persona = {};
+    App.contracts.Asegurador.deployed().then(function (instance) {
+      infoInstance = instance;
+      infoInstance.aseguradoraPrecioAparcado(0)
+        .then(function (PrecioA) {
+          var usuarioTemplate =
+            "<tr><td>" + PrecioA + "</td></tr>";
+            console.log(persona.Precio);
+          htmlAparcado.append(usuarioTemplate);
+        }).then(function() {
+          var htmlCiudad = $("#Ciudad").empty();;
+          App.contracts.Asegurador.deployed().then(function (instance) {
+            InstanceA = instance;
+            InstanceA.aseguradoraPrecioCiudad(0)
+            .then(function (PrecioB) {
+            var usuarioTemplate =
+              "<tr><th>" + PrecioB + "</td></tr>";
+            htmlCiudad.append(usuarioTemplate);
+          })
+        })      
+    })
+  })
+},
+
+  actualizarPrecioAparcado: function () {
+      console.log("entrando contrato")
+      var valor = $("#actualizaAparcado").val();
+      App.contracts.Asegurador.deployed().then(function (instance) {
+        return instance.actualizarPrecioAparcado(valor, { from: App.account });
+      }).then(function (result) {
+        $("#content").show();
+        $("#loader").show();
+      }).catch(function (err) {
+        console.error(err);
+      });
+    },
+
+    actualizarPrecioCiudad: function () {
+      console.log("entrando contrato")
+      var valor = $("#actualizaCiudad").val();
+      App.contracts.Asegurador.deployed().then(function (instance) {
+        return instance.actualizarPrecioCiudad(valor, { from: App.account });
+      }).then(function (result) {
+        $("#content").show();
+        $("#loader").show();
+      }).catch(function (err) {
+        console.error(err);
+      });
+    },
+  /*activarContrato: function () {
     App.contracts.Token.deployed().then(function (instance) {
       TokenInstance = instance;
       return App.contracts.CompraToken.deployed();
     }).then(function (instance) {
       CompraTokenInstance = instance;
-      return TokenInstance.DetenerContratoToken();
-    }).then(function (result) {
-      $('form').trigger('reset') 
-    }); 
-  },
-  activarContrato: function () {   
-    App.contracts.Token.deployed().then(function (instance) {
-      TokenInstance = instance;
-      return App.contracts.CompraToken.deployed();
-    }).then(function (instance) {
-      CompraTokenInstance = instance;      
       return TokenInstance.ActivarContratoToken();
     }).then(function (result) {
-      $('form').trigger('reset') 
-    
-    }); 
+      $('form').trigger('reset')
+
+    });
   },
 
-  TranferenciaInicialTokens: function () {   
+  TranferenciaInicialTokens: function () {
     App.contracts.Token.deployed().then(function (instance) {
       TokenInstance = instance;
       return App.contracts.CompraToken.deployed();
@@ -293,9 +271,9 @@ App = {
       CompraTokenInstance = instance;
       return TokenInstance.transferInicial(CompraTokenInstance.address, App.tokensDisponibles);
     }).then(function (result) {
-      $('form').trigger('reset') 
-      
-    }); 
+      $('form').trigger('reset')
+
+    });
   },
 
   ComprarTokens: function () {
@@ -304,12 +282,12 @@ App = {
       return instance.compraTokens(numeroTokens, {
         from: App.account,
         value: numeroTokens * App.PrecioToken,
-        gas: 500000 
+        gas: 500000
       });
     }).then(function (result) {
-      $('form').trigger('reset') 
-      
-    }); 
+      $('form').trigger('reset')
+
+    });
   },
   depositarTokens: function () {
     let fecha = (new Date()).getTime();
@@ -321,8 +299,8 @@ App = {
     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.depositoAhorro(contribucion, fechaSolidity);
     }).then(function (result) {
-      $('form1').trigger('reset') 
-    
+      $('form1').trigger('reset')
+
     });
   },
   retiroTokens: function () {
@@ -333,15 +311,11 @@ App = {
     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.retiroTokens(prestamo, fechaSolidity);
     }).then(function (result) {
-      $('form2').trigger('reset') 
-      
+      $('form2').trigger('reset')
+
     });
-  },
- 
+  },*/
 
-
-
-  
 };
 
 $(function () {
@@ -349,4 +323,4 @@ $(function () {
     console.log("entrando reinicio")
     App.init();
   });
-})
+});
