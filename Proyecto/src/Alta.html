@@ -76,6 +76,30 @@
                       </div>
                   </div>
                   <div class="form-group col-sm-8 text-left">
+                    <label class="control-label col-sm-4" for="ApellidosLabelAlta">Edad</label>
+                    <div class="col-sm-4">
+                      <input class="form-control" type="text-left" name="Edad" id="Edad">
+                    </div>
+                </div>
+                <div class="form-group col-sm-8 text-left">
+                  <label class="control-label col-sm-4" for="ApellidosLabelAlta">ID Licencia de Conducción</label>
+                  <div class="col-sm-4">
+                    <input class="form-control" type="text-left" name="ID Licencia de conducir" id="Licencia">
+                  </div>
+              </div>
+
+              <div class="form-group col-sm-8 text-left">
+                <label class="control-label col-sm-4" for="ApellidosLabelAlta">Antiguedad Licencia de Conducción</label>
+                <div class="col-sm-4">
+                  <input class="form-control" type="text-left" name="Antiguedad Licencia de conducir" id="AntiguedadLicencia">
+                </div>
+            </div>
+
+
+
+
+
+                  <div class="form-group col-sm-8 text-left">
                         <label class="control-label col-sm-4" for="TelefonoLabelAlta">Teléfono</label>
                         <div class="col-sm-4">
                           <input class="form-control" type="text-left" name="Telefono" id="Telefono">
@@ -158,6 +182,9 @@
       {
         document.getElementById("Nombre").value='';
         document.getElementById("Apellidos").value='';
+        document.getElementById("Edad").value='';
+        document.getElementById("Licencia").value='';
+        document.getElementById("AntiguedadLicencia").value='';
         document.getElementById("Telefono").value='';
         document.getElementById("Email").value='';
         document.getElementById("DNI").value='';
@@ -167,6 +194,9 @@
 
         document.getElementById("Nombre").setAttribute("disabled","disabled");
         document.getElementById("Apellidos").setAttribute("disabled","disabled");
+        document.getElementById("Edad").setAttribute("disabled","disabled");
+        document.getElementById("Licencia").setAttribute("disabled","disabled");
+        document.getElementById("AntiguedadLicencia").setAttribute("disabled","disabled");
         document.getElementById("Telefono").setAttribute("disabled","disabled");
         document.getElementById("Email").setAttribute("disabled","disabled");
         document.getElementById("DNI").setAttribute("disabled","disabled");
