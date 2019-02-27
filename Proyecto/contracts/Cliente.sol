@@ -15,9 +15,10 @@ contract Cliente is Owned {
     );  
 
     
-    string public tipoSeguroXDefecto = '0A';
-    string public idCocheXDefecto = '0A';
+    string public tipoSeguroXDefecto = "0A";
+    string public idCocheXDefecto = "0A";
 
+    mapping(address => Seguro) public CostSeguro;
     mapping(address => cliente) public clientes;
     mapping(address => uint) public ownerCuentaLeasing;
     
@@ -35,6 +36,13 @@ contract Cliente is Owned {
         bool credito;
         uint recordCliente;
         bool leasing;
+    }
+
+    struct Seguro {
+        uint CostoTotal;
+        uint KmCiudad;
+        uint KmCarretera;
+        uint TiempoAparcado;
     }
 
 
@@ -84,6 +92,84 @@ contract Cliente is Owned {
         emit nuevoCliente(idLicencia, antiguedadLicencia, record);
         
         
+    }
+    address admin;
+    
+    uint256 public PrecioKmCiudad;
+    uint256 public PrecioKmCarretera;
+    uint256 public PrecioAparcado;
+
+    event CostoSeguro(uint idCoche, uint TotalCost);
+
+    mapping(uint => uint) public aseguradoraPrecioAparcado;
+    mapping(uint => uint) public aseguradoraPrecioCarretera;
+    mapping(uint => uint) public aseguradoraPrecioCiudad;
+
+    mapping(uint => address) public adminAseguradora;
+    mapping(address => uint) public IdEmpresa;
+
+
+
+    function actualizarPrecioAparcado(uint precioAparcado) public {
+        /*uint idEmpresa;
+        idEmpresa = IdEmpresa[msg.sender];
+        require(adminAseguradora[idEmpresa] == msg.sender);
+        aseguradoraPrecioAparcado[idEmpresa] = precioAparcado;*/
+        aseguradoraPrecioAparcado[0] = precioAparcado;
+    }
+    function actualizarPrecioCarretera(uint precioCarretera) public {
+        uint idEmpresa;
+        idEmpresa = IdEmpresa[msg.sender];
+        require(adminAseguradora[idEmpresa] == msg.sender);
+        aseguradoraPrecioCarretera[idEmpresa] = precioCarretera;
+        aseguradoraPrecioCarretera[0] = precioCarretera;
+    }
+    function actualizarPrecioCiudad(uint precioCiudad) public {
+        /*uint idEmpresa;
+        idEmpresa = IdEmpresa[msg.sender];
+        require(adminAseguradora[idEmpresa] == msg.sender);
+        aseguradoraPrecioCiudad[idEmpresa] = precioCiudad;*/
+        aseguradoraPrecioCiudad[0] = precioCiudad;
+    }
+
+//para probar si funciona la función de calculo del seguro
+    uint _tiempoAparcado = 10;
+    uint _KmCiudad = 100 ;
+    uint _KmCarretera = 50; 
+    uint CostoAparcado = 20;
+    uint CostoKmCiudad = 30;
+    uint CostoKmCarretera = 50;
+
+
+    
+
+//** @title Constructor. */
+    
+//** @title Compra de tokens. */
+    function costoSeguro() public {
+          /**@param _numeroTokens cantidad a comprar.
+ 
+      /** @dev verificar que el precio a pagar sea el precio estblecido
+      verifica que el contrato cuente con los tokens solicitados para comprar
+      verifica que se haya realizado la transacción satisfactoriamente desde el contrato Token.sol.
+      Actualiza el valor de los tokens vendidos
+      */ 
+        uint CostoMovCiudad;
+        uint CostoMovCarretera;
+        uint CostoMovimiento;
+        uint CMovRecord;
+        uint CostoTotal;
+        uint edad;
+
+        edad = clientes[msg.sender].edad;
+        CostoAparcado = SafeMath.mul(_tiempoAparcado, aseguradoraPrecioAparcado[0]);
+        CostoMovCiudad = SafeMath.mul(_KmCiudad, aseguradoraPrecioCiudad[0]);
+        CostoMovCarretera = SafeMath.mul(_KmCarretera, PrecioKmCarretera);
+        CostoMovimiento = SafeMath.add(CostoMovCiudad, aseguradoraPrecioCarretera[0]);
+        CMovRecord = SafeMath.mul((SafeMath.add(CostoMovCiudad, CostoMovCarretera)),(SafeMath.div(1, clientes[msg.sender].recordCliente)));
+        CostoTotal = SafeMath.mul(CMovRecord, SafeMath.div(65,edad));
+        CostSeguro[msg.sender] = Seguro(CostoTotal, _KmCiudad, _KmCarretera, _tiempoAparcado);
+        emit CostoSeguro(edad, CostoTotal);
     }
 
 
