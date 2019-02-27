@@ -25,12 +25,6 @@ App = {
   },
 
   initContracts: function () {
-    $.getJSON("Asegurador.json", function (Asegurador) {
-      App.contracts.Asegurador = TruffleContract(Asegurador);
-      App.contracts.Asegurador.setProvider(App.web3Provider);
-      App.contracts.Asegurador.deployed().then(function (Asegurador) {
-      });
-    }).done(function () {
       $.getJSON("Cliente.json", function (Cliente) {
         App.contracts.Cliente = TruffleContract(Cliente);
         App.contracts.Cliente.setProvider(App.web3Provider);
@@ -39,7 +33,6 @@ App = {
           return App.render();
         });
       });
-    })
   },
 
 
@@ -158,10 +151,10 @@ App = {
     },*/
   crearCliente: function () {
     console.log("entrando contrato")
-    var name = $("#fname").val();
-    var edad = $("#edad").val();
-    var idLicencia = $("#idLicencia").val();
-    var antiguedadLicencia = $("#antiguedadLicencia").val();
+    var name = $("#Nombre").val();
+    var edad = $("#Edad").val();
+    var idLicencia = $("#Licencia").val();
+    var antiguedadLicencia = $("#AntiguedadLicencia").val();
     App.contracts.Cliente.deployed().then(function (instance) {
       return instance.crearCliente(name, edad, idLicencia, antiguedadLicencia, { from: App.account });
     }).then(function (result) {
@@ -190,9 +183,9 @@ App = {
             leasing: cliente[8],
           };
           var usuarioTemplate =
-            "<tr><th>" + persona.leasing +
+            "<tr><th>" + persona.nombre +
+            "</td><td>" + persona.edad +
             "</td><td>" + persona.seguro +
-            "</td><td>" + persona.credito +
             "</td></tr>";
           htmlclienteDatos.append(usuarioTemplate);
         })      
@@ -200,29 +193,27 @@ App = {
   },
 
   infoAsegurador: function () {
-    var htmlAparcado = $("#Aparcado").empty();
-    var persona = {};
-    App.contracts.Asegurador.deployed().then(function (instance) {
+    var htmlClienteDatosSeguro = $("#clienteDatosSeguro").empty();
+    var Datos = {};
+    App.contracts.Cliente.deployed().then(function (instance) {
       infoInstance = instance;
-      infoInstance.aseguradoraPrecioAparcado(0)
-        .then(function (PrecioA) {
+      infoInstance.CostSeguro(App.account)
+        .then(function (DatosSeguro) {
+            Datos = {
+            CostoTotal: DatosSeguro[0],
+            KmCiudad: DatosSeguro[1],
+            KmCarretera: DatosSeguro[2],
+            TiempoAparcado: DatosSeguro[3],
+          };
           var usuarioTemplate =
-            "<tr><td>" + PrecioA + "</td></tr>";
-            console.log(persona.Precio);
-          htmlAparcado.append(usuarioTemplate);
-        }).then(function() {
-          var htmlCiudad = $("#Ciudad").empty();;
-          App.contracts.Asegurador.deployed().then(function (instance) {
-            InstanceA = instance;
-            InstanceA.aseguradoraPrecioCiudad(0)
-            .then(function (PrecioB) {
-            var usuarioTemplate =
-              "<tr><th>" + PrecioB + "</td></tr>";
-            htmlCiudad.append(usuarioTemplate);
+          "<tr><th>" + Datos.CostoTotal +
+          "</td><td>" + Datos.KmCiudad +
+          "</td><td>" + Datos.KmCarretera +
+          "</td><td>" + Datos.TiempoAparcado +
+          "</td></tr>";
+          htmlClienteDatosSeguro.append(usuarioTemplate);
           })
-        })      
-    })
-  })
+        })     
 },
 
   actualizarPrecioAparcado: function () {
