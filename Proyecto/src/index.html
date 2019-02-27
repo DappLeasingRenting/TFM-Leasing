@@ -21,37 +21,37 @@
 
 <body>
   <div class="container ">
-      <div class="row ">
-          <div class="col-md-12">
-            <h1 class="text-center">ZONA DE ACCESO</h1>
-            <hr />
-            <br />
+    <div class="row ">
+      <div class="col-md-12">
+        <h1 class="text-center">ZONA DE ACCESO</h1>
+        <hr />
+        <br />
+      </div>
+      <div id="content" class="col-md-12">
+        <p id="accountAddress" class="text-center bg-warning"></p>
+        <h5 class="text-center bg-primary"><dt>Ingrese su usuario y password o seleccione el botón alta</dt></h5>
+        <form class="form-horizontal">
+          <div class="form-group">
+            <label class="control-label col-sm-4 text-right" for="UsuarioLabel">Nombre de Usuario</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="text" name="IdUsuario" id="IdUsuario">
+            </div>
           </div>
-          <div id="content" class="col-md-12">
-            <p id="accountAddress" class="text-center bg-warning"></p>
-            <h5 class="text-center bg-primary"><dt>Ingrese su usuario y password o seleccione el botón alta</dt></h5>
-            <form class="form-horizontal">
-              <div class="form-group">
-                <label class="control-label col-sm-4 text-right" for="UsuarioLabel">Nombre de Usuario</label>
-                <div class="col-sm-4">
-                  <input class="form-control" type="text" name="IdUsuario" id="IdUsuario">
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-4 text-right" for="ContraseñaLabel">Contraseña</label>
-                <div class="col-sm-4">
-                  <input class="form-control" type="password" value="FakePSW" id="Contraseña">
-                </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-12 text-center">
-                  <button id="Ingreso" onclick="App.IngresoUsuario()" class="btn">Ingreso</button>
-                  <button id="Alta" class="btn"><a href="Alta.html">Alta</a></button>
-                </div>
-              </div>
-            </form>
+          <div class="form-group">
+            <label class="control-label col-sm-4 text-right" for="ContraseñaLabel">Contraseña</label>
+            <div class="col-sm-4">
+              <input class="form-control" type="password" value="FakePSW" id="Contraseña">
+            </div>
           </div>
-        </div>
+          <div class="form-group">
+            <div class="col-sm-12 text-center">
+              <button id="Ingreso" onclick="App.IngresoUsuario()" class="btn">Ingreso</button>
+              <button id="Alta" class="btn"><a href="Alta.html">Alta</a></button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="row ">
       <div class="col-md-12">
         <div class="panel panel-primary" id="contentOwner" style="display: none;">
@@ -61,27 +61,61 @@
               <div class="col-sm-12 text-left">
                 <div class="col-sm-12 text-left">
                   <div style="margin: 5px">
-                    <button id="DetenerContrato" onclick="App.infoCliente()" class="btn-lg btn-default btn-lg btn-block">Mis
-                      contratos</button>
+                    <h3 class="text-center bg-primary">Mis Contratos</h3>
+                    <button id="DetenerContrato" onclick="App.infoCliente()" class="btn-lg btn-default btn-lg btn-block">Leasing</button>
                     <table class="table table-bordered table-responsive">
                       <div style="margin: 5px">
                         <thead>
                           <tr class="info">
-                            <th scope="col">Leasing</th>
-                            <th scope="col">Seguro</th>
-                            <th scope="col">Financiamiento</th>
+                            <th scope="col">ID Coche</th>
+                            <th scope="col">Costo mensual</th>
+                            <th scope="col">Fecha finalización contrato</th>
                           </tr>
                         </thead>
                         <tbody id="clienteDatos" class="success">
                           <tr class="success"></tr>
                         </tbody>
                       </div>
-                    </table>
+                      </table>
+                      <button id="DetenerContrato" onclick="App.infoAsegurador()" class="btn-lg btn-default btn-lg btn-block">Seguro</button>
+                      <table class="table table-bordered table-responsive">
+                        <div style="margin: 5px">
+                          <thead>
+                            <tr class="info">
+                              <th scope="col">Costo Total del seguro €</th>
+                              <th scope="col">Km Ciudad</th>
+                              <th scope="col">Km Carretera</th>
+                              <th scope="col">Tiempo Aparcado (horas)</th>
+                            </tr>
+                          </thead>
+                          <tbody id="clienteDatosSeguro" class="success">
+                            <tr class="success"></tr>
+                          </tbody>
+                          </div>
+                          </table>
+                          <button id="DetenerContrato" onclick="App.infoCliente()" class="btn-lg btn-default btn-lg btn-block">Financiamiento</button>
+                          <table class="table table-bordered table-responsive">
+                            <div style="margin: 5px">
+                              <thead>
+                                <tr class="info">
+                                  <th scope="col">Deuda Inicial</th>
+                                  <th scope="col">Deuda Actual</th>
+                                  <th scope="col">Otro campo</th>
+                                </tr>
+                              </thead>
+                              <tbody id="clienteDatos" class="success">
+                                <tr class="success"></tr>
+                              </tbody>
+                            </div>
+                            </table>
+                        </div>
+                      </table>
 
-                    <div class="form-group">
+                      <div class="form-group">
                         <div class="col-sm-12 text-center">
-                          
-                          <button id="Consulta Coches" class="btn-lg btn-default btn-lg btn-block"><a href="WebCoches.html">Ver Coches</a></button>
+
+                          <button id="Consulta Coches" class="btn-lg btn-default btn-lg btn-block"><a href="WebCoches.html">Ver
+                              Coches</a></button>
                         </div>
                       </div>
                   </div>
@@ -135,57 +169,57 @@
                 </div>
               </div>
             </form>
-          
-          <div class="form-group">
-            <div class="row">
-              <div class="col-sm-12 text-left">
-                <div style="margin: 5px">
-                  <button id="envioConsulta" onclick="App.infoAsegurador()" class="btn btn-info btn-lg">Consuta</button>
+
+            <div class="form-group">
+              <div class="row">
+                <div class="col-sm-12 text-left">
+                  <div style="margin: 5px">
+                    <button id="envioConsulta" onclick="App.infoAsegurador()" class="btn btn-info btn-lg">Consuta</button>
+                  </div>
                 </div>
               </div>
             </div>
+            <table class="table table-bordered table-responsive">
+              <div style="margin: 5px">
+                <thead>
+                  <tr class="info">
+                    <th scope="col">Precio Km Ciudad</th>
+                  </tr>
+                </thead>
+                <tbody id="Ciudad" class="success">
+                  <tr class="success"></tr>
+                </tbody>
+              </div>
+            </table>
+            <table class="table table-bordered table-responsive">
+              <div style="margin: 5px">
+                <thead>
+                  <tr class="info">
+                    <th scope="col">Precio Km Carretera</th>
+                  </tr>
+                </thead>
+                <tbody id="Carretera" class="success">
+                  <tr class="success"></tr>
+                </tbody>
+              </div>
+            </table>
+            <table class="table table-bordered table-responsive">
+              <div style="margin: 5px">
+                <thead>
+                  <tr class="info">
+                    <th scope="col">Precio Aparcado</th>
+                  </tr>
+                </thead>
+                <tbody id="Aparcado" class="success">
+                  <tr class="success"></tr>
+                </tbody>
+              </div>
+            </table>
           </div>
-          <table class="table table-bordered table-responsive">
-            <div style="margin: 5px">
-              <thead>
-                <tr class="info">
-                  <th scope="col">Precio Km Ciudad</th>
-                </tr>
-              </thead>
-              <tbody id="Ciudad" class="success">
-                <tr class="success"></tr>
-              </tbody>
-            </div>
-          </table>
-          <table class="table table-bordered table-responsive">
-            <div style="margin: 5px">
-              <thead>
-                <tr class="info">
-                  <th scope="col">Precio Km Carretera</th>
-                </tr>
-              </thead>
-              <tbody id="Carretera" class="success">
-                <tr class="success"></tr>
-              </tbody>
-            </div>
-          </table>
-          <table class="table table-bordered table-responsive">
-            <div style="margin: 5px">
-              <thead>
-                <tr class="info">
-                  <th scope="col">Precio Aparcado</th>
-                </tr>
-              </thead>
-              <tbody id="Aparcado" class="success">
-                <tr class="success"></tr>
-              </tbody>
-            </div>
-          </table>
         </div>
       </div>
     </div>
   </div>
-    </div>
 
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
