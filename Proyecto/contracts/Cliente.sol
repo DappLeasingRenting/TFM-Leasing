@@ -13,18 +13,25 @@ contract Cliente is Owned {
         uint antiguedadLicencia,
         uint record
     );  
-
-    
+    event CostoSeguro(
+        uint idCoche, 
+        uint TotalCost
+    );    
     string public tipoSeguroXDefecto = "0A";
     string public idCocheXDefecto = "0A";
+    address admin;    
+    uint256 public PrecioKmCiudad;
+    uint256 public PrecioKmCarretera;
+    uint256 public PrecioAparcado;
 
     mapping(address => Seguro) public CostSeguro;
     mapping(address => cliente) public clientes;
     mapping(address => uint) public ownerCuentaLeasing;
-    
-
-       
-   
+    mapping(uint => uint) public aseguradoraPrecioAparcado;
+    mapping(uint => uint) public aseguradoraPrecioCarretera;
+    mapping(uint => uint) public aseguradoraPrecioCiudad;
+    mapping(uint => address) public adminAseguradora;
+    mapping(address => uint) public IdEmpresa;
 
     struct cliente {
         string nombre;
@@ -37,18 +44,12 @@ contract Cliente is Owned {
         uint recordCliente;
         bool leasing;
     }
-
     struct Seguro {
         uint CostoTotal;
         uint KmCiudad;
         uint KmCarretera;
         uint TiempoAparcado;
     }
-
-
-
-
-
     //** @title detener el contrato. */
     function DetenerContratoToken() public onlyOwner returns (bool) {
         Activo = true;
@@ -89,26 +90,8 @@ contract Cliente is Owned {
         clientes[msg.sender] = cliente(nombre, edad, idLicencia, antiguedadLicencia, false, idCocheXDefecto, false, record,false);
         ownerCuentaLeasing[msg.sender] ++;
         /**@return emite el evento con los datos de mes, nombre y fecha de comienzoAhorro.*/
-        emit nuevoCliente(idLicencia, antiguedadLicencia, record);
-        
-        
+        emit nuevoCliente(idLicencia, antiguedadLicencia, record);        
     }
-    address admin;
-    
-    uint256 public PrecioKmCiudad;
-    uint256 public PrecioKmCarretera;
-    uint256 public PrecioAparcado;
-
-    event CostoSeguro(uint idCoche, uint TotalCost);
-
-    mapping(uint => uint) public aseguradoraPrecioAparcado;
-    mapping(uint => uint) public aseguradoraPrecioCarretera;
-    mapping(uint => uint) public aseguradoraPrecioCiudad;
-
-    mapping(uint => address) public adminAseguradora;
-    mapping(address => uint) public IdEmpresa;
-
-
 
     function actualizarPrecioAparcado(uint precioAparcado) public {
         /*uint idEmpresa;
@@ -118,10 +101,10 @@ contract Cliente is Owned {
         aseguradoraPrecioAparcado[0] = precioAparcado;
     }
     function actualizarPrecioCarretera(uint precioCarretera) public {
-        uint idEmpresa;
+        /*uint idEmpresa;
         idEmpresa = IdEmpresa[msg.sender];
         require(adminAseguradora[idEmpresa] == msg.sender);
-        aseguradoraPrecioCarretera[idEmpresa] = precioCarretera;
+        aseguradoraPrecioCarretera[idEmpresa] = precioCarretera;*/
         aseguradoraPrecioCarretera[0] = precioCarretera;
     }
     function actualizarPrecioCiudad(uint precioCiudad) public {
@@ -136,12 +119,7 @@ contract Cliente is Owned {
     uint _tiempoAparcado = 10;
     uint _KmCiudad = 100 ;
     uint _KmCarretera = 50; 
-    uint CostoAparcado = 20;
-    uint CostoKmCiudad = 30;
-    uint CostoKmCarretera = 50;
-
-
-    
+ 
 
 //** @title Constructor. */
     
@@ -157,6 +135,7 @@ contract Cliente is Owned {
         uint CostoMovCiudad;
         uint CostoMovCarretera;
         uint CostoMovimiento;
+        uint CostoAparcado;
         uint CMovRecord;
         uint CostoTotal;
         uint edad;
@@ -164,9 +143,9 @@ contract Cliente is Owned {
         edad = clientes[msg.sender].edad;
         CostoAparcado = SafeMath.mul(_tiempoAparcado, aseguradoraPrecioAparcado[0]);
         CostoMovCiudad = SafeMath.mul(_KmCiudad, aseguradoraPrecioCiudad[0]);
-        CostoMovCarretera = SafeMath.mul(_KmCarretera, PrecioKmCarretera);
-        CostoMovimiento = SafeMath.add(CostoMovCiudad, aseguradoraPrecioCarretera[0]);
-        CMovRecord = SafeMath.mul((SafeMath.add(CostoMovCiudad, CostoMovCarretera)),(SafeMath.div(1, clientes[msg.sender].recordCliente)));
+        CostoMovCarretera = SafeMath.mul(_KmCarretera, aseguradoraPrecioCarretera[0]);
+        CostoMovimiento = SafeMath.add(CostoMovCiudad, (SafeMath.add(CostoAparcado, CostoMovCarretera)));
+        CMovRecord = SafeMath.mul((CostoMovimiento),(SafeMath.div(1, clientes[msg.sender].recordCliente)));
         CostoTotal = SafeMath.mul(CMovRecord, SafeMath.div(65,edad));
         CostSeguro[msg.sender] = Seguro(CostoTotal, _KmCiudad, _KmCarretera, _tiempoAparcado);
         emit CostoSeguro(edad, CostoTotal);
