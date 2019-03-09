@@ -25,14 +25,14 @@ App = {
   },
 
   initContracts: function () {
-      $.getJSON("Cliente.json", function (Cliente) {
-        App.contracts.Cliente = TruffleContract(Cliente);
-        App.contracts.Cliente.setProvider(App.web3Provider);
-        App.contracts.Cliente.deployed().then(function (Cliente) {
-          App.listenForEvents();
-          return App.render();
-        });
+    $.getJSON("Cliente.json", function (Cliente) {
+      App.contracts.Cliente = TruffleContract(Cliente);
+      App.contracts.Cliente.setProvider(App.web3Provider);
+      App.contracts.Cliente.deployed().then(function (Cliente) {
+        App.listenForEvents();
+        return App.render();
       });
+    });
   },
 
 
@@ -47,8 +47,16 @@ App = {
         App.render();
       });
     });
+    App.contracts.Cliente.deployed().then(function (instance) {
+      instance.CostoSeguro({}, {
+        fromBlock: 0,
+        toBlock: 'latest'
+      }).watch(function (error, event) {
+        console.log("event triggered", event)
+        App.render();
+      });
+    });
   },
-
 
   render: function () {
     if (App.loading) {
@@ -171,7 +179,7 @@ App = {
       infoInstance = instance;
       infoInstance.clientes(App.account)
         .then(function (cliente) {
-            persona = {
+          persona = {
             nombre: cliente[0],
             edad: cliente[1],
             idLicencia: cliente[2],
@@ -188,59 +196,126 @@ App = {
             "</td><td>" + persona.seguro +
             "</td></tr>";
           htmlclienteDatos.append(usuarioTemplate);
-        })      
+        })
     })
   },
 
   infoAsegurador: function () {
-    var htmlClienteDatosSeguro = $("#clienteDatosSeguro").empty();
-    var Datos = {};
+    App.costoSeguro();
+      var htmlclienteDatosSeguro = $("#clienteDatosSeguro").empty();
+      var Datos = {};
+      App.contracts.Cliente.deployed().then(function (instance) {
+        infoInstance = instance;
+        infoInstance.CostSeguro(App.account)
+          .then(function (DatosSeguro) {
+            ;
+            Datos = {
+              CostoTotal: DatosSeguro[0],
+              KmCiudad: DatosSeguro[1],
+              KmCarretera: DatosSeguro[2],
+              TiempoAparcado: DatosSeguro[3],
+            };
+            console.log(DatosSeguro[0]);
+            var usuarioTemplate =
+              "<tr><th>" + Datos.CostoTotal +
+              "</td><td>" + Datos.KmCiudad +
+              "</td><td>" + Datos.KmCarretera +
+              "</td><td>" + Datos.TiempoAparcado +
+              "</td></tr>";
+            htmlclienteDatosSeguro.append(usuarioTemplate);
+          })
+      })
+  },
+
+  costoSeguro: function () {
+    console.log("entrando CostoSeguro")
+     App.contracts.Cliente.deployed().then(function (instance) {
+      return instance.costoSeguro()
+    }).then(function (result) {
+      $("#content").show();
+      $("#loader").show();
+    }).catch(function (err) {
+      console.error(err);
+    });
+  },
+
+  infoConsultaAsegurador: function () {
+    console.log("entrandoConsulta");
+    var htmlAparcado = $("#Aparcado").empty();
+    var persona = {};
     App.contracts.Cliente.deployed().then(function (instance) {
       infoInstance = instance;
-      infoInstance.CostSeguro(App.account)
-        .then(function (DatosSeguro) {
-            Datos = {
-            CostoTotal: DatosSeguro[0],
-            KmCiudad: DatosSeguro[1],
-            KmCarretera: DatosSeguro[2],
-            TiempoAparcado: DatosSeguro[3],
-          };
+      infoInstance.aseguradoraPrecioAparcado(0)
+        .then(function (PrecioA) {
           var usuarioTemplate =
-          "<tr><th>" + Datos.CostoTotal +
-          "</td><td>" + Datos.KmCiudad +
-          "</td><td>" + Datos.KmCarretera +
-          "</td><td>" + Datos.TiempoAparcado +
-          "</td></tr>";
-          htmlClienteDatosSeguro.append(usuarioTemplate);
+            "<tr><td>" + PrecioA + "</td></tr>";
+          console.log(persona.Precio);
+          htmlAparcado.append(usuarioTemplate);
+        }).then(function () {
+          var htmlCiudad = $("#Ciudad").empty();;
+          App.contracts.Cliente.deployed().then(function (instance) {
+            InstanceA = instance;
+            InstanceA.aseguradoraPrecioCiudad(0)
+              .then(function (PrecioB) {
+                var usuarioTemplate =
+                  "<tr><th>" + PrecioB + "</td></tr>";
+                htmlCiudad.append(usuarioTemplate);
+              }).then(function () {
+                var htmlCarretera = $("#Carretera").empty();;
+                App.contracts.Cliente.deployed().then(function (instance) {
+                  InstanceA = instance;
+                  InstanceA.aseguradoraPrecioCarretera(0)
+                    .then(function (PrecioC) {
+                      var usuarioTemplate =
+                        "<tr><th>" + PrecioC + "</td></tr>";
+                      htmlCarretera.append(usuarioTemplate);
+                    })
+                })
+              })
           })
-        })     
-},
+        })
+    })
+  },
+
 
   actualizarPrecioAparcado: function () {
-      console.log("entrando contrato")
-      var valor = $("#actualizaAparcado").val();
-      App.contracts.Asegurador.deployed().then(function (instance) {
-        return instance.actualizarPrecioAparcado(valor, { from: App.account });
-      }).then(function (result) {
-        $("#content").show();
-        $("#loader").show();
-      }).catch(function (err) {
-        console.error(err);
-      });
-    },
+    console.log("entrando contrato")
+    var valor = $("#actualizaAparcado").val();
+    App.contracts.Cliente.deployed().then(function (instance) {
+      return instance.actualizarPrecioAparcado(valor, { from: App.account });
+    }).then(function (result) {
+      $("#content").show();
+      $("#loader").show();
+    }).catch(function (err) {
+      console.error(err);
+    });
+  },
 
-    actualizarPrecioCiudad: function () {
-      console.log("entrando contrato")
-      var valor = $("#actualizaCiudad").val();
-      App.contracts.Asegurador.deployed().then(function (instance) {
-        return instance.actualizarPrecioCiudad(valor, { from: App.account });
-      }).then(function (result) {
-        $("#content").show();
-        $("#loader").show();
-      }).catch(function (err) {
-        console.error(err);
-      });
-    },
+  actualizarPrecioCiudad: function () {
+    console.log("entrando contrato")
+    var valor = $("#actualizaCiudad").val();
+    App.contracts.Cliente.deployed().then(function (instance) {
+      return instance.actualizarPrecioCiudad(valor, { from: App.account });
+    }).then(function (result) {
+      $("#content").show();
+      $("#loader").show();
+    }).catch(function (err) {
+      console.error(err);
+    });
+  },
+
+  actualizarPrecioCarretera: function () {
+    console.log("entrando contrato")
+    var valor = $("#actualizaCarretera").val();
+    App.contracts.Cliente.deployed().then(function (instance) {
+      return instance.actualizarPrecioCarretera(valor, { from: App.account });
+    }).then(function (result) {
+      $("#content").show();
+      $("#loader").show();
+    }).catch(function (err) {
+      console.error(err);
+    });
+  },
   /*activarContrato: function () {
     App.contracts.Token.deployed().then(function (instance) {
       TokenInstance = instance;
