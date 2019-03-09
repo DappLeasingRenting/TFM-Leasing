@@ -144,11 +144,11 @@
                 </div>
               </div>
             </form>
-            <form onSubmit="App.depositarTokens(); return false;" role="form1">
+            <form onSubmit="App.actualizarPrecioCarretera(); return false;" role="form1">
               <div class="form-group">
                 <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
                 <div class="input-group">
-                  <input id="depositoTokens" class="form-control input-lg" type="number" name="number" min="0" pattern="[0-9]">
+                  <input id="actualizaCarretera" class="form-control input-lg" type="number" name="number" min="0" pattern="[0-9]">
                   <br>
                   <span class="input-group-btn">
                     <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
@@ -174,7 +174,7 @@
               <div class="row">
                 <div class="col-sm-12 text-left">
                   <div style="margin: 5px">
-                    <button id="envioConsulta" onclick="App.infoAsegurador()" class="btn btn-info btn-lg">Consuta</button>
+                    <button id="envioConsulta" onclick="App.infoConsultaAsegurador()" class="btn btn-info btn-lg">Consuta</button>
                   </div>
                 </div>
               </div>
