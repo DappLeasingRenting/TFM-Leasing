@@ -332,7 +332,21 @@ App = {
   });
 },
 
-
+IngresoUsuario: function () {
+  console.log("verificando usuario...")
+  var IdUsuario = $("#IdUsuario").val();
+  var Password = $("#Contraseña").val();
+  App.contracts.Cliente.deployed().then(function (instance) {
+    return instance.fetchUser({ from: App.account });
+  }).then(function (result) {
+    if ((result[0] == IdUsuario) && (result[1] == Password))
+    {
+      console.log("Autenticación realizada con éxito");
+    };
+  }).catch(function (err) {
+    console.error(err);
+  });
+},
   /*activarContrato: function () {
     App.contracts.Token.deployed().then(function (instance) {
       TokenInstance = instance;

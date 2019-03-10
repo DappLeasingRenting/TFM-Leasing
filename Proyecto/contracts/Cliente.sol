@@ -170,6 +170,10 @@ contract Cliente is Owned {
 
     }
 
-    
+    function fetchUser() public returns (string, string)
+
+    {
+        return (user[msg.sender].IdUser,user[msg.sender].Password);
+    }
     
 }
