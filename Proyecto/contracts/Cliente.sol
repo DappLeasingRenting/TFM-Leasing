@@ -38,6 +38,8 @@ contract Cliente is Owned {
    struct user {
         string IdUser;
         string Password;
+        string DNI;
+        string VATNumber;
         uint TypeUser;
         uint256 timestamp;
     }
@@ -183,6 +185,19 @@ contract Cliente is Owned {
         users[msg.sender].timestamp=now;
         return (true);
     }
+
+    function NewUser(string _IdUsuario, string _Password,uint _TypeUser,string _DNI,string _VATNumber) public returns (bool)
+
+    {
+        users[msg.sender].timestamp=now;
+        users[msg.sender].IdUsuario=_IdUsuario;
+        users[msg.sender].Password=_Password;
+        users[msg.sender].TypeUser=_TypeUser;
+        users[msg.sender].DNI=_DNI;
+        users[msg.sender].VATNumber=_VATNumber;
+        return (true);
+    }
+
 
 
 }

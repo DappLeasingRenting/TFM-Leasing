@@ -333,19 +333,49 @@ App = {
 },
 
 RegistroUsuario: function () {
-  console.log("registrando usuario...")
+  console.log("registrando usuario...");
   var IdUsuario = $("#IdUsuario").val();
   var Password = $("#Contraseña").val();
-  App.contracts.Cliente.deployed().then(function (instance) {
-    return instance.fetchUser({ from: App.account });
-  }).then(function (result) {
-    if ((result[0] == IdUsuario) && (result[1] == Password))
+  var TypeUserString = $("#ListaTipoUsuario").val();
+  switch (TypeUserString)
+  {
+    case ('Cliente'):
     {
-      console.log("Autenticación realizada con éxito");
+      TypeUser=1;
+      var DNI = $("#DNI").val();
+      var VATNumber='N/A';
+    }
+    break;
+    case ('Empresa Aseguradora'):
+    {
+      TypeUser=2;
+      var VATNumber = $("#VATNumber").val();
+      var DNI='N/A';
+    }
+    break;
+    case ('Empresa Financiera'):
+    {
+      TypeUser=3;
+      var VATNumber = $("#VATNumber").val();
+      var DNI='N/A';
 
-      //OMAR: Introducir aquí el front siguiente al de login que quieres que aparezca: window.location.href = "../XXX.html";
-
-    };
+    }
+    break;
+    default:
+    {
+      TypeUser=0;
+      var DNI = 'N/A';
+      var VATNumber='N/A';
+      console.log("Tipo de usuario incorrecto...");
+    }
+    break;
+  }
+  
+  App.contracts.Cliente.deployed().then(function (instance) {
+    return instance.NewUser(IdUsuario,Password,TypeUser,DNI,VATNumber,{ from: App.account });
+  }).then(function (result) {
+    // nuevo usuario
+    console.log(result);
   }).catch(function (err) {
     console.error(err);
   });
