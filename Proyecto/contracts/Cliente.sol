@@ -33,6 +33,15 @@ contract Cliente is Owned {
     mapping(uint => uint) public aseguradoraPrecioCiudad;
     mapping(uint => address) public adminAseguradora;
     mapping(address => uint) public IdEmpresa;
+    mapping(address => user) public users;
+
+   struct user {
+        string IdUser;
+        string Password;
+        uint TypeUser;
+        uint256 timestamp;
+    }
+   
 
     struct cliente {
         string nombre;
@@ -157,9 +166,10 @@ contract Cliente is Owned {
     
         IsAdmin = true; 
         return (IsAdmin);
+        //returns true if it is the owner of the contract
 
     }
 
-    //returns true if it is the owner of the contract
+    
     
 }
