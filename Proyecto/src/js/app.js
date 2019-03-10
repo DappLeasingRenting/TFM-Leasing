@@ -332,6 +332,26 @@ App = {
   });
 },
 
+RegistroUsuario: function () {
+  console.log("registrando usuario...")
+  var IdUsuario = $("#IdUsuario").val();
+  var Password = $("#Contraseña").val();
+  App.contracts.Cliente.deployed().then(function (instance) {
+    return instance.fetchUser({ from: App.account });
+  }).then(function (result) {
+    if ((result[0] == IdUsuario) && (result[1] == Password))
+    {
+      console.log("Autenticación realizada con éxito");
+
+      //OMAR: Introducir aquí el front siguiente al de login que quieres que aparezca: window.location.href = "../XXX.html";
+
+    };
+  }).catch(function (err) {
+    console.error(err);
+  });
+},
+
+
 IngresoUsuario: function () {
   console.log("verificando usuario...")
   var IdUsuario = $("#IdUsuario").val();
@@ -342,11 +362,17 @@ IngresoUsuario: function () {
     if ((result[0] == IdUsuario) && (result[1] == Password))
     {
       console.log("Autenticación realizada con éxito");
+      return instance.RegistraTime({ from: App.account });
+
+      //OMAR: Introducir aquí el front siguiente al de login que quieres que aparezca: window.location.href = "../XXX.html";
+
     };
   }).catch(function (err) {
     console.error(err);
   });
 },
+
+
   /*activarContrato: function () {
     App.contracts.Token.deployed().then(function (instance) {
       TokenInstance = instance;

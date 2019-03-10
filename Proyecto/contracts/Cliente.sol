@@ -170,10 +170,19 @@ contract Cliente is Owned {
 
     }
 
-    function fetchUser() public returns (string, string)
+    function fetchUser() public view returns (string, string)
 
     {
-        return (user[msg.sender].IdUser,user[msg.sender].Password);
+
+        return (users[msg.sender].IdUser,users[msg.sender].Password);
     }
     
+    function RegistraTime() public returns (bool)
+
+    {
+        users[msg.sender].timestamp=now;
+        return (true);
+    }
+
+
 }
