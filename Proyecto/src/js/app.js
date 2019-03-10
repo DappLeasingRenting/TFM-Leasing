@@ -316,6 +316,23 @@ App = {
       console.error(err);
     });
   },
+
+  ZonaAdmin: function() {
+      
+    App.contracts.Cliente.deployed().then(function (instance) {
+    return instance.CheckAdmin.call({ from: App.account });
+  }).then(function (result) {
+    if (result == true)
+    {
+      console.log(result);
+      window.location.href = "../Admin.html";
+    };
+  }).catch(function (err) {
+    console.error(err);
+  });
+},
+
+
   /*activarContrato: function () {
     App.contracts.Token.deployed().then(function (instance) {
       TokenInstance = instance;

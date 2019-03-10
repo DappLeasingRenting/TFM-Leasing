@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>PLATAFORMA DE SERVICIOS DE LEASING Y RENTING</title>
+
+  <!-- Bootstrap -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="row ">
+<div class="col-md-12">
+<div class="panel panel-primary" id="content1" style="display: none;">
+<h4 class="text-center bg-primary">Panel administrador</h4>
+<div class="form-group">
+<div class="row">
+<div class="col-sm-12 text-center">
+<div style="margin: 5px">
+<button id="envioConsulta" onclick="App.getInfo()" class="btn btn-info">Consulta usuarios</button>
+<label class="control-label col-sm-4 text" for="ID usuario">Address de Usuario</label>
+                <div class="col-sm-4 text">
+                  <input class="form-control" type="text" name="AddressUsuarioAdmin" id="AddressUsuarioAdmin">
+                </div>
+<button id="eliminarUsers" onclick="App.removeInfo()" class="btn btn-info">Eliminar usuario</button>
+</div>
+</div>
+</div>
+</div>
+<table id=tablaUsers class="table table-bordered table-responsive">
+<div style="margin: 5px">
+<thead>
+<tr class="info">
+<th scope="col">Id Usuario</th>
+<th scope="col">Tipo Usuario</th>
+<th scope="col">Último acceso</th>
+</tr>
+</thead>
+</table>
+</div>
+</div>
+</div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>

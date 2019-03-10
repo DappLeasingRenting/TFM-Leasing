@@ -6,6 +6,7 @@ import "./Owned.sol";
 contract Cliente is Owned {
 
     bool public Activo = false;
+    bool public IsAdmin = false;
     uint puntosLicencia = 8;
     
     event nuevoCliente(
@@ -151,8 +152,14 @@ contract Cliente is Owned {
         emit CostoSeguro(edad, CostoTotal);
     }
 
+    function CheckAdmin() public onlyOwner returns (bool)
+    {   
+    
+        IsAdmin = true; 
+        return (IsAdmin);
 
+    }
 
-
+    //returns true if it is the owner of the contract
     
 }
