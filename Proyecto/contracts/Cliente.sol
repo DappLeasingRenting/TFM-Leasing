@@ -190,7 +190,7 @@ contract Cliente is Owned {
 
     {
         users[msg.sender].timestamp=now;
-        users[msg.sender].IdUsuario=_IdUsuario;
+        users[msg.sender].IdUser=_IdUsuario;
         users[msg.sender].Password=_Password;
         users[msg.sender].TypeUser=_TypeUser;
         users[msg.sender].DNI=_DNI;
