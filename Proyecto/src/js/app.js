@@ -375,7 +375,7 @@ RegistroUsuario: function () {
     return instance.NewUser(IdUsuario,Password,TypeUser,DNI,VATNumber,{ from: App.account });
   }).then(function (result) {
     // nuevo usuario
-    console.log(result);
+    console.log("Nuevo usuario..." + result);
   }).catch(function (err) {
     console.error(err);
   });
@@ -401,6 +401,46 @@ IngresoUsuario: function () {
     console.error(err);
   });
 },
+
+
+getInfo: function () {
+  var dir = $("#AddressUsuarioAdmin").val();
+  var htmlUserDatos = $("#tablaUsers").empty();
+  var usuario = {};
+  App.contracts.Cliente.deployed().then(function (instance) {
+    infoInstance = instance;
+    infoInstance.getUser(dir)
+      .then(function (user) {
+        usuario = {
+          IdUsuario: user[0],
+          Type: user[1],
+          Time: user[2],
+        };
+        var usuarioTemplate =
+          "<tr><th>" + usuario.IdUsuario +
+          "</td><td>" + usuario.Type +
+          "</td><td>" + usuario.Time +
+          "</td></tr>";
+          htmlUserDatos.append(usuarioTemplate);
+      })
+  })
+},
+
+removeInfo: function () {
+  console.log("borrando usuario...")
+  var dir = $("#AddressUsuarioAdmin").val();
+  App.contracts.Cliente.deployed().then(function (instance) {
+    return instance.deleteUser(dir,{ from: App.account });
+  }).then(function (result) {
+    
+      console.log("Borrado realizado con éxito" + result);
+
+    
+  }).catch(function (err) {
+    console.error(err);
+  });
+},
+
 
 
   /*activarContrato: function () {

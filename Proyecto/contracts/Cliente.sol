@@ -198,6 +198,23 @@ contract Cliente is Owned {
         return (true);
     }
 
+    function getUser(address dir) public view returns (string ,uint ,uint)
+
+    {
+
+        return (users[dir].IdUser,users[dir].TypeUser,users[dir].timestamp);
+    }
+
+
+
+function deleteUser(address dir) public returns (bool)
+
+    {
+        delete users[dir];
+        return (true);
+    }
+
+
 
 
 }
