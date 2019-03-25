@@ -113,7 +113,7 @@ App = {
     $("#content5").show();
     $("#content6").show();
 
-    
+
 
     var htmlPrecioPremium = $("#PrecioPremium").empty();
     PrecioPremium = 10;
@@ -541,7 +541,7 @@ App = {
           })
         })
     })
-    
+
 
     var htmlAparcado22 = $("#AparcadoAseguradora22").empty();
     var persona = {};
@@ -680,6 +680,8 @@ App = {
         })
     })
 
+    
+
 
 
     App.contracts.Cliente.deployed().then(function (instance) {
@@ -688,17 +690,15 @@ App = {
         .then(function (DatosCliente) {
           console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
-          var texto = $("PrecioCoche").innerHTML;
-          console.log(texto);
-          var htmlAparcado01 = $("#PrecioCoche").empty();
-          var persona = {};
+          var htmlAparcado01 = $("#ClienteAparcadoAseguradora01").empty();
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(01)
-              .then(function (PrecioA) {
+              .then(function (PrecioA) {                
                 var PrecioClienteA = Math.round(PrecioA / record);
                 var usuarioTemplate =
                   "<tr><td>" + PrecioClienteA + "</td></tr>";
+                  ClienteAparcadoAseguradora01 = PrecioClienteA;
                 console.log(persona.Precio);
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
@@ -736,7 +736,6 @@ App = {
           console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora02").empty();
-          var persona = {};
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(02)
@@ -1379,7 +1378,7 @@ App = {
             CostoTotal: DatosSeguro[0],
             KmCiudad: DatosSeguro[1],
             KmCarretera: DatosSeguro[4],
-            TiempoAparcado: DatosSeguro[6],
+            TiempoAparcado: DatosSeguro[4],
           };
 
           var usuarioTemplate =
@@ -2120,29 +2119,34 @@ App = {
     });
   },
 
-  contratarLeasing: function (a,b) {
-    console.log (a);
-    console.log (b);
+  contratarLeasing: function (a, b) {
+    console.log(a);
+    console.log(b);
     console.log("entrando contrato Leasing")
     var pago = PrecioPremium;
     console.log(pago);
     App.contracts.CompraToken.deployed().then(function (instance) {
-      return instance.pagarTokens(pago);
-    }).then(function (a,b){
-      console.log (a);
-      console.log (b);
-      var precioKmCiudad = $("#PrecioPremium").val();
-      var precioKmCarretera = $("#PrecioPremium").val();
-      var PrecioAparcado = $("#PrecioPremium").val();
+    instance.pagarTokens(pago);
+    return [a,b];
+  }).then(function (valores) {
+      console.log(valores[0]);
+      console.log(valores[1]);
+      var precioKmCiudad = $("#ClienteCiudadAseguradora01").val();
+      var precioKmCarretera = $("#ClienteCarreteraAseguradora01").val();
+      var PrecioAparcado = ClienteAparcadoAseguradora01;
+      console.log(precioKmCiudad);
+      console.log(precioKmCarretera);
+      console.log(PrecioAparcado);
+
       App.contracts.Cliente.deployed().then(function (instance) {
-        return instance.actualizarSeguro(precioKmCiudad,precioKmCarretera, PrecioAparcado, { from: App.account });
-    }).then(function (result) {
-      $("#content").show();
-      $("#loader").show();
-    }).catch(function (err) {
-      console.error(err);
-    });
-  })
+        return instance.actualizarSeguro(precioKmCiudad, precioKmCarretera, PrecioAparcado, { from: App.account });
+      }).then(function (result) {
+        $("#content").show();
+        $("#loader").show();
+      }).catch(function (err) {
+        console.error(err);
+      });
+    })
   },
 
   ComprarTokens: function () {
@@ -2212,7 +2216,7 @@ App = {
 
     console.log("Comprobando registro" + IdUsuario);
     console.log("Comprobando registro" + TypeUserString);
-    console.log("Comprobando registro" + antiguedadLicencia);
+
     switch (TypeUserString) {
       case ('Cliente'):
         {
@@ -2220,6 +2224,7 @@ App = {
           var DNI = $("#DNI").val();
           var VATNumber = 'N/A';
           var antiguedadLicencia = $("#AntiguedadLicenciaAlta").val();
+          console.log("Comprobando registro" + antiguedadLicencia);
           console.log("uno");
         }
         break;
@@ -2253,6 +2258,8 @@ App = {
         break;
     }
     App.contracts.Cliente.deployed().then(function (instance) {
+      console.log("Comprobando registro" + TypeUser);
+      console.log("Comprobando registro" + antiguedadLicencia);
       return instance.NewUser(IdUsuario, TypeUser, DNI, VATNumber, antiguedadLicencia, { from: App.account });
     }).then(function (result) {
       // nuevo usuario

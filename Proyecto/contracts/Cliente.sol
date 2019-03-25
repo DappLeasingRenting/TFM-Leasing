@@ -185,11 +185,11 @@ contract Cliente is Owned, usingOraclize {
        //require((ownerCuentaLeasing[msg.sender]) == 0);
         if (antiguedadLicencia <= 3){
             record = SafeMath.div(puntosLicencia, 8);
-        }else if (antiguedadLicencia >= 6 && antiguedadLicencia >= 9){
+        }else if (antiguedadLicencia >= 6 && antiguedadLicencia <= 9){
             record = SafeMath.div(puntosLicencia, 12);
         }else if (antiguedadLicencia >= 9 && antiguedadLicencia <= 12){
             record = SafeMath.div(puntosLicencia, 14);
-        }else if (antiguedadLicencia > 15){
+        }else if (antiguedadLicencia >= 13){
             record = SafeMath.div(puntosLicencia, 15);
         }
         /*uint recordCliente;
