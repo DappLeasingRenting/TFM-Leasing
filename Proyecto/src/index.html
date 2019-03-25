@@ -2,11 +2,18 @@
 <html lang="en">
 
 <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>LEASING & RENTING</title>
+  <title>AHORRO COOPERATIVO</title>
 
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -29,7 +36,9 @@
       </div>
       <div id="content" class="col-md-12">
         <p id="accountAddress" class="text-center bg-warning"></p>
-        <h5 class="text-center bg-primary"><dt>Ingrese su usuario y password o seleccione el botón alta</dt></h5>
+        <h5 class="text-center bg-primary">
+          <dt>Ingrese su usuario y password o seleccione el botón alta</dt>
+        </h5>
         <form class="form-horizontal">
           <div class="form-group">
             <label class="control-label col-sm-4 text-right" for="UsuarioLabel">Nombre de Usuario</label>
@@ -51,7 +60,10 @@
             </div>
           </div>
         </form>
+
       </div>
+
+
     </div>
     <div class="row ">
       <div class="col-md-12">
@@ -63,7 +75,8 @@
                 <div class="col-sm-12 text-left">
                   <div style="margin: 5px">
                     <h3 class="text-center bg-primary">Mis Contratos</h3>
-                    <button id="DetenerContrato" onclick="App.infoCliente()" class="btn-lg btn-default btn-lg btn-block">Leasing</button>
+                    <button id="DetenerContrato" onclick="App.contratarOraculo()"
+                      class="btn-lg btn-default btn-lg btn-block">Leasing</button>
                     <table class="table table-bordered table-responsive">
                       <div style="margin: 5px">
                         <thead>
@@ -71,165 +84,1748 @@
                             <th scope="col">ID Coche</th>
                             <th scope="col">Costo mensual</th>
                             <th scope="col">Fecha finalización contrato</th>
+                        </thead>
+                        <tbody id="clienteDatos1" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <button id="DetenerContrato" onclick="App.infoAsegurador()"
+                      class="btn-lg btn-default btn-lg btn-block">Seguro</button>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Costo Total del seguro €</th>
+                            <th scope="col">Km Ciudad</th>
+                            <th scope="col">Km Carretera</th>
+                            <th scope="col">Tiempo Aparcado (horas)</th>
+                          </tr>
+                        </thead>
+                        <tbody id="clienteDatosSeguro" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <button id="DetenerContrato" onclick="App.infoCliente()"
+                      class="btn-lg btn-default btn-lg btn-block">Financiamiento</button>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Deuda Inicial</th>
+                            <th scope="col">Deuda Actual</th>
+                            <th scope="col">Otro campo</th>
                           </tr>
                         </thead>
                         <tbody id="clienteDatos" class="success">
                           <tr class="success"></tr>
                         </tbody>
                       </div>
-                      </table>
-                      <button id="DetenerContrato" onclick="App.infoAsegurador()" class="btn-lg btn-default btn-lg btn-block">Seguro</button>
-                      <table class="table table-bordered table-responsive">
-                        <div style="margin: 5px">
-                          <thead>
-                            <tr class="info">
-                              <th scope="col">Costo Total del seguro €</th>
-                              <th scope="col">Km Ciudad</th>
-                              <th scope="col">Km Carretera</th>
-                              <th scope="col">Tiempo Aparcado (horas)</th>
-                            </tr>
-                          </thead>
-                          <tbody id="clienteDatosSeguro" class="success">
-                            <tr class="success"></tr>
-                          </tbody>
-                          </div>
-                          </table>
-                          <button id="DetenerContrato" onclick="App.infoCliente()" class="btn-lg btn-default btn-lg btn-block">Financiamiento</button>
-                          <table class="table table-bordered table-responsive">
-                            <div style="margin: 5px">
-                              <thead>
-                                <tr class="info">
-                                  <th scope="col">Deuda Inicial</th>
-                                  <th scope="col">Deuda Actual</th>
-                                  <th scope="col">Otro campo</th>
-                                </tr>
-                              </thead>
-                              <tbody id="clienteDatos" class="success">
-                                <tr class="success"></tr>
-                              </tbody>
+                    </table>
+                  </div>
+                  </table>
+
+                  <div class="form-group">
+                    <div class="col-sm-12 text-center">
+
+                      <button id="Consulta Coches" class="btn-lg btn-default btn-lg btn-block"><a
+                          href="WebCoches.html">Ver
+                          Coches</a></button>
+                    </div>
+                    <div class="row ">
+                      <div class="col-md-12">
+                        <div class="panel panel-primary" id="content3" class="text-center" style="display: none;">
+                          <h4 class="text-center bg-primary">
+                            Bienvenido "Leasing Smart Token" (LST)!
+                          </h4>
+                          <h4 class="text-center">
+                            El precio de este token es <span class="token-price"></span> Ether. Actualmente posees
+                            <span class="dapp-balance"></span>&nbsp;LST.
+                          </h4>
+                          <form onSubmit="App.ComprarTokens(); return false;" role="form">
+
+                            <div class="form-group">
+                              <div class="input-group">
+                                <input id="numeroTokens" class="form-control input-lg" type="number" name="number"
+                                  value="1" min="1" pattern="[0-9]"><br>
+                                <span class="input-group-btn">
+                                  <button type="submit" class="btn btn-success btn-lg">Comprar Tokens</button>
+                                </span>
+                              </div>
                             </div>
-                            </table>
-                        </div>
-                      </table>
-
-                      <div class="form-group">
-                        <div class="col-sm-12 text-center">
-
-                          <button id="Consulta Coches" class="btn-lg btn-default btn-lg btn-block"><a href="WebCoches.html">Ver
-                              Coches</a></button>
+                          </form>
                         </div>
                       </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-      <div class="row ">
-        <div class="col-md-12">
-          <div class="panel panel-primary" id="content1" style="display: none;">
-            <h3 class="text-center bg-primary">Asegurador</h3>
-            <p id="accountAddress" class="text-center bg-warning"></p>
-            <h5 class="text-center bg-primary"><dt>Ingrese los nuevos valores en los campos. Registre el valor actual
-                de aquellos valores que no desea cambiar</dt></h5>
-            <form onSubmit="App.actualizarPrecioCiudad(); return false;" role="form1">
-              <div class="form-group">
-                <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
-                <div class="input-group">
-                  <input id="actualizaCiudad" class="form-control input-lg" type="number" name="number" min="0" pattern="[0-9]">
-                  <br>
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
-                  </span>
-                </div>
-              </div>
-            </form>
-            <form onSubmit="App.actualizarPrecioCarretera(); return false;" role="form1">
-              <div class="form-group">
-                <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
-                <div class="input-group">
-                  <input id="actualizaCarretera" class="form-control input-lg" type="number" name="number" min="0" pattern="[0-9]">
-                  <br>
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
-                  </span>
-                </div>
-              </div>
-            </form>
-            <form onSubmit="App.actualizarPrecioAparcado(); return false;" role="form1">
-              <div class="form-group">
-                <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
-                <div class="input-group">
-                  <input id="actualizaAparcado" class="form-control input-lg" type="number" name="number" min="0"
-                    pattern="[0-9]">
-                  <br>
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
-                  </span>
-                </div>
-              </div>
-            </form>
-
-            <div class="form-group">
-              <div class="row">
-                <div class="col-sm-12 text-left">
-                  <div style="margin: 5px">
-                    <button id="envioConsulta" onclick="App.infoConsultaAsegurador()" class="btn btn-info btn-lg">Consuta</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <table class="table table-bordered table-responsive">
-              <div style="margin: 5px">
-                <thead>
-                  <tr class="info">
-                    <th scope="col">Precio Km Ciudad</th>
-                  </tr>
-                </thead>
-                <tbody id="Ciudad" class="success">
-                  <tr class="success"></tr>
-                </tbody>
-              </div>
-            </table>
-            <table class="table table-bordered table-responsive">
-              <div style="margin: 5px">
-                <thead>
-                  <tr class="info">
-                    <th scope="col">Precio Km Carretera</th>
-                  </tr>
-                </thead>
-                <tbody id="Carretera" class="success">
-                  <tr class="success"></tr>
-                </tbody>
-              </div>
-            </table>
-            <table class="table table-bordered table-responsive">
-              <div style="margin: 5px">
-                <thead>
-                  <tr class="info">
-                    <th scope="col">Precio Aparcado</th>
-                  </tr>
-                </thead>
-                <tbody id="Aparcado" class="success">
-                  <tr class="success"></tr>
-                </tbody>
-              </div>
-            </table>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <!-- Include all compiled plugins (below), or include individual files as needed -->
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/web3.min.js"></script>
-  <script src="js/truffle-contract.js"></script>
-  <script src="js/app.js"></script>
+
+
+
+
+    <div class="row ">
+      <div class="col-md-12">
+        <div class="panel panel-primary" id="content4" class="text-center" style="display: none;">
+          <h4 class="text-center bg-primary">
+            Bienvenido "Aumentar Tokens" (TAC)!
+          </h4>
+          <h4 class="text-center">
+            El precio de este token es <span class="token-price"></span> Ether. Actualmente posees <span
+              class="dapp-balance"></span>&nbsp;TAC.
+          </h4>
+          <form onSubmit="App.aumentarSupply(); return false;" role="form">
+
+            <div class="form-group">
+              <div class="input-group">
+                <input id="numeroTokensAumentar" class="form-control input-lg" type="number" name="number" value="1"
+                  min="1" pattern="[0-9]"><br>
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-success btn-lg">Aumentar Tokens</button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <br>
+          <div class="progress text-center">
+            <div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0"
+              aria-valuemax="100">
+            </div>
+          </div>
+          <p class="text-center"><span class="tokens-vendidos"></span> tokens vendidos / <span
+              class="tokens-disponibles"></span>
+            tokens disponibles</p>
+          <hr>
+          <button id="Tranferencia inicial" onclick="App.TranferenciaInicialTokens()" class="btn">Transferencia
+            inicial</button>
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="row ">
+      <div class="col-md-12">
+        <div class="panel panel-primary" id="content1" style="display: none;">
+          <h3 class="text-center bg-primary">Asegurador</h3>
+          <p id="accountAddress" class="text-center bg-warning"></p>
+          <h5 class="text-center bg-primary">
+            <dt>Ingrese los nuevos valores en los campos. Registre el valor actual
+              de aquellos valores que no desea cambiar</dt>
+          </h5>
+          <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Seguro Premiun
+                    </span></a>
+                </h4>
+              </div>
+              <div id="collapse1" class="panel-collapse collapse ">
+                <div class="panel-body">
+                  <form onSubmit="App.actualizarPrecioCiudad(0,1); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                      <div class="input-group">
+                        <input id="actualizaCiudad01" class="form-control input-lg" type="number" name="number" min="0"
+                          pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                  <form onSubmit="App.actualizarPrecioCarretera(0,1); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                      <div class="input-group">
+                        <input id="actualizaCarretera01" class="form-control input-lg" type="number" name="number"
+                          min="0" pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                  <form onSubmit="App.actualizarPrecioAparcado(0,1); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                      <div class="input-group">
+                        <input id="actualizaAparcado01" class="form-control input-lg" type="number" name="number"
+                          min="0" pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12 text-left">
+                      <div style="margin: 5px">
+                        <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                          class="btn btn-info btn-lg">Consuta</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Km Ciudad</th>
+                      </tr>
+                    </thead>
+                    <tbody id="CiudadAseguradora01" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Km Carretera</th>
+                      </tr>
+                    </thead>
+                    <tbody id="CarreteraAseguradora01" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Aparcado</th>
+                      </tr>
+                    </thead>
+                    <tbody id="AparcadoAseguradora01" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Seguro Luxure
+                    </span></a>
+                </h4>
+              </div>
+              <div id="collapse2" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <form onSubmit="App.actualizarPrecioCiudad(0,2); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                      <div class="input-group">
+                        <input id="actualizaCiudad02" class="form-control input-lg" type="number" name="number" min="0"
+                          pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                  <form onSubmit="App.actualizarPrecioCarretera(0,2); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                      <div class="input-group">
+                        <input id="actualizaCarretera02" class="form-control input-lg" type="number" name="number"
+                          min="0" pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                  <form onSubmit="App.actualizarPrecioAparcado(0,2); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                      <div class="input-group">
+                        <input id="actualizaAparcado02" class="form-control input-lg" type="number" name="number"
+                          min="0" pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12 text-left">
+                      <div style="margin: 5px">
+                        <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                          class="btn btn-info btn-lg">Consuta</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Km Ciudad</th>
+                      </tr>
+                    </thead>
+                    <tbody id="CiudadAseguradora02" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Km Carretera</th>
+                      </tr>
+                    </thead>
+                    <tbody id="CarreteraAseguradora02" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Aparcado</th>
+                      </tr>
+                    </thead>
+                    <tbody id="AparcadoAseguradora02" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Seguro Classic </span></a>
+                </h4>
+              </div>
+              <div id="collapse3" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <form onSubmit="App.actualizarPrecioCiudad(0,3); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                      <div class="input-group">
+                        <input id="actualizaCiudad03" class="form-control input-lg" type="number" name="number" min="0"
+                          pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                  <form onSubmit="App.actualizarPrecioCarretera(0,3); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                      <div class="input-group">
+                        <input id="actualizaCarretera03" class="form-control input-lg" type="number" name="number"
+                          min="0" pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                  <form onSubmit="App.actualizarPrecioAparcado(0,3); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                      <div class="input-group">
+                        <input id="actualizaAparcado03" class="form-control input-lg" type="number" name="number"
+                          min="0" pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12 text-left">
+                      <div style="margin: 5px">
+                        <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                          class="btn btn-info btn-lg">Consuta</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Km Ciudad</th>
+                      </tr>
+                    </thead>
+                    <tbody id="CiudadAseguradora03" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Km Carretera</th>
+                      </tr>
+                    </thead>
+                    <tbody id="CarreteraAseguradora03" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Aparcado</th>
+                      </tr>
+                    </thead>
+                    <tbody id="AparcadoAseguradora03" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+              </div>
+
+
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Seguro Corriente </span></a>
+                </h4>
+              </div>
+              <div id="collapse4" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <form onSubmit="App.actualizarPrecioCiudad(0,4); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                      <div class="input-group">
+                        <input id="actualizaCiudad04" class="form-control input-lg" type="number" name="number" min="0"
+                          pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                  <form onSubmit="App.actualizarPrecioCarretera(0,4); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                      <div class="input-group">
+                        <input id="actualizaCarretera04" class="form-control input-lg" type="number" name="number"
+                          min="0" pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                  <form onSubmit="App.actualizarPrecioAparcado(0,4); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                      <div class="input-group">
+                        <input id="actualizaAparcado04" class="form-control input-lg" type="number" name="number"
+                          min="0" pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12 text-left">
+                      <div style="margin: 5px">
+                        <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                          class="btn btn-info btn-lg">Consuta</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Km Ciudad</th>
+                      </tr>
+                    </thead>
+                    <tbody id="CiudadAseguradora04" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Km Carretera</th>
+                      </tr>
+                    </thead>
+                    <tbody id="CarreteraAseguradora04" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Aparcado</th>
+                      </tr>
+                    </thead>
+                    <tbody id="AparcadoAseguradora04" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h4 class="panel-title">
+                  <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">Seguro Furgoneta </span></a>
+                </h4>
+              </div>
+              <div id="collapse5" class="panel-collapse collapse">
+                <div class="panel-body">
+                  <form onSubmit="App.actualizarPrecioCiudad(0,5); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                      <div class="input-group">
+                        <input id="actualizaCiudad05" class="form-control input-lg" type="number" name="number" min="0"
+                          pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                  <form onSubmit="App.actualizarPrecioCarretera(0,5); return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                      <div class="input-group">
+                        <input id="actualizaCarretera05" class="form-control input-lg" type="number" name="number"
+                          min="0" pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                  <form onSubmit="App.actualizarPrecioAparcado(0,5) ; return false;" role="form1">
+                    <div class="form-group">
+                      <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                      <div class="input-group">
+                        <input id="actualizaAparcado05" class="form-control input-lg" type="number" name="number"
+                          min="0" pattern="[0-9]">
+                        <br>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                        </span>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12 text-left">
+                      <div style="margin: 5px">
+                        <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                          class="btn btn-info btn-lg">Consuta</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Km Ciudad</th>
+                      </tr>
+                    </thead>
+                    <tbody id="CiudadAseguradora05" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Km Carretera</th>
+                      </tr>
+                    </thead>
+                    <tbody id="CarreteraAseguradora05" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+                <table class="table table-bordered table-responsive">
+                  <div style="margin: 5px">
+                    <thead>
+                      <tr class="info">
+                        <th scope="col">Precio Aparcado</th>
+                      </tr>
+                    </thead>
+                    <tbody id="AparcadoAseguradora05" class="success">
+                      <tr class="success"></tr>
+                    </tbody>
+                  </div>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+        <div class="row ">
+          <div class="col-md-12">
+            <div class="panel panel-primary" id="content5" style="display: none;">
+              <h3 class="text-center bg-primary">Asegurador</h3>
+              <p id="accountAddress" class="text-center bg-warning"></p>
+              <h5 class="text-center bg-primary">
+                <dt>Ingrese los nuevos valores en los campos. Registre el valor actual
+                  de aquellos valores que no desea cambiar</dt>
+              </h5>
+              <div class="panel-group" id="accordion1">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion1" href="#collapse6">Seguro Premiun
+                        </span></a>
+                    </h4>
+                  </div>
+                  <div id="collapse6" class="panel-collapse collapse ">
+                    <div class="panel-body">
+                      <form onSubmit="App.actualizarPrecioCiudad(1,1); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                          <div class="input-group">
+                            <input id="actualizaCiudad11" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioCarretera(1,1); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                          <div class="input-group">
+                            <input id="actualizaCarretera11" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioAparcado(1,1); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                          <div class="input-group">
+                            <input id="actualizaAparcado11" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-12 text-left">
+                          <div style="margin: 5px">
+                            <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                              class="btn btn-info btn-lg">Consuta</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Ciudad</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CiudadAseguradora11" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Carretera</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CarreteraAseguradora11" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Aparcado</th>
+                          </tr>
+                        </thead>
+                        <tbody id="AparcadoAseguradora11" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion1" href="#collapse7">Seguro Luxure
+                        </span></a>
+                    </h4>
+                  </div>
+                  <div id="collapse7" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <form onSubmit="App.actualizarPrecioCiudad(1,1); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                          <div class="input-group">
+                            <input id="actualizaCiudad12" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioCarretera(1,2); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                          <div class="input-group">
+                            <input id="actualizaCarretera12" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioAparcado(1,2); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                          <div class="input-group">
+                            <input id="actualizaAparcado12" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-12 text-left">
+                          <div style="margin: 5px">
+                            <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                              class="btn btn-info btn-lg">Consuta</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Ciudad</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CiudadAseguradora12" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Carretera</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CarreteraAseguradora12" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Aparcado</th>
+                          </tr>
+                        </thead>
+                        <tbody id="AparcadoAseguradora12" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+
+
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion1" href="#collapse8">Seguro Classic </span></a>
+                    </h4>
+                  </div>
+                  <div id="collapse8" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <form onSubmit="App.actualizarPrecioCiudad(1,3); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                          <div class="input-group">
+                            <input id="actualizaCiudad13" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioCarretera(1,3); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                          <div class="input-group">
+                            <input id="actualizaCarretera13" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioAparcado(1,3); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                          <div class="input-group">
+                            <input id="actualizaAparcado13" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-12 text-left">
+                          <div style="margin: 5px">
+                            <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                              class="btn btn-info btn-lg">Consuta</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Ciudad</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CiudadAseguradora13" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Carretera</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CarreteraAseguradora13" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Aparcado</th>
+                          </tr>
+                        </thead>
+                        <tbody id="AparcadoAseguradora13" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion1" href="#collapse9">Seguro Corriente </span></a>
+                    </h4>
+                  </div>
+                  <div id="collapse9" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <form onSubmit="App.actualizarPrecioCiudad(1,4); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                          <div class="input-group">
+                            <input id="actualizaCiudad14" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioCarretera(1,4); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                          <div class="input-group">
+                            <input id="actualizaCarretera14" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioAparcado(1,4); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                          <div class="input-group">
+                            <input id="actualizaAparcado14" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-12 text-left">
+                          <div style="margin: 5px">
+                            <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                              class="btn btn-info btn-lg">Consuta</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Ciudad</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CiudadAseguradora14" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Carretera</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CarreteraAseguradora14" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Aparcado</th>
+                          </tr>
+                        </thead>
+                        <tbody id="AparcadoAseguradora14" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion1" href="#collapse10">Seguro Furgoneta
+                        </span></a>
+                    </h4>
+                  </div>
+                  <div id="collapse10" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <form onSubmit="App.actualizarPrecioCiudad(1,5); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                          <div class="input-group">
+                            <input id="actualizaCiudad15" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioCarretera(1,5); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                          <div class="input-group">
+                            <input id="actualizaCarretera15" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioAparcado(1,5) ; return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                          <div class="input-group">
+                            <input id="actualizaAparcado15" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-12 text-left">
+                          <div style="margin: 5px">
+                            <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                              class="btn btn-info btn-lg">Consuta</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Ciudad</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CiudadAseguradora15" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Carretera</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CarreteraAseguradora15" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Aparcado</th>
+                          </tr>
+                        </thead>
+                        <tbody id="AparcadoAseguradora15" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-md-12">
+            <div class="panel panel-primary" id="content6" style="display: none;">
+              <h3 class="text-center bg-primary">Asegurador</h3>
+              <p id="accountAddress" class="text-center bg-warning"></p>
+              <h5 class="text-center bg-primary">
+                <dt>Ingrese los nuevos valores en los campos. Registre el valor actual
+                  de aquellos valores que no desea cambiar</dt>
+              </h5>
+              <div class="panel-group" id="accordion2">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse11">Seguro Premiun
+                        </span></a>
+                    </h4>
+                  </div>
+                  <div id="collapse11" class="panel-collapse collapse ">
+                    <div class="panel-body">
+                      <form onSubmit="App.actualizarPrecioCiudad(2,1); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                          <div class="input-group">
+                            <input id="actualizaCiudad21" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioCarretera(2,1); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                          <div class="input-group">
+                            <input id="actualizaCarretera21" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioAparcado(2,1); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                          <div class="input-group">
+                            <input id="actualizaAparcado21" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-12 text-left">
+                          <div style="margin: 5px">
+                            <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                              class="btn btn-info btn-lg">Consuta</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Ciudad</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CiudadAseguradora21" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Carretera</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CarreteraAseguradora21" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Aparcado</th>
+                          </tr>
+                        </thead>
+                        <tbody id="AparcadoAseguradora21" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse12">Seguro Luxure
+                        </span></a>
+                    </h4>
+                  </div>
+                  <div id="collapse12" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <form onSubmit="App.actualizarPrecioCiudad(2,2); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                          <div class="input-group">
+                            <input id="actualizaCiudad22" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioCarretera(2,2); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                          <div class="input-group">
+                            <input id="actualizaCarretera22" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioAparcado(2,2); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                          <div class="input-group">
+                            <input id="actualizaAparcado22" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-12 text-left">
+                          <div style="margin: 5px">
+                            <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                              class="btn btn-info btn-lg">Consuta</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Ciudad</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CiudadAseguradora22" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Carretera</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CarreteraAseguradora22" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Aparcado</th>
+                          </tr>
+                        </thead>
+                        <tbody id="AparcadoAseguradora22" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse13">Seguro Classic </span></a>
+                    </h4>
+                  </div>
+                  <div id="collapse13" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <form onSubmit="App.actualizarPrecioCiudad(2,3); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                          <div class="input-group">
+                            <input id="actualizaCiudad23" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioCarretera(2,3); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                          <div class="input-group">
+                            <input id="actualizaCarretera23" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioAparcado(2,3); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                          <div class="input-group">
+                            <input id="actualizaAparcado23" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-12 text-left">
+                          <div style="margin: 5px">
+                            <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                              class="btn btn-info btn-lg">Consuta</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Ciudad</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CiudadAseguradora23" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Carretera</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CarreteraAseguradora23" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Aparcado</th>
+                          </tr>
+                        </thead>
+                        <tbody id="AparcadoAseguradora23" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse14">Seguro Corriente
+                        </span></a>
+                    </h4>
+                  </div>
+                  <div id="collapse14" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <form onSubmit="App.actualizarPrecioCiudad(2,4); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                          <div class="input-group">
+                            <input id="actualizaCiudad24" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioCarretera(2,4); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                          <div class="input-group">
+                            <input id="actualizaCarretera24" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioAparcado(2,4); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                          <div class="input-group">
+                            <input id="actualizaAparcado24" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-12 text-left">
+                          <div style="margin: 5px">
+                            <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                              class="btn btn-info btn-lg">Consuta</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Ciudad</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CiudadAseguradora24" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Carretera</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CarreteraAseguradora24" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Aparcado</th>
+                          </tr>
+                        </thead>
+                        <tbody id="AparcadoAseguradora24" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                  </div>
+                </div>
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h4 class="panel-title">
+                      <a data-toggle="collapse" data-parent="#accordion2" href="#collapse15">Seguro Furgoneta
+                        </span></a>
+                    </h4>
+                  </div>
+                  <div id="collapse15" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <form onSubmit="App.actualizarPrecioCiudad(2,5); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Ciudad</label>
+                          <div class="input-group">
+                            <input id="actualizaCiudad25" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioCarretera(2,5); return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Km Carretera</label>
+                          <div class="input-group">
+                            <input id="actualizaCarretera25" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                      <form onSubmit="App.actualizarPrecioAparcado(2,5) ; return false;" role="form1">
+                        <div class="form-group">
+                          <label for="depositoTokens" class="col-lg-2 control-label">Precio Aparcado</label>
+                          <div class="input-group">
+                            <input id="actualizaAparcado25" class="form-control input-lg" type="number" name="number"
+                              min="0" pattern="[0-9]">
+                            <br>
+                            <span class="input-group-btn">
+                              <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                            </span>
+                          </div>
+                        </div>
+                      </form>
+                    </div>
+                    <div class="form-group">
+                      <div class="row">
+                        <div class="col-sm-12 text-left">
+                          <div style="margin: 5px">
+                            <button id="envioConsulta" onclick="App.infoConsultaAsegurador()"
+                              class="btn btn-info btn-lg">Consuta</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Ciudad</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CiudadAseguradora25" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Km Carretera</th>
+                          </tr>
+                        </thead>
+                        <tbody id="CarreteraAseguradora25" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                    <table class="table table-bordered table-responsive">
+                      <div style="margin: 5px">
+                        <thead>
+                          <tr class="info">
+                            <th scope="col">Precio Aparcado</th>
+                          </tr>
+                        </thead>
+                        <tbody id="AparcadoAseguradora25" class="success">
+                          <tr class="success"></tr>
+                        </tbody>
+                      </div>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+
+      <div class="container ">
+        <div class="row ">
+          <div class="col-md-12">
+            <h1 class="text-center">ZONA DE FINANCIACIÓN</h1>
+            <hr />
+            <br />
+          </div>
+        </div>
+
+        <div class="row ">
+          <div class="col-md-12">
+          </div>
+          <div class="row ">
+            <div class="col-md-12">
+              <div class="panel panel-primary" id="content1" style="display: none;">
+                <h3 class="text-center bg-primary">FINANCIACIÓN</h3>
+                <p id="accountAddress" class="text-center bg-warning"></p>
+                <h5 class="text-center bg-primary">
+                  <dt>Para obtener financiación ingrese los siguientes valores</dt>
+                </h5>
+                <form onSubmit="App.actualizaLimiteCredito(); return false;" role="form1">
+                  <div class="form-group">
+                    <label for="VolumenCredito" class="col-lg-2 control-label">Volumen de crédito</label>
+                    <div class="input-group">
+                      <input id="VolumenCredito" class="form-control input-lg" type="number" name="number" min="0">
+                      <br>
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                      </span>
+                    </div>
+                  </div>
+                </form>
+                <form onSubmit="App.actualizaLimiteCredito(); return false;" role="form1">
+                  <div class="form-group">
+                    <label for="Demora" class="col-lg-2 control-label">Demora en días</label>
+                    <div class="input-group">
+                      <input id="Demora" class="form-control input-lg" type="number" name="number" min="1" max="365"
+                        pattern="[1-365]">
+                      <br>
+                      <span class="input-group-btn">
+                        <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
+                      </span>
+                    </div>
+                  </div>
+                </form>
+                <div class="form-group">
+                  <label class="control-label col-sm-4 text-left" for="ClienteNuevo">¿Es usted nuevo cliente?</label>
+                  <div class="col-sm-4">
+                    <select id="ClienteNuevo" name="ClienteNuevo">
+                      <option value="" selected disabled hidden>Elija opción</option>
+                      <option value="Si">Sí</option>
+                      <option value="No">No</option>
+                    </select>
+
+                  </div>
+                  <span class="input-group-btn">
+                    <button type="submit" class="btn btn-success btn-right btn-lg">Actualizar</button>
+                  </span>
+                </div>
+
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-12 text-left">
+                      <div style="margin: 5px">
+                        <button id="envioPeticion" onclick="App.envioPeticion()" class="btn btn-info btn-lg">Envío de
+                          petición</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+          <label for="MaxCredito" class="col-lg-2 control-label">Máximo crédito disponible: </label>
+
+        </div>
+
+
+
+      </div>
+    </div>
+
+
+      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <!-- Include all compiled plugins (below), or include individual files as needed -->
+      <script src="js/bootstrap.min.js"></script>
+      <script src="js/web3.min.js"></script>
+      <script src="js/truffle-contract.js"></script>
+      <script src="js/app.js"></script>
 
 </body>
 
