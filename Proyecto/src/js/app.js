@@ -115,7 +115,35 @@ App = {
 
     
 
+    var htmlPrecioPremium = $("#PrecioPremium").empty();
+    PrecioPremium = 10;
+    var usuarioTemplatePremium =
+      "<tr><td>" + PrecioPremium + "</td></tr>";
+    htmlPrecioPremium.append(usuarioTemplatePremium);
 
+    var htmlPrecioLuxure = $("#PrecioLuxure").empty();
+    PrecioLuxure = 9;
+    var usuarioTemplateLuxure =
+      "<tr><td>" + PrecioLuxure + "</td></tr>";
+    htmlPrecioLuxure.append(usuarioTemplateLuxure);
+
+    var htmlPrecioClassic = $("#PrecioLuxure").empty();
+    PrecioClassic = 8;
+    var usuarioTemplateClassic =
+      "<tr><td>" + PrecioClassic + "</td></tr>";
+    htmlPrecioClassic.append(usuarioTemplateClassic);
+
+    var htmlPrecioCorriente = $("#PrecioCorriente").empty();
+    PrecioCorriente = 7;
+    var usuarioTemplateCorriente =
+      "<tr><td>" + PrecioCorriente + "</td></tr>";
+    htmlPrecioCorriente.append(usuarioTemplateCorriente);
+
+    var htmlPrecioFurgonetas = $("#PrecioFurgonetas").empty();
+    PrecioFurgonetas = 6;
+    var usuarioTemplateFurgonetas =
+      "<tr><td>" + PrecioFurgonetas + "</td></tr>";
+    htmlPrecioFurgonetas.append(usuarioTemplateFurgonetas);
 
 
 
@@ -513,11 +541,7 @@ App = {
           })
         })
     })
-    var htmlPrecioPremium = $("#PrecioPremium").empty();
-    PrecioPremium = 10;
-    var usuarioTemplatex =
-      "<tr><td>" + PrecioPremium + "</td></tr>";
-    htmlPrecioPremium.append(usuarioTemplatex);
+    
 
     var htmlAparcado22 = $("#AparcadoAseguradora22").empty();
     var persona = {};
