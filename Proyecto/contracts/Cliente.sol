@@ -32,19 +32,7 @@ contract Cliente is Owned, usingOraclize {
     mapping(uint => uint) public aseguradoraPrecioCarretera;
     mapping(uint => uint) public aseguradoraPrecioCiudad;
     mapping(address => user) public users;
-    mapping(address => cliente) public clientes;
-
-    struct cliente {
-        string nombre;
-        string DNI;
-        string VATNumber;
-        uint Typeuser;
-        uint record;
-        uint PrecioAparcado;
-        uint PrecioKmCarretera;
-        uint PrecioKmCiudad;
-    }
-
+    
  struct user {
         string IdUser;
         string DNI;
@@ -84,44 +72,7 @@ contract Cliente is Owned, usingOraclize {
     function actualizarPrecioCiudad(uint idEmpresa, uint precioCiudad) public {
         aseguradoraPrecioCiudad[idEmpresa] = precioCiudad;
     }
-
-//para probar si funciona la función de calculo del seguro
-   function crearCliente(string memory nombre, uint TypeUser, string memory DNI, string memory VATNumber, uint antiguedadLicencia) public {
-        /** @param nombre nomhttps://github.com/DappLeasingRenting/TFM-Leasing.gitbre del usuario.
-            @param idUsuario identifiación del usuario.
-            @param fecha fecha en la que se realiza el alta del usuario.
-        */
-        /** @dev verifica que el Smartcontract este activo
-        verifica que la address no haya creado un usuario ya en la DAAP y finalmente verifica que no se hayan asignado ya todos los 
-        periodos de retiro de Tokens*/
-
-        uint recordCliente;
-        require(Activo == false);
-       //require((ownerCuentaLeasing[msg.sender]) == 0);
-        if (antiguedadLicencia <= 3){
-            recordCliente = SafeMath.div(puntosLicencia, 8);
-            
-        }else if (antiguedadLicencia > 3 && antiguedadLicencia <= 6){
-            recordCliente = SafeMath.div(puntosLicencia, 12);
-            
-        }else if (antiguedadLicencia >= 9 && antiguedadLicencia <= 12){
-            recordCliente = SafeMath.div(puntosLicencia, 14);
-            
-        }else if (antiguedadLicencia > 12){
-            recordCliente = SafeMath.div(puntosLicencia, 15);
-            
-        }
-       /** @dev cuando se registra el sexto usuario, se inicializan las fechas para el contrato y para los usuarios, de acuerdo
-       a la fecha de registro de último usuario*/             
-        /** @dev se da de alta los valores del usuario que se ha registrado para cada uno de lo campos del strcut en el mapping Ahorrado
-        Se suma el 1 a los contadores mes y ownerCuenta Ahorro, mesCount y mes*/
-        clientes[msg.sender] = cliente(nombre, DNI, VATNumber,TypeUser,recordCliente, 0, 0, 0);
-      
-        /**@return emite el evento con los datos de mes, nombre y fecha de comienzoAhorro.*/
-        emit nuevoCliente(TypeUser);        
-    }
-      
-      
+   
 
 //** @title Constructor. */
     
@@ -129,7 +80,7 @@ contract Cliente is Owned, usingOraclize {
     function costoSeguro() public {
           /**@param _numeroTokens cantidad a comprar.
  
-      /** @dev verificar que el precio a pagar sea el precio estblecido
+      /** @dev verificar que el precio a pagar sea el precio establecido
       verifica que el contrato cuente con los tokens solicitados para comprar
       verifica que se haya realizado la transacción satisfactoriamente desde el contrato Token.sol.
       Actualiza el valor de los tokens vendidos
@@ -179,7 +130,7 @@ contract Cliente is Owned, usingOraclize {
 
    function NewUser(string memory IdUsuario, uint TypeUser, string memory DNI, string memory VATNumber, uint antiguedadLicencia) public 
     {
-
+//solo deberia poder darese de alta una vez el usuario
        uint record;
         require(Activo == false);
        //require((ownerCuentaLeasing[msg.sender]) == 0);
@@ -192,28 +143,9 @@ contract Cliente is Owned, usingOraclize {
         }else if (antiguedadLicencia >= 13){
             record = SafeMath.div(puntosLicencia, 15);
         }
-        /*uint recordCliente;
-
-       require(Activo == false);
-        if (antiguedadLicencia <= 3){
-            record = SafeMath.div(puntosLicencia, 8);
-            users[msg.sender].record = record;
-        }else if (antiguedadLicencia > 3 && antiguedadLicencia <= 6){
-            record = SafeMath.div(puntosLicencia, 12);
-            users[msg.sender].record = record;
-        }else if (antiguedadLicencia >= 9 && antiguedadLicencia <= 12){
-            record = SafeMath.div(puntosLicencia, 14);
-            users[msg.sender].record = record;
-        }else if (antiguedadLicencia > 12){
-            record = SafeMath.div(puntosLicencia, 15);
-            users[msg.sender].record = record;
-        }*/
+       
         users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0);
-        /*users[msg.sender].timestamp = now;
-        users[msg.sender].IdUser = IdUsuario;
-        users[msg.sender].TypeUser = TypeUser;
-        users[msg.sender].DNI = DNI;
-        users[msg.sender].VATNumber = VATNumber;*/
+        
         
         emit nuevoCliente(TypeUser); 
        
@@ -236,12 +168,17 @@ function deleteUser(address dir) public returns (bool)
         return (true);
     }
 
-    function actualizarSeguro(uint precioKmCiudad, uint precioKmCarretera, uint PrecioAparcados) public returns (bool)
+    
+
+    function actualizarSeguro(uint precioKmCiudad, uint precioKmCarretera, uint precioAparcado) public returns (bool)
 
     {
-        uint CostoTotal = 0;
+        //Solo debería poder contratar un leasing el cliente
         
-        CostSeguro[msg.sender] = Seguro(CostoTotal, precioKmCiudad, precioKmCarretera, PrecioAparcados);
+        users[msg.sender].PrecioAparcado = precioAparcado;
+        users[msg.sender].PrecioKmCarretera = precioKmCarretera;
+        users[msg.sender].PrecioKmCiudad = precioKmCiudad;
+
       
         return (true);
     }

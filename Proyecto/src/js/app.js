@@ -152,7 +152,7 @@ App = {
 
 
 
-    console.log("carga inicial");
+
     var htmlAparcado01 = $("#AparcadoAseguradora01").empty();
     var persona = {};
     App.contracts.Cliente.deployed().then(function (instance) {
@@ -161,7 +161,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado01.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad01 = $("#CiudadAseguradora01").empty();
@@ -188,7 +187,7 @@ App = {
         })
     })
 
-    console.log("carga inicial");
+
     var htmlAparcado02 = $("#AparcadoAseguradora02").empty();
     var persona = {};
     App.contracts.Cliente.deployed().then(function (instance) {
@@ -197,7 +196,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado02.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad02 = $("#CiudadAseguradora02").empty();
@@ -224,7 +222,7 @@ App = {
         })
     })
 
-    console.log("carga inicial");
+
     var htmlAparcado03 = $("#AparcadoAseguradora03").empty();
     var persona = {};
     App.contracts.Cliente.deployed().then(function (instance) {
@@ -233,7 +231,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado03.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad03 = $("#CiudadAseguradora03").empty();
@@ -259,7 +256,6 @@ App = {
           })
         })
     })
-    console.log("carga inicial");
     var htmlAparcado04 = $("#AparcadoAseguradora04").empty();
     var persona = {};
     App.contracts.Cliente.deployed().then(function (instance) {
@@ -268,7 +264,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado04.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad04 = $("#CiudadAseguradora04").empty();
@@ -294,7 +289,6 @@ App = {
           })
         })
     })
-    console.log("carga inicial");
     var htmlAparcado05 = $("#AparcadoAseguradora05").empty();
     var persona = {};
     App.contracts.Cliente.deployed().then(function (instance) {
@@ -303,7 +297,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado05.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad05 = $("#CiudadAseguradora05").empty();
@@ -341,7 +334,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado11.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad11 = $("#CiudadAseguradora11").empty();
@@ -376,7 +368,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado12.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad12 = $("#CiudadAseguradora12").empty();
@@ -411,7 +402,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado13.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad13 = $("#CiudadAseguradora13").empty();
@@ -445,7 +435,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado14.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad14 = $("#CiudadAseguradora14").empty();
@@ -479,7 +468,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado15.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad15 = $("#CiudadAseguradora15").empty();
@@ -515,7 +503,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado21.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad21 = $("#CiudadAseguradora21").empty();
@@ -551,7 +538,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado22.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad22 = $("#CiudadAseguradora22").empty();
@@ -585,7 +571,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado23.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad23 = $("#CiudadAseguradora23").empty();
@@ -619,7 +604,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado24.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad24 = $("#CiudadAseguradora24").empty();
@@ -653,7 +637,6 @@ App = {
         .then(function (PrecioA) {
           var usuarioTemplate =
             "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
           htmlAparcado25.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad25 = $("#CiudadAseguradora25").empty();
@@ -680,7 +663,7 @@ App = {
         })
     })
 
-    
+
 
 
 
@@ -688,18 +671,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora01").empty();
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(01)
-              .then(function (PrecioA) {                
-                var PrecioClienteA = Math.round(PrecioA / record);
+              .then(function (PrecioA) {
+                var PrecioClienteA01 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                  ClienteAparcadoAseguradora01 = PrecioClienteA;
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA01 + "</td></tr>";
+                ClienteAparcadoAseguradora01 = PrecioClienteA01;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora01").empty();;
@@ -707,9 +688,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(01)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB01 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB01 + "</td></tr>";
+                      ClienteCiudadAseguradora01 = PrecioClienteB01
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora01").empty();;
@@ -717,9 +699,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(01)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC01 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC01 + "</td></tr>";
+                            ClienteCarreteraAseguradora01 = PrecioClienteC01
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -733,17 +716,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora02").empty();
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(02)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA02 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA02 + "</td></tr>";
+                ClienteAparcadoCiudad02 = PrecioClienteA02;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora02").empty();;
@@ -751,9 +733,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(02)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB02 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB02 + "</td></tr>";
+                      ClienteCiudadAseguradora02 = PrecioClienteB02;
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora02").empty();;
@@ -761,9 +744,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(02)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC02 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC02 + "</td></tr>";
+                            ClienteCarreteraAseguradora02 = PrecioClienteC02;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -777,18 +761,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora03").empty();
-          var persona = {};
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(03)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA03 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA03 + "</td></tr>";
+                ClienteAparcadoAseguradora03 = PrecioClienteA03;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora03").empty();;
@@ -796,9 +778,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(03)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB03 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB03 + "</td></tr>";
+                      ClienteCiudadAseguradora03 = PrecioClienteB03
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora03").empty();;
@@ -806,9 +789,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(03)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC03 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC03 + "</td></tr>";
+                            ClienteCarreteraAseguradora03 = PrecioClienteC03;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -822,18 +806,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora04").empty();
-          var persona = {};
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(04)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA04 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA04 + "</td></tr>";
+                ClienteAparcadoAseguradora04 = PrecioClienteA04;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora04").empty();;
@@ -841,9 +823,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(04)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB04 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB04 + "</td></tr>";
+                      ClienteCiudadAseguradora04 = PrecioClienteB04
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora04").empty();;
@@ -851,9 +834,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(04)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC04 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC04 + "</td></tr>";
+                            ClienteCarreteraAseguradora04 = PrecioClienteC04;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -867,18 +851,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora05").empty();
-          var persona = {};
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(05)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA05 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA05 + "</td></tr>";
+                ClienteAparcadoAseguradora05 = PrecioClienteA05;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora05").empty();;
@@ -886,9 +868,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(05)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB05 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB05 + "</td></tr>";
+                      ClienteCiudadAseguradora05 = PrecioClienteB05
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora05").empty();;
@@ -896,9 +879,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(05)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC05 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC05 + "</td></tr>";
+                            ClienteCarreteraAseguradora05 = PrecioClienteC05;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -913,18 +897,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora11").empty();
-          var persona = {};
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(11)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA11 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA11 + "</td></tr>";
+                ClienteAparcadoAseguradora11 = PrecioClienteA11;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora11").empty();;
@@ -932,9 +914,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(11)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB11 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB11 + "</td></tr>";
+                      ClienteCiudadAseguradora11 = PrecioClienteB11
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora11").empty();;
@@ -942,9 +925,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(11)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC11 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC11 + "</td></tr>";
+                            ClienteCarreteraAseguradora11 = PrecioClienteC11;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -958,18 +942,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora12").empty();
-          var persona = {};
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(12)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA12 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA12 + "</td></tr>";
+                ClienteAparcadoAseguradora12 = PrecioClienteA12;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora12").empty();;
@@ -977,9 +959,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(12)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB12 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB12 + "</td></tr>";
+                      ClienteCiudadAseguradora12 = PrecioClienteB12
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora12").empty();;
@@ -987,9 +970,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(12)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC12 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC12 + "</td></tr>";
+                            ClienteCarreteraAseguradora12 = PrecioClienteC12;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -1003,18 +987,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora13").empty();
-          var persona = {};
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(13)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA13 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA13 + "</td></tr>";
+                ClienteAparcadoAseguradora13 = PrecioClienteA13;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora13").empty();;
@@ -1022,9 +1004,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(13)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB13 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB13 + "</td></tr>";
+                      ClienteCiudadAseguradora13 = PrecioClienteB13
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora13").empty();;
@@ -1032,9 +1015,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(13)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC13 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC13 + "</td></tr>";
+                            ClienteCarreteraAseguradora13 = PrecioClienteC13;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -1049,18 +1033,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora14").empty();
-          var persona = {};
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(14)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA14 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA14 + "</td></tr>";
+                ClienteAparcadoAseguradora14 = PrecioClienteA14;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora14").empty();;
@@ -1068,9 +1050,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(14)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB14 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB14 + "</td></tr>";
+                      ClienteCiudadAseguradora14 = PrecioClienteB14
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora14").empty();;
@@ -1078,9 +1061,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(14)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC14 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC14 + "</td></tr>";
+                            ClienteCarreteraAseguradora14 = PrecioClienteC14;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -1095,18 +1079,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora15").empty();
-          var persona = {};
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(15)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA15 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA15 + "</td></tr>";
+                ClienteAparcadoAseguradora15 = PrecioClienteA15;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora15").empty();;
@@ -1114,9 +1096,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(15)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB15 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB15 + "</td></tr>";
+                      ClienteCiudadAseguradora15 = PrecioClienteB15
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora15").empty();;
@@ -1124,9 +1107,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(15)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC15 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC15 + "</td></tr>";
+                            ClienteCarreteraAseguradora15 = PrecioClienteC15;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -1141,18 +1125,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora21").empty();
-          var persona = {};
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(21)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA21 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA21 + "</td></tr>";
+                ClienteAparcadoAseguradora21 = PrecioClienteA21;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora21").empty();;
@@ -1160,9 +1142,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(21)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB21 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB21 + "</td></tr>";
+                      ClienteCiudadAseguradora21 = PrecioClienteB21
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora21").empty();;
@@ -1170,9 +1153,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(21)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC21 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC21 + "</td></tr>";
+                            ClienteCarreteraAseguradora21 = PrecioClienteC21;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -1187,18 +1171,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora22").empty();
-          var persona = {};
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(22)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA22 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA22 + "</td></tr>";
+                ClienteAparcadoAseguradora22 = PrecioClienteA22;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora22").empty();;
@@ -1206,9 +1188,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(22)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB22 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB22 + "</td></tr>";
+                      ClienteCiudadAseguradora22 = PrecioClienteB22
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora22").empty();;
@@ -1216,9 +1199,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(22)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC22 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC22 + "</td></tr>";
+                            ClienteCarreteraAseguradora22 = PrecioClienteC22;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -1232,7 +1216,6 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora23").empty();
           var persona = {};
@@ -1240,10 +1223,10 @@ App = {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(23)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA23 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-                console.log(persona.Precio);
+                  "<tr><td>" + PrecioClienteA23 + "</td></tr>";
+                ClienteAparcadoAseguradora23 = PrecioClienteA23;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora23").empty();;
@@ -1251,9 +1234,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(23)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB23 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB23 + "</td></tr>";
+                      ClienteCiudadAseguradora23 = PrecioClienteB23
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora23").empty();;
@@ -1261,9 +1245,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(23)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC23 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC23 + "</td></tr>";
+                            ClienteCarreteraAseguradora23 = PrecioClienteC23;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -1277,18 +1262,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-          console.log(DatosCliente[4]);
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora24").empty();
-
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(24)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA24 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-
+                  "<tr><td>" + PrecioClienteA24 + "</td></tr>";
+                ClienteAparcadoAseguradora24 = PrecioClienteA24;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora24").empty();;
@@ -1296,9 +1279,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(24)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB24 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB24 + "</td></tr>";
+                      ClienteCiudadAseguradora24 = PrecioClienteB24
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora24").empty();;
@@ -1306,9 +1290,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(24)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC24 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC24 + "</td></tr>";
+                            ClienteCarreteraAseguradora24 = PrecioClienteC24;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -1322,17 +1307,16 @@ App = {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
-
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora25").empty();
           App.contracts.Cliente.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(25)
               .then(function (PrecioA) {
-                var PrecioClienteA = Math.round(PrecioA / record);
+                var PrecioClienteA25 = Math.round(PrecioA / record);
                 var usuarioTemplate =
-                  "<tr><td>" + PrecioClienteA + "</td></tr>";
-
+                  "<tr><td>" + PrecioClienteA25 + "</td></tr>";
+                ClienteAparcadoAseguradora25 = PrecioClienteA25;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora25").empty();;
@@ -1340,9 +1324,10 @@ App = {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(25)
                     .then(function (PrecioB) {
-                      var PrecioClienteB = Math.round(PrecioB / record);
+                      var PrecioClienteB25 = Math.round(PrecioB / record);
                       var usuarioTemplate =
-                        "<tr><td>" + PrecioClienteB + "</td></tr>";
+                        "<tr><td>" + PrecioClienteB25 + "</td></tr>";
+                      ClienteCiudadAseguradora25 = PrecioClienteB25
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora25").empty();;
@@ -1350,9 +1335,10 @@ App = {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(25)
                           .then(function (PrecioC) {
-                            var PrecioClienteC = Math.round(PrecioC / record);
+                            var PrecioClienteC25 = Math.round(PrecioC / record);
                             var usuarioTemplate =
-                              "<tr><td>" + PrecioClienteC + "</td></tr>";
+                              "<tr><td>" + PrecioClienteC25 + "</td></tr>";
+                            ClienteCarreteraAseguradora25 = PrecioClienteC25;
                             htmlCarretera01.append(usuarioTemplate);
                           })
                       })
@@ -1370,15 +1356,13 @@ App = {
     var Datos = {};
     App.contracts.Cliente.deployed().then(function (instance) {
       infoInstance = instance;
-      console.log(App.account + 'Hola');
       infoInstance.users(App.account)
         .then(function (DatosSeguro) {
-          console.log(DatosSeguro[0]);
           Datos = {
             CostoTotal: DatosSeguro[0],
-            KmCiudad: DatosSeguro[1],
-            KmCarretera: DatosSeguro[4],
-            TiempoAparcado: DatosSeguro[4],
+            KmCiudad: DatosSeguro[5],
+            KmCarretera: DatosSeguro[6],
+            TiempoAparcado: DatosSeguro[7],
           };
 
           var usuarioTemplate =
@@ -1620,70 +1604,26 @@ App = {
     });
   },
 
-  infoConsultaAsegurador: function () {
-    console.log("entrandoConsulta");
-    var htmlAparcado = $("#AparcadoAseguradora01").empty();
-    App.contracts.Cliente.deployed().then(function (instance) {
-      infoInstance = instance;
-      infoInstance.aseguradoraPrecioAparcado(01)
-        .then(function (PrecioA) {
-          var usuarioTemplate =
-            "<tr><td>" + PrecioA + "</td></tr>";
-          console.log(persona.Precio);
-          htmlAparcado.append(usuarioTemplate);
-        }).then(function () {
-          var htmlCiudad = $("#CiudadAseguradora01").empty();;
-          App.contracts.Cliente.deployed().then(function (instance) {
-            InstanceA = instance;
-            InstanceA.aseguradoraPrecioCiudad(01)
-              .then(function (PrecioB) {
-                var usuarioTemplate =
-                  "<tr><th>" + PrecioB + "</td></tr>";
-                htmlCiudad.append(usuarioTemplate);
-              }).then(function () {
-                var htmlCarretera = $("#CarreteraAseguradora01").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
-                  InstanceA = instance;
-                  InstanceA.aseguradoraPrecioCarretera(01)
-                    .then(function (PrecioC) {
-                      var usuarioTemplate =
-                        "<tr><th>" + PrecioC + "</td></tr>";
-                      htmlCarretera.append(usuarioTemplate);
-                    })
-                })
-              })
-          })
-        })
-    })
-  },
-
-
   actualizarPrecioAparcado: function (a, b) {
-    console.log("entrando precio aparcado");
-    console.log(a);
-    console.log(b);
     switch (a) {
       case 0:
         {
-          console.log("entrando empresa 0");
+
           switch (b) {
             case 1:
               {
-                console.log("entrando empresa Premium")
                 var id = 01;
                 var valor = $("#actualizaAparcado01").val();
               }
               break;
             case 2:
               {
-                console.log("entrando empresa Luxure")
                 var id = 02;
                 var valor = $("#actualizaAparcado02").val();
               }
               break;
             case 3:
               {
-                console.log("entrando empresa Classic")
                 var id = 03;
                 var valor = $("#actualizaAparcado03").val();
 
@@ -1691,14 +1631,12 @@ App = {
               break;
             case 4:
               {
-                console.log("entrando empresa Corriente")
                 var id = 04;
                 var valor = $("#actualizaAparcado04").val();
               }
               break;
             case 5:
               {
-                console.log("entrando empresa Furgoneta")
                 var id = 05;
                 var valor = $("#actualizaAparcado05").val();
               }
@@ -1710,11 +1648,9 @@ App = {
 
       case 1:
         {
-          console.log("entrando empresa 1");
           switch (b) {
             case 1:
               {
-                console.log("entrando empresa Premium")
                 var id = 11;
                 var valor = $("#actualizaAparcado11").val();
 
@@ -1722,7 +1658,6 @@ App = {
               break;
             case 2:
               {
-                console.log("entrando empresa Luxure")
                 var id = 12;
                 var valor = $("#actualizaAparcado12").val();
 
@@ -1730,7 +1665,6 @@ App = {
               break;
             case 3:
               {
-                console.log("entrando empresa Classic")
                 var id = 13;
                 var valor = $("#actualizaAparcado13").val();
 
@@ -1738,7 +1672,6 @@ App = {
               break;
             case 4:
               {
-                console.log("entrando empresa Corriente")
                 var id = 14;
                 var valor = $("#actualizaAparcado14").val();
 
@@ -1746,7 +1679,6 @@ App = {
               break;
             case 5:
               {
-                console.log("entrando empresa Furgoneta")
                 var id = 15;
                 var valor = $("#actualizaAparcado15").val();
 
@@ -1759,39 +1691,33 @@ App = {
         break;
       case 2:
         {
-          console.log("entrando empresa 2");
           switch (b) {
             case 1:
               {
-                console.log("entrando empresa Premium")
                 var id = 21;
                 var valor = $("#actualizaAparcado21").val();
               }
               break;
             case 2:
               {
-                console.log("entrando empresa Luxure")
                 var id = 22;
                 var valor = $("#actualizaAparcado22").val();
               }
               break;
             case 3:
               {
-                console.log("entrando empresa Classic")
                 var id = 23;
                 var valor = $("#actualizaAparcado23").val();
               }
               break;
             case 4:
               {
-                console.log("entrando empresa Corriente")
                 var id = 24;
                 var valor = $("#actualizaAparcado24").val();
               }
               break;
             case 5:
               {
-                console.log("entrando empresa Furgoneta")
                 var id = 25;
                 var valor = $("#actualizaAparcado25").val();
               }
@@ -1815,31 +1741,24 @@ App = {
 
   actualizarPrecioCiudad: function (a, b) {
 
-    console.log("entrando precio Ciudad");
-    console.log(a);
-    console.log(b);
     switch (a) {
       case 0:
         {
-          console.log("entrando empresa 0");
           switch (b) {
             case 1:
               {
-                console.log("entrando empresa Premium")
                 var id = 01;
                 var valor = $("#actualizaCiudad01").val();
               }
               break;
             case 2:
               {
-                console.log("entrando empresa Luxure")
                 var id = 02;
                 var valor = $("#actualizaCiudad02").val();
               }
               break;
             case 3:
               {
-                console.log("entrando empresa Classic")
                 var id = 03;
                 var valor = $("#actualizaCiudad03").val();
 
@@ -1847,14 +1766,12 @@ App = {
               break;
             case 4:
               {
-                console.log("entrando empresa Corriente")
                 var id = 04;
                 var valor = $("#actualizaCiudad04").val();
               }
               break;
             case 5:
               {
-                console.log("entrando empresa Furgoneta")
                 var id = 05;
                 var valor = $("#actualizaCiudad05").val();
               }
@@ -1865,11 +1782,9 @@ App = {
 
       case 1:
         {
-          console.log("entrando empresa 1");
           switch (b) {
             case 1:
               {
-                console.log("entrando empresa Premium")
                 var id = 11;
                 var valor = $("#actualizaCiudad11").val();
 
@@ -1877,7 +1792,6 @@ App = {
               break;
             case 2:
               {
-                console.log("entrando empresa Luxure")
                 var id = 12;
                 var valor = $("#actualizaCiudad12").val();
 
@@ -1885,7 +1799,6 @@ App = {
               break;
             case 3:
               {
-                console.log("entrando empresa Classic")
                 var id = 13;
                 var valor = $("#actualizaCiudad13").val();
 
@@ -1893,7 +1806,6 @@ App = {
               break;
             case 4:
               {
-                console.log("entrando empresa Corriente")
                 var id = 14;
                 var valor = $("#actualizaCiudad14").val();
 
@@ -1901,7 +1813,6 @@ App = {
               break;
             case 5:
               {
-                console.log("entrando empresa Furgoneta")
                 var id = 15;
                 var valor = $("#actualizaCiudad15").val();
 
@@ -1913,39 +1824,33 @@ App = {
         break;
       case 2:
         {
-          console.log("entrando empresa 2");
           switch (b) {
             case 1:
               {
-                console.log("entrando empresa Premium")
                 var id = 21;
                 var valor = $("#actualizaCiudad21").val();
               }
               break;
             case 2:
               {
-                console.log("entrando empresa Luxure")
                 var id = 22;
                 var valor = $("#actualizaCiudad22").val();
               }
               break;
             case 3:
               {
-                console.log("entrando empresa Classic")
                 var id = 23;
                 var valor = $("#actualizaCiudad23").val();
               }
               break;
             case 4:
               {
-                console.log("entrando empresa Corriente")
                 var id = 24;
                 var valor = $("#actualizaCiudad24").val();
               }
               break;
             case 5:
               {
-                console.log("entrando empresa Furgoneta")
                 var id = 25;
                 var valor = $("#actualizaCiudad25").val();
               }
@@ -1969,31 +1874,25 @@ App = {
 
   actualizarPrecioCarretera: function (a, b) {
 
-    console.log("entrando precio Carretera");
-    console.log(a);
-    console.log(b);
     switch (a) {
       case 0:
         {
-          console.log("entrando empresa 0");
+
           switch (b) {
             case 1:
               {
-                console.log("entrando empresa Premium")
                 var id = 01;
                 var valor = $("#actualizaCarretera01").val();
               }
               break;
             case 2:
               {
-                console.log("entrando empresa Luxure")
                 var id = 02;
                 var valor = $("#actualizaCarretera02").val();
               }
               break;
             case 3:
               {
-                console.log("entrando empresa Classic")
                 var id = 03;
                 var valor = $("#actualizaCarretera03").val();
 
@@ -2001,14 +1900,12 @@ App = {
               break;
             case 4:
               {
-                console.log("entrando empresa Corriente")
                 var id = 04;
                 var valor = $("#actualizaCarretera04").val();
               }
               break;
             case 5:
               {
-                console.log("entrando empresa Furgoneta")
                 var id = 05;
                 var valor = $("#actualizaCarretera05").val();
               }
@@ -2019,11 +1916,9 @@ App = {
 
       case 1:
         {
-          console.log("entrando empresa 1");
           switch (b) {
             case 1:
               {
-                console.log("entrando empresa Premium")
                 var id = 11;
                 var valor = $("#actualizaCarretera11").val();
 
@@ -2031,7 +1926,6 @@ App = {
               break;
             case 2:
               {
-                console.log("entrando empresa Luxure")
                 var id = 12;
                 var valor = $("#actualizaCarretera12").val();
 
@@ -2039,7 +1933,6 @@ App = {
               break;
             case 3:
               {
-                console.log("entrando empresa Classic")
                 var id = 13;
                 var valor = $("#actualizaCarretera13").val();
 
@@ -2047,7 +1940,6 @@ App = {
               break;
             case 4:
               {
-                console.log("entrando empresa Corriente")
                 var id = 14;
                 var valor = $("#actualizaCarretera14").val();
 
@@ -2055,7 +1947,6 @@ App = {
               break;
             case 5:
               {
-                console.log("entrando empresa Furgoneta")
                 var id = 15;
                 var valor = $("#actualizaCarretera15").val();
 
@@ -2067,39 +1958,33 @@ App = {
         break;
       case 2:
         {
-          console.log("entrando empresa 2");
           switch (b) {
             case 1:
               {
-                console.log("entrando empresa Premium")
                 var id = 21;
                 var valor = $("#actualizaCarretera21").val();
               }
               break;
             case 2:
               {
-                console.log("entrando empresa Luxure")
                 var id = 22;
                 var valor = $("#actualizaCarretera22").val();
               }
               break;
             case 3:
               {
-                console.log("entrando empresa Classic")
                 var id = 23;
                 var valor = $("#actualizaCarretera23").val();
               }
               break;
             case 4:
               {
-                console.log("entrando empresa Corriente")
                 var id = 24;
                 var valor = $("#actualizaCarretera24").val();
               }
               break;
             case 5:
               {
-                console.log("entrando empresa Furgoneta")
                 var id = 25;
                 var valor = $("#actualizaCarretera25").val();
               }
@@ -2126,20 +2011,155 @@ App = {
     var pago = PrecioPremium;
     console.log(pago);
     App.contracts.CompraToken.deployed().then(function (instance) {
-    instance.pagarTokens(pago);
-    return [a,b];
-  }).then(function (valores) {
-      console.log(valores[0]);
-      console.log(valores[1]);
-      var precioKmCiudad = $("#ClienteCiudadAseguradora01").val();
-      var precioKmCarretera = $("#ClienteCarreteraAseguradora01").val();
-      var PrecioAparcado = ClienteAparcadoAseguradora01;
+      instance.pagarTokens(pago);
+      return [a, b];
+    }).then(function () {
+      console.log(a);
+      console.log(b);
+
+      switch (a) {
+        case 0:
+          {
+
+            switch (b) {
+              case 1:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora01;
+                  var precioKmCarretera = ClienteCarreteraAseguradora01;
+                  var precioAparcado = ClienteAparcadoAseguradora01;
+                }
+                break;
+              case 2:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora02;
+                  var precioKmCarretera = ClienteCarreteraAseguradora02;
+                  var precioAparcado = ClienteAparcadoAseguradora02;
+                }
+                break;
+              case 3:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora03;
+                  var precioKmCarretera = ClienteCarreteraAseguradora03;
+                  var precioAparcado = ClienteAparcadoAseguradora03;
+
+                }
+                break;
+              case 4:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora04;
+                  var precioKmCarretera = ClienteCarreteraAseguradora04;
+                  var precioAparcado = ClienteAparcadoAseguradora04;
+                }
+                break;
+              case 5:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora05;
+                  var precioKmCarretera = ClienteCarreteraAseguradora05;
+                  var precioAparcado = ClienteAparcadoAseguradora05;
+                }
+
+            }
+          }
+          break;
+
+        case 1:
+          {
+            switch (b) {
+              case 1:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora11;
+                  var precioKmCarretera = ClienteCarreteraAseguradora11;
+                  var precioAparcado = ClienteAparcadoAseguradora11;
+
+                }
+                break;
+              case 2:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora12;
+                  var precioKmCarretera = ClienteCarreteraAseguradora12;
+                  var precioAparcado = ClienteAparcadoAseguradora12;
+
+                }
+                break;
+              case 3:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora13;
+                  var precioKmCarretera = ClienteCarreteraAseguradora13;
+                  var precioAparcado = ClienteAparcadoAseguradora13;
+
+                }
+                break;
+              case 4:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora14;
+                  var precioKmCarretera = ClienteCarreteraAseguradora14;
+                  var precioAparcado = ClienteAparcadoAseguradora14;
+
+                }
+                break;
+              case 5:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora15;
+                  var precioKmCarretera = ClienteCarreteraAseguradora15;
+                  var precioAparcado = ClienteAparcadoAseguradora15;
+
+                }
+
+            }
+
+          }
+          break;
+        case 2:
+          {
+            switch (b) {
+              case 1:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora21;
+                  var precioKmCarretera = ClienteCarreteraAseguradora21;
+                  var precioAparcado = ClienteAparcadoAseguradora21;
+                }
+                break;
+              case 2:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora22;
+                  var precioKmCarretera = ClienteCarreteraAseguradora22;
+                  var precioAparcado = ClienteAparcadoAseguradora22;
+                }
+                break;
+              case 3:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora23;
+                  var precioKmCarretera = ClienteCarreteraAseguradora23;
+                  var precioAparcado = ClienteAparcadoAseguradora23;
+                }
+                break;
+              case 4:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora24;
+                  var precioKmCarretera = ClienteCarreteraAseguradora24;
+                  var precioAparcado = ClienteAparcadoAseguradora24;
+                }
+                break;
+              case 5:
+                {
+                  var precioKmCiudad = ClienteCiudadAseguradora25;
+                  var precioKmCarretera = ClienteCarreteraAseguradora25;
+                  var precioAparcado = ClienteAparcadoAseguradora25;
+                }
+            }
+            break;
+          }
+
+
+      }
+
       console.log(precioKmCiudad);
       console.log(precioKmCarretera);
-      console.log(PrecioAparcado);
+      console.log(precioAparcado);
+
 
       App.contracts.Cliente.deployed().then(function (instance) {
-        return instance.actualizarSeguro(precioKmCiudad, precioKmCarretera, PrecioAparcado, { from: App.account });
+        return instance.actualizarSeguro(precioKmCiudad, precioKmCarretera, precioAparcado, { from: App.account });
       }).then(function (result) {
         $("#content").show();
         $("#loader").show();
