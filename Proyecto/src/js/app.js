@@ -2474,7 +2474,7 @@ App = {
   },*/
 
 
-  retiroTokens: function () {
+  prestamoTokens: function () {
     var prestamo = $('#PrestamoTokens').val();
     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.prestamoTokens(prestamo, fechaSolidity);
