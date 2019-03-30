@@ -2350,29 +2350,6 @@ App = {
   },
 
 
-  actualizaTipoUserCredito: function (VolumenCredito,Demora,modificador) {
-    console.log("actualizando el crédito máximo...");
-//    var VolumenCredito = $("#VolumenCredito").val();
-//    var Demora = $("#Demora").val();
-
-    console.log("Comprobando volumen crédito" + VolumenCredito);
-    console.log("Comprobando demora en días" + Demora);
-    console.log("Comprobando si es nuevo cliente" + modificador);
-  maxCredito=VolumenCredito*(Demora/360)*modificador;
-  App.contracts.Cliente.deployed().then(function (instance) {
-    return instance.asignaCreditoMaximo.call(maxCredito, { from: App.account });
-  }).then(function (result) {
-
-    console.log("Credito asignado con éxito" + result);
-
-
-  }).catch(function (err) {
-    console.error(err);
-  });
-     
-  },
-
-
   actualizaLimiteCredito: function () {
     console.log("actualizando el crédito máximo...");
     var VolumenCredito = $("#VolumenCredito").val();
@@ -2385,13 +2362,13 @@ App = {
     if(modificadorText=='Si')
     {
 
-      modificador=1;
+      modificador=0.5;
 
     }
     else if (modificadorText=='No')
     {
 
-      modificador=0.5;
+      modificador=1;
     }
     else
     {
@@ -2402,11 +2379,23 @@ App = {
   console.log("Comprobando si es nuevo cliente " + modificador);
   maxCredito=VolumenCredito*(Demora/360)*modificador;
   console.log("Maxcredito " + maxCredito);
+
   App.contracts.Cliente.deployed().then(function (instance) {
-    return instance.asignaCreditoMaximo.call(maxCredito, { from: App.account });
+    return instance.asignaCreditoMaximo(maxCredito, { from: App.account });
+
   }).then(function (result) {
 
     console.log("Credito asignado con éxito " + result);
+    window.location.href = "../index.html";
+    const finan = document.getElementById('MaxFinan'); 
+    App.contracts.Cliente.deployed().then(function (instance) {
+    infoInstance = instance;
+    infoInstance.users("0x52faf4fa5c8d0d9eecae073161b0659cf6acbd5d")
+    .then(function (DatosCliente) {
+    MaxCredit = (DatosCliente[8]);
+    })
+  });
+    finan.innerHTML = MaxCredit; 
 
 
   }).catch(function (err) {

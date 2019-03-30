@@ -107,8 +107,34 @@
                         </tbody>
                       </div>
                     </table>
-                    <button id="DetenerContrato" onclick="App.infoCliente()"
+                    <button id="Financiamiento" onclick="RedirigeFinanciamiento(); return false;"
                       class="btn-lg btn-default btn-lg btn-block">Financiamiento</button>
+                      <div class="row ">
+                        <div class="col-md-12">
+                          <div class="panel panel-primary" id="content3" class="text-center" style="display: none;">
+                            <h4 class="text-center bg-primary">
+                              Financiamiento
+                            </h4>
+                            <h4 class="text-center">
+                              Puede financiar hasta un máximo de: <span class="token-price"></span> Ether. 
+                              <span id=MaxFinan></span>
+                            </h4>
+                            <form onSubmit="App.Financiar(); return false;" role="form">
+  
+                              <div class="form-group">
+                                <div class="input-group">
+                                  <input id="numeroTokensFinanciar" class="form-control input-lg" type="number" name="number"
+                                    value="1" min="1" pattern="[0-10000]"><br>
+                                  <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-success btn-lg">Financiar</button>
+                                  </span>
+                                </div>
+                              </div>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <table class="table table-bordered table-responsive">
                       <div style="margin: 5px">
                         <thead>
@@ -1735,89 +1761,20 @@
         </div>
       
 
-      <div class="container ">
-        <div class="row ">
-          <div class="col-md-12">
-            <h1 class="text-center">ZONA DE FINANCIACIÓN</h1>
-            <hr />
-            <br />
-          </div>
-        </div>
-
-        <div class="row ">
-          <div class="col-md-12">
-          </div>
-          <div class="row ">
-            <div class="col-md-12">
-              <div class="panel panel-primary" id="content1" style="display: none;">
-                <h3 class="text-center bg-primary">FINANCIACIÓN</h3>
-                <p id="accountAddress" class="text-center bg-warning"></p>
-                <h5 class="text-center bg-primary">
-                  <dt>Para obtener financiación ingrese los siguientes valores</dt>
-                </h5>
-                <form onSubmit="App.actualizaLimiteCredito(); return false;" role="form1">
-                  <div class="form-group">
-                    <label for="VolumenCredito" class="col-lg-2 control-label">Volumen de crédito</label>
-                    <div class="input-group">
-                      <input id="VolumenCredito" class="form-control input-lg" type="number" name="number" min="0">
-                      <br>
-                      <span class="input-group-btn">
-                        <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
-                      </span>
-                    </div>
-                  </div>
-                </form>
-                <form onSubmit="App.actualizaLimiteCredito(); return false;" role="form1">
-                  <div class="form-group">
-                    <label for="Demora" class="col-lg-2 control-label">Demora en días</label>
-                    <div class="input-group">
-                      <input id="Demora" class="form-control input-lg" type="number" name="number" min="1" max="365"
-                        pattern="[1-365]">
-                      <br>
-                      <span class="input-group-btn">
-                        <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
-                      </span>
-                    </div>
-                  </div>
-                </form>
-                <div class="form-group">
-                  <label class="control-label col-sm-4 text-left" for="ClienteNuevo">¿Es usted nuevo cliente?</label>
-                  <div class="col-sm-4">
-                    <select id="ClienteNuevo" name="ClienteNuevo">
-                      <option value="" selected disabled hidden>Elija opción</option>
-                      <option value="Si">Sí</option>
-                      <option value="No">No</option>
-                    </select>
-
-                  </div>
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-success btn-right btn-lg">Actualizar</button>
-                  </span>
-                </div>
-
-                <div class="form-group">
-                  <div class="row">
-                    <div class="col-sm-12 text-left">
-                      <div style="margin: 5px">
-                        <button id="envioPeticion" onclick="App.envioPeticion()" class="btn btn-info btn-lg">Envío de
-                          petición</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </div>
-          <label for="MaxCredito" class="col-lg-2 control-label">Máximo crédito disponible: </label>
-
-        </div>
+     
 
 
 
       </div>
     </div>
 
+
+    <script>
+      function RedirigeFinanciamiento() 
+      {
+        window.location.href = "../financiacion.html";
+      }
+    </script>
 
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

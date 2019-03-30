@@ -226,6 +226,7 @@ function deleteUser(address dir) public returns (bool)
     function asignaCreditoMaximo(uint maxCredit) public returns (uint){
     users[msg.sender].MaxCredito= maxCredit;
     return users[msg.sender].MaxCredito;
+    //asignación de crédito máximo por dirección de usuario
     }
 
 
