@@ -65,23 +65,20 @@
             <div class="form-group">
               <label class="control-label col-sm-4 text-left" for="ClienteNuevo" >¿Es usted nuevo cliente?</label>
               <div class="col-sm-4">
-                  <select id="ClienteNuevo" name="ClienteNuevo">
+                  <select id="ClienteNuevo" name="ClienteNuevo" onchange="CheckNewClient(this); return false">
                       <option value="" selected disabled hidden>Elija opción</option>
                       <option value="Si">Sí</option>
                       <option value="No">No</option>
                     </select>
 
               </div>
-              <span class="input-group-btn">
-                <button type="submit" class="btn btn-success btn-right btn-lg">Actualizar</button>
-              </span>
             </div>
           
           <div class="form-group">
             <div class="row">
               <div class="col-sm-12 text-left">
                 <div style="margin: 5px">
-                  <button id="envioPeticion" onclick="App.envioPeticion()" class="btn btn-info btn-lg">Envío de petición</button>
+                  <button id="envioPeticion" onclick="App.actualizaLimiteCredito();return false" class="btn btn-info btn-lg">Envío de petición</button>
                 </div>
               </div>
             </div>
@@ -94,7 +91,25 @@
 
   </div>
 
+  <script>
+    function CheckNewClient(input) {
+      if (input.value != 'Sí')
+      {
+        var VolumenCredito = $("#VolumenCredito").val();
+        var Demora = $("#Demora").val();
+        App.actualizaTipoUserCredito(VolumenCredito,Demora,1);
 
+      }
+      else
+      {
+        var VolumenCredito = $("#VolumenCredito").val();
+        var Demora = $("#Demora").val();
+        App.actualizaTipoUserCredito(VolumenCredito,Demora,0.5);
+
+      }
+    }
+  
+  </script>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

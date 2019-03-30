@@ -2350,6 +2350,51 @@ App = {
   },
 
 
+  actualizaTipoUserCredito: function (VolumenCredito,Demora,modificador) {
+    console.log("actualizando el crédito máximo...");
+//    var VolumenCredito = $("#VolumenCredito").val();
+//    var Demora = $("#Demora").val();
+
+    console.log("Comprobando volumen crédito" + VolumenCredito);
+    console.log("Comprobando demora en días" + Demora);
+
+  maxCredito=VolumenCredito*(Demora/360)*modificador;
+  App.contracts.Cliente.deployed().then(function (instance) {
+    return instance.asignaCreditoMaximo.call(maxCredito, { from: App.account });
+  }).then(function (result) {
+
+    console.log("Credito asignado con éxito" + result);
+
+
+  }).catch(function (err) {
+    console.error(err);
+  });
+     
+  },
+
+
+  actualizaLimiteCredito: function () {
+    console.log("actualizando el crédito máximo...");
+    var VolumenCredito = $("#VolumenCredito").val();
+    var Demora = $("#Demora").val();
+    var modificador= $("#ClienteNuevo").val();
+    console.log("Comprobando volumen crédito" + VolumenCredito);
+    console.log("Comprobando demora en días" + Demora);
+    console.log("Comprobando si es nuevo cliente" + modificador);
+  maxCredito=VolumenCredito*(Demora/360)*modificador;
+  App.contracts.Cliente.deployed().then(function (instance) {
+    return instance.asignaCreditoMaximo.call(maxCredito, { from: App.account });
+  }).then(function (result) {
+
+    console.log("Credito asignado con éxito" + result);
+
+
+  }).catch(function (err) {
+    console.error(err);
+  });
+     
+  },
+
 
   /*activarContrato: function () {
     App.contracts.Token.deployed().then(function (instance) {

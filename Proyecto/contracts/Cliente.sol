@@ -42,6 +42,7 @@ contract Cliente is Owned, usingOraclize {
         uint PrecioAparcado;
         uint PrecioKmCarretera;
         uint PrecioKmCiudad;
+        uint MaxCredito;
  }
    
     struct Seguro {
@@ -144,7 +145,7 @@ contract Cliente is Owned, usingOraclize {
             record = SafeMath.div(puntosLicencia, 15);
         }
        
-        users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0);
+        users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0);
         
         
         emit nuevoCliente(TypeUser); 
@@ -221,6 +222,10 @@ function deleteUser(address dir) public returns (bool)
         uint callbackGas = 20000; // amount of gas we want Oraclize to set for the callback function
         bytes32 queryId = oraclize_newRandomDSQuery(delay, N, callbackGas); // this function internally generates the correct oraclize_query and returns its queryId
     } 
+
+    function asignaCreditoMaximo(uint maxCredit) public {
+    users[msg.sender].MaxCredito= maxCredit;
+    }
 
 
 
