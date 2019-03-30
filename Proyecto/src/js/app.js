@@ -2357,7 +2357,7 @@ App = {
 
     console.log("Comprobando volumen crédito" + VolumenCredito);
     console.log("Comprobando demora en días" + Demora);
-
+    console.log("Comprobando si es nuevo cliente" + modificador);
   maxCredito=VolumenCredito*(Demora/360)*modificador;
   App.contracts.Cliente.deployed().then(function (instance) {
     return instance.asignaCreditoMaximo.call(maxCredito, { from: App.account });
@@ -2377,16 +2377,36 @@ App = {
     console.log("actualizando el crédito máximo...");
     var VolumenCredito = $("#VolumenCredito").val();
     var Demora = $("#Demora").val();
-    var modificador= $("#ClienteNuevo").val();
-    console.log("Comprobando volumen crédito" + VolumenCredito);
-    console.log("Comprobando demora en días" + Demora);
-    console.log("Comprobando si es nuevo cliente" + modificador);
+    var modificadorText= $("#ClienteNuevo").val();
+    console.log("Comprobando volumen crédito " + VolumenCredito);
+    console.log("Comprobando demora en días " + Demora);
+   
+    
+    if(modificadorText=='Si')
+    {
+
+      modificador=1;
+
+    }
+    else if (modificadorText=='No')
+    {
+
+      modificador=0.5;
+    }
+    else
+    {
+      modificador=0;
+
+    }
+
+  console.log("Comprobando si es nuevo cliente " + modificador);
   maxCredito=VolumenCredito*(Demora/360)*modificador;
+  console.log("Maxcredito " + maxCredito);
   App.contracts.Cliente.deployed().then(function (instance) {
     return instance.asignaCreditoMaximo.call(maxCredito, { from: App.account });
   }).then(function (result) {
 
-    console.log("Credito asignado con éxito" + result);
+    console.log("Credito asignado con éxito " + result);
 
 
   }).catch(function (err) {

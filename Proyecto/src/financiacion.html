@@ -38,34 +38,28 @@
             <h3 class="text-center bg-primary">FINANCIACIÓN</h3>
             <p id="accountAddress" class="text-center bg-warning"></p>
             <h5 class="text-center bg-primary"><dt>Para obtener financiación ingrese los siguientes valores</dt></h5>
-            <form onSubmit="App.actualizaLimiteCredito(); return false;" role="form1">
+        
               <div class="form-group">
                 <label for="VolumenCredito" class="col-lg-2 control-label">Volumen de crédito</label>
                 <div class="input-group">
                   <input id="VolumenCredito" class="form-control input-lg" type="number" name="number" min="0" >
                   <br>
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
-                  </span>
                 </div>
               </div>
-            </form>
-            <form onSubmit="App.actualizaLimiteCredito(); return false;" role="form1">
+            
+            
               <div class="form-group">
                 <label for="Demora" class="col-lg-2 control-label">Demora en días</label>
                 <div class="input-group">
                   <input id="Demora" class="form-control input-lg" type="number" name="number" min="1" max="365" pattern="[1-365]">
                   <br>
-                  <span class="input-group-btn">
-                    <button type="submit" class="btn btn-success btn-lg">Actualizar</button>
-                  </span>
                 </div>
               </div>
-            </form>
+            
             <div class="form-group">
               <label class="control-label col-sm-4 text-left" for="ClienteNuevo" >¿Es usted nuevo cliente?</label>
               <div class="col-sm-4">
-                  <select id="ClienteNuevo" name="ClienteNuevo" onchange="CheckNewClient(this); return false">
+                  <select id="ClienteNuevo" name="ClienteNuevo">
                       <option value="" selected disabled hidden>Elija opción</option>
                       <option value="Si">Sí</option>
                       <option value="No">No</option>
@@ -87,29 +81,9 @@
         </div>
       </div>
     </div>
-    <label for="MaxCredito" class="col-lg-2 control-label">Máximo crédito disponible: </label>
+    
 
   </div>
-
-  <script>
-    function CheckNewClient(input) {
-      if (input.value != 'Sí')
-      {
-        var VolumenCredito = $("#VolumenCredito").val();
-        var Demora = $("#Demora").val();
-        App.actualizaTipoUserCredito(VolumenCredito,Demora,1);
-
-      }
-      else
-      {
-        var VolumenCredito = $("#VolumenCredito").val();
-        var Demora = $("#Demora").val();
-        App.actualizaTipoUserCredito(VolumenCredito,Demora,0.5);
-
-      }
-    }
-  
-  </script>
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

@@ -223,8 +223,9 @@ function deleteUser(address dir) public returns (bool)
         bytes32 queryId = oraclize_newRandomDSQuery(delay, N, callbackGas); // this function internally generates the correct oraclize_query and returns its queryId
     } 
 
-    function asignaCreditoMaximo(uint maxCredit) public {
+    function asignaCreditoMaximo(uint maxCredit) public returns (uint){
     users[msg.sender].MaxCredito= maxCredit;
+    return users[msg.sender].MaxCredito;
     }
 
 
