@@ -68,4 +68,14 @@ contract CompraToken is Owned  {
         return true;
     }
 
+    function prestamoTokens(uint256 _prestamo) public payable {      
+        require(tokenContract.balanceOf(this) >= _prestamo);
+        require(tokenContract.transfer(msg.sender, _prestamo));
+
+        tokensVendidos += _prestamo;
+
+        emit Retiro(msg.sender, _prestamo);
+    }
+}
+
 }

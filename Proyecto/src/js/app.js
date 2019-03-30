@@ -2471,19 +2471,18 @@ App = {
       $('form1').trigger('reset')
 
     });
-  },
+  },*/
+
+
   retiroTokens: function () {
-    let fecha = (new Date()).getTime();
-    let fechaParaSolidity = fecha / 1000;
-    let fechaSolidity = parseInt(fechaParaSolidity);
-    var prestamo = $('#retiroTokens').val();
+    var prestamo = $('#PrestamoTokens').val();
     App.contracts.CompraToken.deployed().then(function (instance) {
-      return instance.retiroTokens(prestamo, fechaSolidity);
+      return instance.prestamoTokens(prestamo, fechaSolidity);
     }).then(function (result) {
       $('form2').trigger('reset')
 
     });
-  },*/
+  }
 
 };
 
