@@ -112,10 +112,10 @@ App = {
     $("#content4").show();
     $("#content5").show();
     $("#content6").show();
-    
-    var TiempoAparcadoArray = new Array(8302,7759,6116,165,8247,7569,4538,6248,943,4665,5147,5337,4821,5919,5310,2639,3829,8622,2581,7046,21,310,6904,1945,418,3532,534,421,1485,2350,2814,4622,5240,154,4000,2991,3320,1589,8571,2284,1781,540,2601,5058,2854,2672,8020,6252,6605,78,5551,2185,977,1334,4853,1375,5200,2935,5487,4045,483,5707,4255,5625,8318,2948,8138,2476,1706,4224,2267,3324,4548,5119,7795,4655,5538,8195,2135,5943,1721,878,6693,6241,1517,5546,1307,4023,6330,2512,5768,6082,7250,1312,7241,7984,8292,2409,113,2131);
-    var TiempoKmCiudadArray = new Array(90280,313612,73317,124328,78296,558883,521653,75777,189051,219484,519583,31070,481577,10774,170515,63111,305285,258683,109814,519422,20295,235418,533894,390006,246544,71403,51565,328477,477193,157426,222323,436023,551782,531217,384385,351176,450820,179260,319585,578028,145944,277339,252841,531389,218492,342418,40757,79584,444305,273675,566967,223934,133772,322051,331210,368660,313596,145457,394691,205801,440487,80795,226094,566938,46917,194221,180765,476859,335315,157608,339837,484000,259509,341939,436723,138347,260977,117379,405199,39681,362375,5056,296404,387405,162067,437097,131403,427859,220817,49239,481573,415943,385535,54368,200872,484971,354892,325599,372167,152132);
-    var TiempoKmCiudadArray = new Array(587049,314116,48487,304343,279758,425999,424192,226395,205730,17043,216839,82952,312747,283458,451653,262119,92940,237407,459708,471848,488702,310919,58655,443378,214021,413886,220002,172159,109820,578741,457419,317438,347732,353092,569579,588468,248941,236556,426310,358426,393090,499262,398347,366434,556895,266923,198767,393691,443046,1124,528203,231524,537071,543403,596200,497295,163274,77941,327605,98391,100498,500100,55669,195156,164352,256806,352534,570419,364704,269695,153088,376384,405628,363175,89651,98979,409651,497006,372772,455334,419040,196710,427414,221917,254014,385103,224076,278914,291175,334423,230948,250809,65090,281010,555935,223670,291854,173195,546442,126516);
+
+    var TiempoAparcadoArray = new Array(8302, 7759, 6116, 165, 8247, 7569, 4538, 6248, 943, 4665, 5147, 5337, 4821, 5919, 5310, 2639, 3829, 8622, 2581, 7046, 21, 310, 6904, 1945, 418, 3532, 534, 421, 1485, 2350, 2814, 4622, 5240, 154, 4000, 2991, 3320, 1589, 8571, 2284, 1781, 540, 2601, 5058, 2854, 2672, 8020, 6252, 6605, 78, 5551, 2185, 977, 1334, 4853, 1375, 5200, 2935, 5487, 4045, 483, 5707, 4255, 5625, 8318, 2948, 8138, 2476, 1706, 4224, 2267, 3324, 4548, 5119, 7795, 4655, 5538, 8195, 2135, 5943, 1721, 878, 6693, 6241, 1517, 5546, 1307, 4023, 6330, 2512, 5768, 6082, 7250, 1312, 7241, 7984, 8292, 2409, 113, 2131);
+    var TiempoKmCiudadArray = new Array(90280, 313612, 73317, 124328, 78296, 558883, 521653, 75777, 189051, 219484, 519583, 31070, 481577, 10774, 170515, 63111, 305285, 258683, 109814, 519422, 20295, 235418, 533894, 390006, 246544, 71403, 51565, 328477, 477193, 157426, 222323, 436023, 551782, 531217, 384385, 351176, 450820, 179260, 319585, 578028, 145944, 277339, 252841, 531389, 218492, 342418, 40757, 79584, 444305, 273675, 566967, 223934, 133772, 322051, 331210, 368660, 313596, 145457, 394691, 205801, 440487, 80795, 226094, 566938, 46917, 194221, 180765, 476859, 335315, 157608, 339837, 484000, 259509, 341939, 436723, 138347, 260977, 117379, 405199, 39681, 362375, 5056, 296404, 387405, 162067, 437097, 131403, 427859, 220817, 49239, 481573, 415943, 385535, 54368, 200872, 484971, 354892, 325599, 372167, 152132);
+    var TiempoKmCiudadArray = new Array(587049, 314116, 48487, 304343, 279758, 425999, 424192, 226395, 205730, 17043, 216839, 82952, 312747, 283458, 451653, 262119, 92940, 237407, 459708, 471848, 488702, 310919, 58655, 443378, 214021, 413886, 220002, 172159, 109820, 578741, 457419, 317438, 347732, 353092, 569579, 588468, 248941, 236556, 426310, 358426, 393090, 499262, 398347, 366434, 556895, 266923, 198767, 393691, 443046, 1124, 528203, 231524, 537071, 543403, 596200, 497295, 163274, 77941, 327605, 98391, 100498, 500100, 55669, 195156, 164352, 256806, 352534, 570419, 364704, 269695, 153088, 376384, 405628, 363175, 89651, 98979, 409651, 497006, 372772, 455334, 419040, 196710, 427414, 221917, 254014, 385103, 224076, 278914, 291175, 334423, 230948, 250809, 65090, 281010, 555935, 223670, 291854, 173195, 546442, 126516);
 
 
     var htmlPrecioPremium = $("#PrecioPremium").empty();
@@ -2280,10 +2280,31 @@ App = {
         }
         break;
     }
+
+
+
+
+    if (antiguedadLicencia <= 3) {
+      record = SafeMath.div(puntosLicencia, 8);
+    } else if (antiguedadLicencia >= 6 && antiguedadLicencia <= 9) {
+      record = SafeMath.div(puntosLicencia, 12);
+    } else if (antiguedadLicencia >= 9 && antiguedadLicencia <= 12) {
+      record = SafeMath.div(puntosLicencia, 14);
+    } else if (antiguedadLicencia >= 13) {
+      record = SafeMath.div(puntosLicencia, 15);
+    } else {
+      record = 0;
+    }
+    console.log(record);
+
+
+
+
+
     App.contracts.Cliente.deployed().then(function (instance) {
       console.log("Comprobando registro" + TypeUser);
       console.log("Comprobando registro" + antiguedadLicencia);
-      return instance.NewUser(IdUsuario, TypeUser, DNI, VATNumber, antiguedadLicencia, { from: App.account });
+      return instance.NewUser(IdUsuario, TypeUser, DNI, VATNumber, record, { from: App.account });
     }).then(function (result) {
       // nuevo usuario
       console.log("Nuevo usuario..." + result);
@@ -2353,26 +2374,26 @@ App = {
   },
 
 
-  actualizaTipoUserCredito: function (VolumenCredito,Demora,modificador) {
+  actualizaTipoUserCredito: function (VolumenCredito, Demora, modificador) {
     console.log("actualizando el crédito máximo...");
-//    var VolumenCredito = $("#VolumenCredito").val();
-//    var Demora = $("#Demora").val();
+    //    var VolumenCredito = $("#VolumenCredito").val();
+    //    var Demora = $("#Demora").val();
 
     console.log("Comprobando volumen crédito" + VolumenCredito);
     console.log("Comprobando demora en días" + Demora);
     console.log("Comprobando si es nuevo cliente" + modificador);
-  maxCredito=VolumenCredito*(Demora/360)*modificador;
-  App.contracts.Cliente.deployed().then(function (instance) {
-    return instance.asignaCreditoMaximo.call(maxCredito, { from: App.account });
-  }).then(function (result) {
+    maxCredito = VolumenCredito * (Demora / 360) * modificador;
+    App.contracts.Cliente.deployed().then(function (instance) {
+      return instance.asignaCreditoMaximo.call(maxCredito, { from: App.account });
+    }).then(function (result) {
 
-    console.log("Credito asignado con éxito" + result);
+      console.log("Credito asignado con éxito" + result);
 
 
-  }).catch(function (err) {
-    console.error(err);
-  });
-     
+    }).catch(function (err) {
+      console.error(err);
+    });
+
   },
 
 
@@ -2380,42 +2401,39 @@ App = {
     console.log("actualizando el crédito máximo...");
     var VolumenCredito = $("#VolumenCredito").val();
     var Demora = $("#Demora").val();
-    var modificadorText= $("#ClienteNuevo").val();
+    var modificadorText = $("#ClienteNuevo").val();
     console.log("Comprobando volumen crédito " + VolumenCredito);
     console.log("Comprobando demora en días " + Demora);
-   
-    
-    if(modificadorText=='Si')
-    {
 
-      modificador=1;
+
+    if (modificadorText == 'Si') {
+
+      modificador = 1;
 
     }
-    else if (modificadorText=='No')
-    {
+    else if (modificadorText == 'No') {
 
-      modificador=0.5;
+      modificador = 0.5;
     }
-    else
-    {
-      modificador=0;
+    else {
+      modificador = 0;
 
     }
 
-  console.log("Comprobando si es nuevo cliente " + modificador);
-  maxCredito=VolumenCredito*(Demora/360)*modificador;
-  console.log("Maxcredito " + maxCredito);
-  App.contracts.Cliente.deployed().then(function (instance) {
-    return instance.asignaCreditoMaximo.call(maxCredito, { from: App.account });
-  }).then(function (result) {
+    console.log("Comprobando si es nuevo cliente " + modificador);
+    maxCredito = VolumenCredito * (Demora / 360) * modificador;
+    console.log("Maxcredito " + maxCredito);
+    App.contracts.Cliente.deployed().then(function (instance) {
+      return instance.asignaCreditoMaximo.call(maxCredito, { from: App.account });
+    }).then(function (result) {
 
-    console.log("Credito asignado con éxito " + result);
+      console.log("Credito asignado con éxito " + result);
 
 
-  }).catch(function (err) {
-    console.error(err);
-  });
-     
+    }).catch(function (err) {
+      console.error(err);
+    });
+
   },
 
 

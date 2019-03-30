@@ -129,24 +129,13 @@ contract Cliente is Owned, usingOraclize {
         return (true);
     }*/
 
-   function NewUser(string memory IdUsuario, uint TypeUser, string memory DNI, string memory VATNumber, uint antiguedadLicencia) public 
+   function NewUser(string memory IdUsuario, uint TypeUser, string memory DNI, string memory VATNumber,uint record) public 
     {
 //solo deberia poder darese de alta una vez el usuario
-       uint record;
-        require(Activo == false);
-       //require((ownerCuentaLeasing[msg.sender]) == 0);
-        if (antiguedadLicencia <= 3){
-            record = SafeMath.div(puntosLicencia, 8);
-        }else if (antiguedadLicencia >= 6 && antiguedadLicencia <= 9){
-            record = SafeMath.div(puntosLicencia, 12);
-        }else if (antiguedadLicencia >= 9 && antiguedadLicencia <= 12){
-            record = SafeMath.div(puntosLicencia, 14);
-        }else if (antiguedadLicencia >= 13){
-            record = SafeMath.div(puntosLicencia, 15);
-        }
        
-        users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0);
-        
+        require(Activo == false);
+       //require((ownerCuentaLeasing[msg.sender]) == 0);            
+        users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0);    
         
         emit nuevoCliente(TypeUser); 
        
