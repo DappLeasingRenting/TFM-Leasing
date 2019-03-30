@@ -2233,6 +2233,7 @@ App = {
     console.log("registrando usuario...");
     var IdUsuario = $("#IdUsuarioAlta").val();
     var TypeUserString = $("#ListaTipoUsuario").val();
+    var PuntosLicencia = $("#PuntosLicenciaAlta").val();
 
     console.log("Comprobando registro" + IdUsuario);
     console.log("Comprobando registro" + TypeUserString);
@@ -2244,6 +2245,7 @@ App = {
           var DNI = $("#DNI").val();
           var VATNumber = 'N/A';
           var antiguedadLicencia = $("#AntiguedadLicenciaAlta").val();
+          var PuntosLicencia = $("#PuntosLicenciaAlta").val();
           console.log("Comprobando registro" + antiguedadLicencia);
           console.log("uno");
         }
@@ -2277,6 +2279,25 @@ App = {
         }
         break;
     }
+
+
+
+
+    if (antiguedadLicencia <= 3) {
+      record = (PuntosLicencia/8*10);
+    } else if (antiguedadLicencia >= 6 && antiguedadLicencia <= 9) {
+      record = (PuntosLicencia/12)*10;
+    } else if (antiguedadLicencia >= 9 && antiguedadLicencia <= 12) {
+      record = (PuntosLicencia/14)*10;
+    } else if (antiguedadLicencia >= 13) {
+      record = (PuntosLicencia/15)*10;
+    } else {
+      record = 0;
+    }
+
+
+
+    console.log(record);
     App.contracts.Cliente.deployed().then(function (instance) {
       console.log("Comprobando registro" + TypeUser);
       console.log("Comprobando registro" + antiguedadLicencia);
