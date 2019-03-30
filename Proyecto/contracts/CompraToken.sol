@@ -77,5 +77,3 @@ contract CompraToken is Owned  {
         emit Retiro(msg.sender, _prestamo);
     }
 }
-
-}
