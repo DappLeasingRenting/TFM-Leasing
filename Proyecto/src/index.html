@@ -13,7 +13,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-  <title>AHORRO COOPERATIVO</title>
+  <title>DAPP LEASING RENTING</title>
 
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -107,6 +107,12 @@
                         </tbody>
                       </div>
                     </table>
+
+                    <button id="EntregaCoche" onclick="App.EntregaCoche(); return false;"
+                      class="btn btn-success btn-lg">Entrega coche</button>
+                    <br></br>
+
+
                     <button id="Financiamiento" onclick="RedirigeFinanciamiento(); return false;"
                       class="btn-lg btn-default btn-lg btn-block">Financiamiento</button>
                     <div class="row ">
@@ -115,12 +121,12 @@
                           <h4 class="text-center bg-primary">
                             Financiamiento
                           </h4>
-                     
-                              <h4 class="text-center">
-                                  Puede financiar hasta un máximo de: <span class="tokens-maximo"></span> Ether. 
-                                
-                                </h4>
-                          
+
+                          <h4 class="text-center">
+                            Puede financiar hasta un máximo de: <span class="tokens-maximo"></span> Ether.
+
+                          </h4>
+
                           <form onSubmit="App.Financiar(); return false;" role="form">
 
                             <div class="form-group">

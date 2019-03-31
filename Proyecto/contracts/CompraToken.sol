@@ -46,6 +46,7 @@ contract CompraToken is Owned, usingOraclize  {
     mapping(uint => uint) public aseguradoraPrecioCarretera;
     mapping(uint => uint) public aseguradoraPrecioCiudad;
     mapping(address => user) public users;
+    mapping(address => coche) public coches;
     
  struct user {
         string IdUser;
@@ -60,6 +61,14 @@ contract CompraToken is Owned, usingOraclize  {
         uint IdCoche;
  }
    
+   struct coche {
+uint IdCoche;
+uint KmCarretera;
+uint KmCiudad;
+uint TiempoAparcado;
+uint Estado;
+} 
+
 
 //** @title Constructor. */
     constructor(Token _tokenContract, uint256 _PrecioToken) public {
