@@ -109,59 +109,59 @@
                     </table>
                     <button id="Financiamiento" onclick="RedirigeFinanciamiento(); return false;"
                       class="btn-lg btn-default btn-lg btn-block">Financiamiento</button>
-                      <div class="row ">
-                        <div class="col-md-12">
-                          <div class="panel panel-primary" id="content3" class="text-center" style="display: none;">
-                            <h4 class="text-center bg-primary">
-                              Financiamiento
-                            </h4>
-                            <h4 class="text-center">
-                              Puede financiar hasta un máximo de: <span class="token-price"></span> Ether. 
-                              <span id=MaxFinan></span>
-                            </h4>
-                            <form onSubmit="App.Financiar(); return false;" role="form">
-  
-                              <div class="form-group">
-                                <div class="input-group">
-                                  <input id="numeroTokensFinanciar" class="form-control input-lg" type="number" name="number"
-                                    value="1" min="1" pattern="[0-10000]"><br>
-                                  <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-success btn-lg">Financiar</button>
-                                  </span>
-                                </div>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <table class="table table-bordered table-responsive">
-                      <div style="margin: 5px">
-                        <thead>
-                          <tr class="info">
-                            <th scope="col">Deuda Inicial</th>
-                            <th scope="col">Deuda Actual</th>
-                            <th scope="col">Otro campo</th>
-                          </tr>
-                        </thead>
-                        <tbody id="clienteDatos" class="success">
-                          <tr class="success"></tr>
-                        </tbody>
-                      </div>
-                    </table>
-                  </div>
-                  </table>
-
-                  <div class="form-group">
-                    <div class="col-sm-12 text-center">
-
-                      <button id="Consulta Coches" class="btn-lg btn-default btn-lg btn-block"><a
-                          href="WebCoches.html">Ver
-                          Coches</a></button>
-                    </div>
                     <div class="row ">
                       <div class="col-md-12">
                         <div class="panel panel-primary" id="content3" class="text-center" style="display: none;">
+                          <h4 class="text-center bg-primary">
+                            Financiamiento
+                          </h4>
+                          <h4 class="text-center">
+                            Puede financiar hasta un máximo de: <span class="token-price"></span> Ether.
+                            <span id=MaxFinan></span>
+                          </h4>
+                          <form onSubmit="App.Financiar(); return false;" role="form">
+
+                            <div class="form-group">
+                              <div class="input-group">
+                                <input id="numeroTokensFinanciar" class="form-control input-lg" type="number"
+                                  name="number" value="1" min="1" pattern="[0-10000]"><br>
+                                <span class="input-group-btn">
+                                  <button type="submit" class="btn btn-success btn-lg">Financiar</button>
+                                </span>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <table class="table table-bordered table-responsive">
+                    <div style="margin: 5px">
+                      <thead>
+                        <tr class="info">
+                          <th scope="col">Deuda Inicial</th>
+                          <th scope="col">Deuda Actual</th>
+                          <th scope="col">Otro campo</th>
+                        </tr>
+                      </thead>
+                      <tbody id="clienteDatos" class="success">
+                        <tr class="success"></tr>
+                      </tbody>
+                    </div>
+                  </table>
+                </div>
+                </table>
+
+                <div class="form-group">
+                  <div class="col-sm-12 text-center">
+
+                    <button id="Consulta Coches" class="btn-lg btn-default btn-lg btn-block"><a
+                        href="WebCoches.html">Ver
+                        Coches</a></button>
+
+                    <div class="row ">
+                      <div class="col-md-12">
+                        <div class="panel panel-primary" id="content7" class="text-center" style="display: none;">
                           <h4 class="text-center bg-primary">
                             Bienvenido "Leasing Smart Token" (LST)!
                           </h4>
@@ -192,6 +192,7 @@
         </div>
       </div>
     </div>
+
 
 
 
@@ -1759,9 +1760,9 @@
             </div>
           </div>
         </div>
-      
 
-     
+
+
 
 
 
@@ -1770,19 +1771,18 @@
 
 
     <script>
-      function RedirigeFinanciamiento() 
-      {
+      function RedirigeFinanciamiento() {
         window.location.href = "../financiacion.html";
       }
     </script>
 
-      <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-      <!-- Include all compiled plugins (below), or include individual files as needed -->
-      <script src="js/bootstrap.min.js"></script>
-      <script src="js/web3.min.js"></script>
-      <script src="js/truffle-contract.js"></script>
-      <script src="js/app.js"></script>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
 
 </body>
 

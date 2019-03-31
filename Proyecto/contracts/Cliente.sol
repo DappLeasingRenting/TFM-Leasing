@@ -41,8 +41,9 @@ contract Cliente is Owned, usingOraclize {
         uint record;
         uint PrecioAparcado;
         uint PrecioKmCarretera;
-        uint PrecioKmCiudad;
+        uint PrecioKmCiudad;        
         uint MaxCredito;
+        uint IdCoche;
  }
    
     struct Seguro {
@@ -136,7 +137,7 @@ contract Cliente is Owned, usingOraclize {
         require(Activo == false);
        //require((ownerCuentaLeasing[msg.sender]) == 0);      
        
-        users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0);
+        users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0);
         
         
         emit nuevoCliente(TypeUser); 
