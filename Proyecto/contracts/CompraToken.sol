@@ -46,7 +46,7 @@ contract CompraToken is Owned, usingOraclize  {
     mapping(uint => uint) public aseguradoraPrecioCarretera;
     mapping(uint => uint) public aseguradoraPrecioCiudad;
     mapping(address => user) public users;
-    mapping(address => coche) public coches;
+    mapping(uint => coche) public coches;
     
  struct user {
         string IdUser;
