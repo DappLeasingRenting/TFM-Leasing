@@ -35,23 +35,16 @@ App = {
         App.contracts.Token = TruffleContract(Token);
         App.contracts.Token.setProvider(App.web3Provider);
         App.contracts.Token.deployed().then(function (Token) {
-        });
-      }).done(function () {
-        $.getJSON("Cliente.json", function (Cliente) {
-          App.contracts.Cliente = TruffleContract(Cliente);
-          App.contracts.Cliente.setProvider(App.web3Provider);
-          App.contracts.Cliente.deployed().then(function (Cliente) {
-            App.listenForEvents();
+          App.listenForEvents();
             return App.render();
-          })
-        })
+        });
       })
     })
   },
 
   // Escuchando a los eventos que se emiten en los contratos
   listenForEvents: function () {
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       instance.nuevoCliente({}, {
         fromBlock: 0,
         toBlock: 'latest'
@@ -60,7 +53,7 @@ App = {
         App.render();
       });
     });
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       instance.CostoSeguro({}, {
         fromBlock: 0,
         toBlock: 'latest'
@@ -99,7 +92,7 @@ App = {
         App.init();
       }
     }, 100);
-
+    App.account = account;
     App.admin = web3.eth.accounts[0];
 
     $("#loader").show();
@@ -164,7 +157,7 @@ App = {
 
     var htmlAparcado01 = $("#AparcadoAseguradora01").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(01)
         .then(function (PrecioA) {
@@ -173,7 +166,7 @@ App = {
           htmlAparcado01.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad01 = $("#CiudadAseguradora01").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceD = instance;
             InstanceD.aseguradoraPrecioCiudad(01)
               .then(function (PrecioB) {
@@ -182,7 +175,7 @@ App = {
                 htmlCiudad01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera01 = $("#CarreteraAseguradora01").empty();
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(01)
                     .then(function (PrecioC) {
@@ -199,7 +192,7 @@ App = {
 
     var htmlAparcado02 = $("#AparcadoAseguradora02").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(02)
         .then(function (PrecioA) {
@@ -208,7 +201,7 @@ App = {
           htmlAparcado02.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad02 = $("#CiudadAseguradora02").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(02)
               .then(function (PrecioB) {
@@ -217,7 +210,7 @@ App = {
                 htmlCiudad02.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera02 = $("#CarreteraAseguradora02").empty();
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(02)
                     .then(function (PrecioC) {
@@ -234,7 +227,7 @@ App = {
 
     var htmlAparcado03 = $("#AparcadoAseguradora03").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(03)
         .then(function (PrecioA) {
@@ -243,7 +236,7 @@ App = {
           htmlAparcado03.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad03 = $("#CiudadAseguradora03").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(03)
               .then(function (PrecioB) {
@@ -252,7 +245,7 @@ App = {
                 htmlCiudad03.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera03 = $("#CarreteraAseguradora03").empty();
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(03)
                     .then(function (PrecioC) {
@@ -267,7 +260,7 @@ App = {
     })
     var htmlAparcado04 = $("#AparcadoAseguradora04").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(04)
         .then(function (PrecioA) {
@@ -276,7 +269,7 @@ App = {
           htmlAparcado04.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad04 = $("#CiudadAseguradora04").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(04)
               .then(function (PrecioB) {
@@ -285,7 +278,7 @@ App = {
                 htmlCiudad04.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera04 = $("#CarreteraAseguradora04").empty();
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(04)
                     .then(function (PrecioC) {
@@ -300,7 +293,7 @@ App = {
     })
     var htmlAparcado05 = $("#AparcadoAseguradora05").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(05)
         .then(function (PrecioA) {
@@ -309,7 +302,7 @@ App = {
           htmlAparcado05.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad05 = $("#CiudadAseguradora05").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(05)
               .then(function (PrecioB) {
@@ -318,7 +311,7 @@ App = {
                 htmlCiudad05.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera05 = $("#CarreteraAseguradora05").empty();
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(05)
                     .then(function (PrecioC) {
@@ -337,7 +330,7 @@ App = {
 
     var htmlAparcado11 = $("#AparcadoAseguradora11").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(11)
         .then(function (PrecioA) {
@@ -346,7 +339,7 @@ App = {
           htmlAparcado11.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad11 = $("#CiudadAseguradora11").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(11)
               .then(function (PrecioB) {
@@ -355,7 +348,7 @@ App = {
                 htmlCiudad11.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera11 = $("#CarreteraAseguradora11").empty();
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(11)
                     .then(function (PrecioC) {
@@ -371,7 +364,7 @@ App = {
 
     var htmlAparcado12 = $("#AparcadoAseguradora12").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(12)
         .then(function (PrecioA) {
@@ -380,7 +373,7 @@ App = {
           htmlAparcado12.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad12 = $("#CiudadAseguradora12").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(12)
               .then(function (PrecioB) {
@@ -389,7 +382,7 @@ App = {
                 htmlCiudad12.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera12 = $("#CarreteraAseguradora12").empty();
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(12)
                     .then(function (PrecioC) {
@@ -405,7 +398,7 @@ App = {
 
     var htmlAparcado13 = $("#AparcadoAseguradora13").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(13)
         .then(function (PrecioA) {
@@ -414,7 +407,7 @@ App = {
           htmlAparcado13.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad13 = $("#CiudadAseguradora13").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(13)
               .then(function (PrecioB) {
@@ -423,7 +416,7 @@ App = {
                 htmlCiudad13.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera13 = $("#CarreteraAseguradora13").empty();
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(13)
                     .then(function (PrecioC) {
@@ -438,7 +431,7 @@ App = {
     })
     var htmlAparcado14 = $("#AparcadoAseguradora14").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(14)
         .then(function (PrecioA) {
@@ -447,7 +440,7 @@ App = {
           htmlAparcado14.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad14 = $("#CiudadAseguradora14").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(14)
               .then(function (PrecioB) {
@@ -456,7 +449,7 @@ App = {
                 htmlCiudad14.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera14 = $("#CarreteraAseguradora14").empty();
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(14)
                     .then(function (PrecioC) {
@@ -471,7 +464,7 @@ App = {
     })
     var htmlAparcado15 = $("#AparcadoAseguradora15").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(15)
         .then(function (PrecioA) {
@@ -480,7 +473,7 @@ App = {
           htmlAparcado15.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad15 = $("#CiudadAseguradora15").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(15)
               .then(function (PrecioB) {
@@ -489,7 +482,7 @@ App = {
                 htmlCiudad15.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera15 = $("#CarreteraAseguradora15").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(15)
                     .then(function (PrecioC) {
@@ -506,7 +499,7 @@ App = {
 
     var htmlAparcado21 = $("#AparcadoAseguradora21").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(21)
         .then(function (PrecioA) {
@@ -515,7 +508,7 @@ App = {
           htmlAparcado21.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad21 = $("#CiudadAseguradora21").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(21)
               .then(function (PrecioB) {
@@ -524,7 +517,7 @@ App = {
                 htmlCiudad21.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera21 = $("#CarreteraAseguradora21").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(21)
                     .then(function (PrecioC) {
@@ -541,7 +534,7 @@ App = {
 
     var htmlAparcado22 = $("#AparcadoAseguradora22").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(22)
         .then(function (PrecioA) {
@@ -550,7 +543,7 @@ App = {
           htmlAparcado22.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad22 = $("#CiudadAseguradora22").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(22)
               .then(function (PrecioB) {
@@ -559,7 +552,7 @@ App = {
                 htmlCiudad22.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera22 = $("#CarreteraAseguradora22").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(22)
                     .then(function (PrecioC) {
@@ -574,7 +567,7 @@ App = {
     })
     var htmlAparcado23 = $("#AparcadoAseguradora23").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(23)
         .then(function (PrecioA) {
@@ -583,7 +576,7 @@ App = {
           htmlAparcado23.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad23 = $("#CiudadAseguradora23").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(23)
               .then(function (PrecioB) {
@@ -592,7 +585,7 @@ App = {
                 htmlCiudad23.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera23 = $("#CarreteraAseguradora23").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(23)
                     .then(function (PrecioC) {
@@ -607,7 +600,7 @@ App = {
     })
     var htmlAparcado24 = $("#AparcadoAseguradora24").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(24)
         .then(function (PrecioA) {
@@ -616,7 +609,7 @@ App = {
           htmlAparcado24.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad24 = $("#CiudadAseguradora24").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(24)
               .then(function (PrecioB) {
@@ -625,7 +618,7 @@ App = {
                 htmlCiudad24.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera24 = $("#CarreteraAseguradora24").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(24)
                     .then(function (PrecioC) {
@@ -640,7 +633,7 @@ App = {
     })
     var htmlAparcado25 = $("#AparcadoAseguradora25").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.aseguradoraPrecioAparcado(25)
         .then(function (PrecioA) {
@@ -649,7 +642,7 @@ App = {
           htmlAparcado25.append(usuarioTemplate);
         }).then(function () {
           var htmlCiudad25 = $("#CiudadAseguradora25").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             InstanceA = instance;
             InstanceA.aseguradoraPrecioCiudad(25)
               .then(function (PrecioB) {
@@ -658,7 +651,7 @@ App = {
                 htmlCiudad25.append(usuarioTemplate);
               }).then(function () {
                 var htmlCarretera25 = $("#CarreteraAseguradora25").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceA = instance;
                   InstanceA.aseguradoraPrecioCarretera(25)
                     .then(function (PrecioC) {
@@ -676,13 +669,13 @@ App = {
 
 
 
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora01").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(01)
               .then(function (PrecioA) {
@@ -693,7 +686,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora01").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(01)
                     .then(function (PrecioB) {
@@ -704,7 +697,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora01").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(01)
                           .then(function (PrecioC) {
@@ -721,13 +714,13 @@ App = {
           })
         })
     })
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora02").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(02)
               .then(function (PrecioA) {
@@ -738,7 +731,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora02").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(02)
                     .then(function (PrecioB) {
@@ -749,7 +742,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora02").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(02)
                           .then(function (PrecioC) {
@@ -766,13 +759,13 @@ App = {
           })
         })
     })
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora03").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(03)
               .then(function (PrecioA) {
@@ -783,7 +776,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora03").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(03)
                     .then(function (PrecioB) {
@@ -794,7 +787,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora03").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(03)
                           .then(function (PrecioC) {
@@ -811,13 +804,13 @@ App = {
           })
         })
     })
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora04").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(04)
               .then(function (PrecioA) {
@@ -828,7 +821,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora04").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(04)
                     .then(function (PrecioB) {
@@ -839,7 +832,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora04").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(04)
                           .then(function (PrecioC) {
@@ -856,13 +849,13 @@ App = {
           })
         })
     })
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora05").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(05)
               .then(function (PrecioA) {
@@ -873,7 +866,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora05").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(05)
                     .then(function (PrecioB) {
@@ -884,7 +877,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora05").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(05)
                           .then(function (PrecioC) {
@@ -902,13 +895,13 @@ App = {
         })
     })
 
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora11").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(11)
               .then(function (PrecioA) {
@@ -919,7 +912,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora11").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(11)
                     .then(function (PrecioB) {
@@ -930,7 +923,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora11").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(11)
                           .then(function (PrecioC) {
@@ -947,13 +940,13 @@ App = {
           })
         })
     })
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora12").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(12)
               .then(function (PrecioA) {
@@ -964,7 +957,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora12").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(12)
                     .then(function (PrecioB) {
@@ -975,7 +968,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora12").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(12)
                           .then(function (PrecioC) {
@@ -992,13 +985,13 @@ App = {
           })
         })
     })
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora13").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(13)
               .then(function (PrecioA) {
@@ -1009,7 +1002,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora13").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(13)
                     .then(function (PrecioB) {
@@ -1020,7 +1013,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora13").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(13)
                           .then(function (PrecioC) {
@@ -1038,13 +1031,13 @@ App = {
         })
     })
 
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora14").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(14)
               .then(function (PrecioA) {
@@ -1055,7 +1048,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora14").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(14)
                     .then(function (PrecioB) {
@@ -1066,7 +1059,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora14").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(14)
                           .then(function (PrecioC) {
@@ -1084,13 +1077,13 @@ App = {
         })
     })
 
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora15").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(15)
               .then(function (PrecioA) {
@@ -1101,7 +1094,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora15").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(15)
                     .then(function (PrecioB) {
@@ -1112,7 +1105,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora15").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(15)
                           .then(function (PrecioC) {
@@ -1130,13 +1123,13 @@ App = {
         })
     })
 
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora21").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(21)
               .then(function (PrecioA) {
@@ -1147,7 +1140,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora21").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(21)
                     .then(function (PrecioB) {
@@ -1158,7 +1151,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora21").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(21)
                           .then(function (PrecioC) {
@@ -1176,13 +1169,13 @@ App = {
         })
     })
 
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora22").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(22)
               .then(function (PrecioA) {
@@ -1193,7 +1186,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora22").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(22)
                     .then(function (PrecioB) {
@@ -1204,7 +1197,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora22").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(22)
                           .then(function (PrecioC) {
@@ -1221,14 +1214,14 @@ App = {
           })
         })
     })
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora23").empty();
           var persona = {};
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(23)
               .then(function (PrecioA) {
@@ -1239,7 +1232,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora23").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(23)
                     .then(function (PrecioB) {
@@ -1250,7 +1243,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora23").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(23)
                           .then(function (PrecioC) {
@@ -1267,13 +1260,13 @@ App = {
           })
         })
     })
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora24").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(24)
               .then(function (PrecioA) {
@@ -1284,7 +1277,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora24").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(24)
                     .then(function (PrecioB) {
@@ -1295,7 +1288,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora24").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(24)
                           .then(function (PrecioC) {
@@ -1312,13 +1305,13 @@ App = {
           })
         })
     })
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           record = (DatosCliente[4] / 10);
           var htmlAparcado01 = $("#ClienteAparcadoAseguradora25").empty();
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             infoInstance.aseguradoraPrecioAparcado(25)
               .then(function (PrecioA) {
@@ -1329,7 +1322,7 @@ App = {
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora25").empty();;
-                App.contracts.Cliente.deployed().then(function (instance) {
+                App.contracts.CompraToken.deployed().then(function (instance) {
                   InstanceD = instance;
                   InstanceD.aseguradoraPrecioCiudad(25)
                     .then(function (PrecioB) {
@@ -1340,7 +1333,7 @@ App = {
                       htmlCiudad01.append(usuarioTemplate);
                     }).then(function () {
                       var htmlCarretera01 = $("#ClienteCarreteraAseguradora25").empty();;
-                      App.contracts.Cliente.deployed().then(function (instance) {
+                      App.contracts.CompraToken.deployed().then(function (instance) {
                         InstanceA = instance;
                         InstanceA.aseguradoraPrecioCarretera(25)
                           .then(function (PrecioC) {
@@ -1358,7 +1351,7 @@ App = {
         })
     })
 
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       console.log(App.account);
       infoInstance.users(App.account)
@@ -1377,14 +1370,14 @@ App = {
 
     var htmlclienteDatosSeguro = $("#clienteDatosSeguro").empty();
     var Datos = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       console.log(App.account);
       infoInstance.users(App.account)
         .then(function (DatosSeguro) {
           //console.log(Number(DatosSeguro));
           Datos = {
-            CostoTotal: DatosSeguro[8],
+            CostoTotal: DatosSeguro[9],
             KmCiudad: DatosSeguro[5],
             KmCarretera: DatosSeguro[6],
             TiempoAparcado: DatosSeguro[7],
@@ -1402,7 +1395,7 @@ App = {
 
     var htmlclienteDatos1 = $("#clienteDatos1").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.Aleatorio(App.account)
         .then(function (cliente) {
@@ -1547,7 +1540,7 @@ App = {
   infoCliente: function () {
     var htmlclienteDatos = $("#clienteDatos").empty();
     var persona = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (cliente) {
@@ -1576,7 +1569,7 @@ App = {
     App.costoSeguro();
     var htmlclienteDatosSeguro = $("#clienteDatosSeguro").empty();
     var Datos = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.CostSeguro(App.account)
         .then(function (DatosSeguro) {
@@ -1600,7 +1593,7 @@ App = {
   },
 
   costoSeguro: function () {
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
         .then(function (DatosSeguro) {
@@ -1609,7 +1602,7 @@ App = {
           CostoMovCarretera = Number(TiempoKmCarreteraArray[DatosSeguro[9]]) * Number([DatosSeguro[6]]);
           CostoSeguro = Number(CostoAparcado) + Number(CostoMovCiudad) + Number(CostoMovCarretera);
           console.log(CostoSeguro);
-          App.contracts.Cliente.deployed().then(function (instance) {
+          App.contracts.CompraToken.deployed().then(function (instance) {
             return instance.costoSeguro(CostoSeguro, { from: App.account });
           }).then(function (result) {
             $("#content").show();
@@ -1748,7 +1741,7 @@ App = {
     }
 
 
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.actualizarPrecioAparcado(id, valor, { from: App.account });
     }).then(function (result) {
     }).catch(function (err) {
@@ -1880,7 +1873,7 @@ App = {
     }
 
 
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.actualizarPrecioCiudad(id, valor, { from: App.account });
     }).then(function (result) {
       $("#content").show();
@@ -2012,7 +2005,7 @@ App = {
 
 
     }
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.actualizarPrecioCarretera(id, valor, { from: App.account });
     }).then(function (result) {
       $("#content").show();
@@ -2176,7 +2169,7 @@ App = {
       console.log(precioAparcado);
 
 
-      App.contracts.Cliente.deployed().then(function (instance) {
+      App.contracts.CompraToken.deployed().then(function (instance) {
         return instance.actualizarSeguro(precioKmCiudad, precioKmCarretera, precioAparcado, { from: App.account });
       }).then(function (result) {
         $("#content").show();
@@ -2200,6 +2193,24 @@ App = {
 
     });
   },
+
+
+  pedirPrestamo: function () {
+    var numeroTokens = $('#numeroTokens').val();
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      return instance.compraTokens(numeroTokens, {
+        from: App.account,
+        value: numeroTokens * App.PrecioToken,
+        gas: 500000
+      });
+    }).then(function (result) {
+      $('form').trigger('reset')
+
+    });
+  },
+
+
+
   aumentarSupply: function () {
     var numeroTokens = $('#numeroTokensAumentar').val();
     App.contracts.CompraToken.deployed().then(function (instance) {
@@ -2223,7 +2234,7 @@ App = {
 
   contratarOraculo: function () {
     console.log("entrando Oraculo")
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.update({ from: App.account });
     }).then(function (result) {
       $("#content").show();
@@ -2235,7 +2246,7 @@ App = {
 
   ZonaAdmin: function () {
 
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.CheckAdmin.call({ from: App.account });
     }).then(function (result) {
       if (result == true) {
@@ -2316,7 +2327,7 @@ App = {
 
 
     console.log(record);
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       console.log("Comprobando registro" + TypeUser);
       console.log("Comprobando registro" + antiguedadLicencia);
       return instance.NewUser(IdUsuario, TypeUser, DNI, VATNumber, antiguedadLicencia, { from: App.account });
@@ -2333,7 +2344,7 @@ App = {
     console.log("verificando usuario...")
     var IdUsuario = $("#IdUsuario").val();
     var Password = $("#Contraseña").val();
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.fetchUser({ from: App.account });
     }).then(function (result) {
       console.log(result + "fetch");
@@ -2354,7 +2365,7 @@ App = {
     var dir = $("#AddressUsuarioAdmin").val();
     var htmlUserDatos = $("#tablaUsers").empty();
     var persona_ = {};
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(dir)
         .then(function (user) {
@@ -2376,7 +2387,7 @@ App = {
   removeInfo: function () {
     console.log("borrando usuario...")
     var dir = $("#AddressUsuarioAdmin").val();
-    App.contracts.Cliente.deployed().then(function (instance) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.deleteUser(dir, { from: App.account });
     }).then(function (result) {
 
@@ -2414,8 +2425,8 @@ App = {
     maxCredito = VolumenCredito * (Demora / 360) * modificador;
     console.log("Maxcredito " + maxCredito);
 
-    App.contracts.Cliente.deployed().then(function (instance) {
-      // window.location.href = "../index.html";
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      window.location.href = "../index.html";
       return instance.asignaCreditoMaximo(maxCredito, { from: App.account });
 
 
