@@ -10,17 +10,56 @@ contract CompraToken is Owned, usingOraclize  {
     Token public tokenContract;
     uint256 public PrecioToken;
     uint256 public tokensVendidos;
-
+    bool public Activo = false;
+    bool public IsAdmin = false;
     
     
 
-    event Venta(address _comprador, uint256 _tokens);
-    event Pago(address _depositante, uint256 cantidad);
-    event Retiro(address _retira, uint256 cantidad);
+    event Venta(
+        address _comprador,
+         uint256 _tokens
+         );
+         event Prestamo(
+        address _comprador,
+         uint256 _tokens
+         );
+    event Pago(
+        address _depositante,
+         uint256 cantidad
+         );
+    event Retiro(
+        address _retira,
+         uint256 cantidad
+         );   
+    
+    event nuevoCliente(
+        uint record
+    );  
+    event CostoSeguro(         
+       uint CostoSeguro
+    );    
+    event newRandomNumber_bytes(bytes);
+    event newRandomNumber_uint(uint);   
 
-
-
-
+    mapping(address => uint) public CostSeguro;
+    mapping(uint => uint) public aseguradoraPrecioAparcado;
+    mapping(uint => uint) public aseguradoraPrecioCarretera;
+    mapping(uint => uint) public aseguradoraPrecioCiudad;
+    mapping(address => user) public users;
+    
+ struct user {
+        string IdUser;
+        string DNI;
+        string VATNumber;
+        uint TypeUser;
+        uint record;
+        uint PrecioAparcado;
+        uint PrecioKmCarretera;
+        uint PrecioKmCiudad;        
+        uint MaxCredito;
+        uint IdCoche;
+ }
+   
 
 //** @title Constructor. */
     constructor(Token _tokenContract, uint256 _PrecioToken) public {
@@ -51,6 +90,23 @@ contract CompraToken is Owned, usingOraclize  {
         /** @return devuelve el addres del que compra y la cantidad*/
         emit Venta(msg.sender, _numeroTokens);
     }
+    function prestamoTokens(uint256 _numeroTokens) public payable {
+          /**@param _numeroTokens cantidad a comprarr.
+ 
+      /** @dev verificar que el precio a pagar sea el precio estblecido
+      verifica que el contrato cuente con los tokens solicitados para comprar
+      verifica que se haya realizado la transacción satisfactoriamente desde el contrato Token.sol.
+      Actualiza el valor de los tokens vendidos
+      */ 
+        require(_numeroTokens <= users[msg.sender].MaxCredito);
+        require(tokenContract.balanceOf(address(this)) >= _numeroTokens);
+        require(tokenContract.transfer(msg.sender, _numeroTokens));
+
+        tokensVendidos += _numeroTokens;
+        users[msg.sender].MaxCredito -= _numeroTokens; 
+        /** @return devuelve el addres del que compra y la cantidad*/
+        emit Prestamo(msg.sender, _numeroTokens);
+    }
 //** @title Depotio de tokens. */
     function pagarTokens(uint _pago) public payable {
         /**@param _contribucion cantidad a ahorrar.
@@ -69,44 +125,7 @@ contract CompraToken is Owned, usingOraclize  {
         return true;
     }
 
-bool public Activo = false;
-    bool public IsAdmin = false;
-    uint puntosLicencia = 80;//Este valor se debe obtener desde un Oráculo
-    
-    event nuevoCliente(
-        uint record
-    );  
-    event CostoSeguro(         
-       uint CostoSeguro
-    );    
-    event newRandomNumber_bytes(bytes);
-    event newRandomNumber_uint(uint);
 
-    
- 
-    uint256 public PrecioKmCiudad;
-    uint256 public PrecioKmCarretera;
-    uint256 public PrecioAparcado;
-
-    mapping(address => uint) public CostSeguro;
-    mapping(uint => uint) public aseguradoraPrecioAparcado;
-    mapping(uint => uint) public aseguradoraPrecioCarretera;
-    mapping(uint => uint) public aseguradoraPrecioCiudad;
-    mapping(address => user) public users;
-    
- struct user {
-        string IdUser;
-        string DNI;
-        string VATNumber;
-        uint TypeUser;
-        uint record;
-        uint PrecioAparcado;
-        uint PrecioKmCarretera;
-        uint PrecioKmCiudad;        
-        uint MaxCredito;
-        uint IdCoche;
- }
-   
     
     //** @title detener el contrato. */
     function DetenerContratoToken() public onlyOwner returns (bool) {

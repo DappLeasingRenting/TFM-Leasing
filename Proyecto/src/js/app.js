@@ -2195,17 +2195,12 @@ App = {
   },
 
 
-  pedirPrestamo: function () {
-    var numeroTokens = $('#numeroTokens').val();
+  Financiar: function () {
+    var numeroTokens = $('#numeroTokensFinanciar').val();
     App.contracts.CompraToken.deployed().then(function (instance) {
-      return instance.compraTokens(numeroTokens, {
-        from: App.account,
-        value: numeroTokens * App.PrecioToken,
-        gas: 500000
-      });
+      return instance.prestamoTokens(numeroTokens, {from: App.account});
     }).then(function (result) {
       $('form').trigger('reset')
-
     });
   },
 
