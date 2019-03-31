@@ -14,9 +14,10 @@ contract Cliente is Owned, usingOraclize {
     event nuevoCliente(
         uint record
     );  
-    event CostoSeguro(
-        uint idCoche, 
-        uint TotalCost
+    event CostoSeguro(         
+        uint KmCiudad,
+        uint KmCarretera,
+        uint CostoSeguro
     );    
     event newRandomNumber_bytes(bytes);
     event newRandomNumber_uint(uint);
@@ -79,7 +80,7 @@ contract Cliente is Owned, usingOraclize {
 //** @title Constructor. */
     
 //** @title Compra de tokens. */
-    function costoSeguro() public {
+    function costoSeguro(uint CostoTotal, uint _KmCiudad, uint _KmCarretera, uint _tiempoAparcado) public {
           /**@param _numeroTokens cantidad a comprar.
  
       /** @dev verificar que el precio a pagar sea el precio establecido
@@ -87,26 +88,9 @@ contract Cliente is Owned, usingOraclize {
       verifica que se haya realizado la transacción satisfactoriamente desde el contrato Token.sol.
       Actualiza el valor de los tokens vendidos
       */ 
-        uint _tiempoAparcado = 10;//Debería ser suministrado por Oráculo
-        uint _KmCiudad = 100 ;//Debería ser suministrado por Oráculo
-        uint _KmCarretera = 50; //Debería ser suministrado por Oráculo
-        uint CostoMovCiudad;
-        uint CostoMovCarretera;
-        uint CostoMovimiento;
-        uint CostoAparcado;
-        uint CMovRecord;
-        uint CostoTotal;
-        uint edad;
-
-        //edad = users[msg.sender].edad;
-        CostoAparcado = SafeMath.mul(_tiempoAparcado, aseguradoraPrecioAparcado[0]);
-        CostoMovCiudad = SafeMath.mul(_KmCiudad, aseguradoraPrecioCiudad[0]);
-        CostoMovCarretera = SafeMath.mul(_KmCarretera, aseguradoraPrecioCarretera[0]);
-        CostoMovimiento = SafeMath.add(CostoMovCiudad, (SafeMath.add(CostoAparcado, CostoMovCarretera)));
-        CMovRecord = SafeMath.mul((CostoMovimiento),(SafeMath.div(1, users[msg.sender].record)));
-        CostoTotal = SafeMath.mul(CMovRecord, SafeMath.div(65,edad));
+        
         CostSeguro[msg.sender] = Seguro(CostoTotal, _KmCiudad, _KmCarretera, _tiempoAparcado);
-        emit CostoSeguro(edad, CostoTotal);
+        emit CostoSeguro(_KmCiudad,_KmCarretera,CostoTotal);
     }
 
     function CheckAdmin() public onlyOwner returns (bool)
