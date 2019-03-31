@@ -1368,8 +1368,9 @@ App = {
       console.log(App.account);
       infoInstance.users(App.account)
         .then(function (DatosSeguro) {
+          //console.log(Number(DatosSeguro));
           Datos = {
-            CostoTotal: DatosSeguro[3],
+            CostoTotal: DatosSeguro[8],
             KmCiudad: DatosSeguro[5],
             KmCarretera: DatosSeguro[6],
             TiempoAparcado: DatosSeguro[7],
@@ -1586,41 +1587,16 @@ App = {
 
   costoSeguro: function () {
     App.contracts.Cliente.deployed().then(function (instance) {
-      infoInstance = instance;
-      console.log(TiempoAparcadoArray[0]);
+      infoInstance = instance;      
       infoInstance.users(App.account)
-        .then(function (DatosSeguro) {
-         /* Prueba = {
-            IdCoche : DatosSeguro[9],
-            KmCiudad: DatosSeguro[5],
-            KmCarretera: DatosSeguro[6],
-            TiempoAparcado: DatosSeguro[7],
-          };*/
-
-          /*CostoMovCiudad = SafeMath.mul(_KmCiudad, aseguradoraPrecioCiudad[0]);
-    CostoMovCarretera = SafeMath.mul(_KmCarretera, aseguradoraPrecioCarretera[0]);
-    CostoMovimiento = SafeMath.add(CostoMovCiudad, (SafeMath.add(CostoAparcado, CostoMovCarretera)));
-    CMovRecord = SafeMath.mul((CostoMovimiento),(SafeMath.div(1, users[msg.sender].record)));
-    CostoTotal = SafeMath.mul(CMovRecord, SafeMath.div(65,edad));
-    CostSeguro[msg.sender] = Seguro(CostoTotal, _KmCiudad, _KmCarretera, _tiempoAparcado);*/
-    console.log(TiempoAparcadoArray[0]);
-          console.log("entrando CostoSeguro");
-          console.log("Id Coche" + DatosSeguro[9]);
-          console.log("Tiempo Aparcado" + TiempoAparcadoArray[DatosSeguro[9]]);
-          console.log("Precio tiempo Aparcado" + DatosSeguro[7]);
-    
-          console.log(Number(TiempoAparcadoArray[DatosSeguro[9]]));
+        .then(function (DatosSeguro) {    
     CostoAparcado = Number(TiempoAparcadoArray[DatosSeguro[9]])* Number([DatosSeguro[5]]);
     CostoMovCiudad = Number(TiempoKmCiudadArray[DatosSeguro[9]])* Number([DatosSeguro[7]]);
     CostoMovCarretera = Number(TiempoKmCarreteraArray[DatosSeguro[9]])* Number([DatosSeguro[6]]);
-    CostoSeguro = Number(CostoAparcado) + Number(CostoMovCiudad) + Number(CostoMovCarretera);
-    console.log(CostoAparcado);
-    console.log(CostoMovCiudad);
-    console.log(CostoMovCarretera);
-    console.log(CostoSeguro);
-
+    CostoSeguro = Number(CostoAparcado) + Number(CostoMovCiudad) + Number(CostoMovCarretera);    
+          console.log(CostoSeguro);
     App.contracts.Cliente.deployed().then(function (instance) {
-      return instance.costoSeguro(numeroTokens, { from: App.account });    
+      return instance.costoSeguro(CostoSeguro,  { from: App.account });    
 }).then(function (result) {
       $("#content").show();
       $("#loader").show();
@@ -2406,53 +2382,37 @@ App = {
     var modificadorText= $("#ClienteNuevo").val();
     console.log("Comprobando volumen crédito " + VolumenCredito);
     console.log("Comprobando demora en días " + Demora);
-   
-    
     if(modificadorText=='Si')
     {
-
-      modificador=0.5;
-
+    
+    modificador=0.5;
+    
     }
     else if (modificadorText=='No')
     {
-
-      modificador=1;
+    
+    modificador=1;
     }
     else
     {
-      modificador=0;
-
+    modificador=0;
+    
     }
-
-  console.log("Comprobando si es nuevo cliente " + modificador);
-  maxCredito=VolumenCredito*(Demora/360)*modificador;
-  console.log("Maxcredito " + maxCredito);
-
-  App.contracts.Cliente.deployed().then(function (instance) {
-    return instance.asignaCreditoMaximo(maxCredito, { from: App.account });
-
-  }).then(function (result) {
-
-    console.log("Credito asignado con éxito " + result);
-    window.location.href = "../index.html";
-    const finan = document.getElementById('MaxFinan'); 
+    
+    console.log("Comprobando si es nuevo cliente " + modificador);
+    maxCredito=VolumenCredito*(Demora/360)*modificador;
+    console.log("Maxcredito " + maxCredito);
+    
     App.contracts.Cliente.deployed().then(function (instance) {
-    infoInstance = instance;
-    infoInstance.users("0x52faf4fa5c8d0d9eecae073161b0659cf6acbd5d")
-    .then(function (DatosCliente) {
-    MaxCredit = (DatosCliente[8]);
-    })
-  });
-    finan.innerHTML = MaxCredit; 
-
-
-  }).catch(function (err) {
+    // window.location.href = "../index.html";
+    return instance.asignaCreditoMaximo(maxCredito, { from: App.account }); 
+    
+    
+    }).catch(function (err) {
     console.error(err);
-  });
-     
-  },
-
+    });
+    },
+    
 
   /*activarContrato: function () {
     App.contracts.Token.deployed().then(function (instance) {

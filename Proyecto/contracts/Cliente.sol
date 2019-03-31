@@ -15,9 +15,7 @@ contract Cliente is Owned, usingOraclize {
         uint record
     );  
     event CostoSeguro(         
-        uint KmCiudad,
-        uint KmCarretera,
-        uint CostoSeguro
+       uint CostoSeguro
     );    
     event newRandomNumber_bytes(bytes);
     event newRandomNumber_uint(uint);
@@ -28,7 +26,7 @@ contract Cliente is Owned, usingOraclize {
     uint256 public PrecioKmCarretera;
     uint256 public PrecioAparcado;
 
-    mapping(address => Seguro) public CostSeguro;
+    mapping(address => uint) public CostSeguro;
     mapping(uint => uint) public aseguradoraPrecioAparcado;
     mapping(uint => uint) public aseguradoraPrecioCarretera;
     mapping(uint => uint) public aseguradoraPrecioCiudad;
@@ -47,12 +45,7 @@ contract Cliente is Owned, usingOraclize {
         uint IdCoche;
  }
    
-    struct Seguro {
-        uint CostoTotal;
-        uint KmCiudad;
-        uint KmCarretera;
-        uint TiempoAparcado;
-    }
+    
     //** @title detener el contrato. */
     function DetenerContratoToken() public onlyOwner returns (bool) {
         Activo = true;
@@ -80,7 +73,7 @@ contract Cliente is Owned, usingOraclize {
 //** @title Constructor. */
     
 //** @title Compra de tokens. */
-    function costoSeguro(uint CostoTotal, uint _KmCiudad, uint _KmCarretera, uint _tiempoAparcado) public {
+    function costoSeguro(uint CostoTotal) public {
           /**@param _numeroTokens cantidad a comprar.
  
       /** @dev verificar que el precio a pagar sea el precio establecido
@@ -89,8 +82,8 @@ contract Cliente is Owned, usingOraclize {
       Actualiza el valor de los tokens vendidos
       */ 
         
-        CostSeguro[msg.sender] = Seguro(CostoTotal, _KmCiudad, _KmCarretera, _tiempoAparcado);
-        emit CostoSeguro(_KmCiudad,_KmCarretera,CostoTotal);
+        CostSeguro[msg.sender] = CostoTotal;
+        emit CostoSeguro(CostoTotal);
     }
 
     function CheckAdmin() public onlyOwner returns (bool)
