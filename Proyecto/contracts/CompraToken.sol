@@ -36,7 +36,7 @@ contract CompraToken is Owned, usingOraclize  {
         uint record
     );  
     event CostoSeguro(         
-       uint CostoSeguro
+       uint entregado
     );    
     event newRandomNumber_bytes(bytes);
     event newRandomNumber_uint(uint);   
@@ -59,6 +59,7 @@ contract CompraToken is Owned, usingOraclize  {
         uint PrecioKmCiudad;        
         uint MaxCredito;
         uint IdCoche;
+       
  }
    
    struct coche {
@@ -106,7 +107,7 @@ uint Estado;
       verifica que el contrato cuente con los tokens solicitados para comprar
       verifica que se haya realizado la transacción satisfactoriamente desde el contrato Token.sol.
       Actualiza el valor de los tokens vendidos
-      */ 
+      */require(_numeroTokens >= 10); 
         require(_numeroTokens <= users[msg.sender].MaxCredito);
         require(tokenContract.balanceOf(address(this)) >= _numeroTokens);
         require(tokenContract.transfer(msg.sender, _numeroTokens));
@@ -117,7 +118,7 @@ uint Estado;
         emit Prestamo(msg.sender, _numeroTokens);
     }
 //** @title Depotio de tokens. */
-    function pagarTokens(uint _pago) public payable {
+    function pagarTokens(uint _pago, uint precioKmCiudad, uint precioKmCarretera, uint precioAparcado) public payable {
         /**@param _contribucion cantidad a ahorrar.
        @param fechaEjecucion fecha en que se realiza el deposito.*/
       /** @dev verificar que el balance de quien envía sea mayor a la cantidad a enviar
@@ -125,6 +126,11 @@ uint Estado;
       */ 
         require(tokenContract.balanceOf(msg.sender) >= _pago);
         require(tokenContract.transferFrom(msg.sender, address(this), _pago));
+        users[msg.sender].PrecioAparcado = precioAparcado;
+        users[msg.sender].PrecioKmCarretera = precioKmCarretera;
+        users[msg.sender].PrecioKmCiudad = precioKmCiudad;     
+         
+       
        /** @return devuelve el address del que solicita el deposito y la cantidad.*/
         emit Pago(msg.sender, _pago);
     }
@@ -163,17 +169,17 @@ uint Estado;
 //** @title Constructor. */
     
 //** @title Compra de tokens. */
-    function costoSeguro(uint CostoTotal) public {
-          /**@param _numeroTokens cantidad a comprar.
- 
-      /** @dev verificar que el precio a pagar sea el precio establecido
-      verifica que el contrato cuente con los tokens solicitados para comprar
-      verifica que se haya realizado la transacción satisfactoriamente desde el contrato Token.sol.
-      Actualiza el valor de los tokens vendidos
-      */ 
-        
-        CostSeguro[msg.sender] = CostoTotal;
-        emit CostoSeguro(CostoTotal);
+    function PagoSeguro(uint TokensSeguro) public payable {        
+     
+        require(msg.value == SafeMath.mul(TokensSeguro, PrecioToken));
+        require(tokenContract.balanceOf(address(this)) >= TokensSeguro);
+        require(tokenContract.transfer(msg.sender, TokensSeguro));
+
+        tokensVendidos += TokensSeguro;
+
+        //users[msg.sender].Entregado = true;
+        //emit CostoSeguro(users[msg.sender].Entregado);
+        emit CostoSeguro(TokensSeguro);
     }
 
     function CheckAdmin() public onlyOwner returns (bool)
@@ -226,25 +232,9 @@ function deleteUser(address dir) public returns (bool)
     {
         delete users[dir];
         return (true);
-    }
+    }  
 
-    
-
-    function actualizarSeguro(uint precioKmCiudad, uint precioKmCarretera, uint precioAparcado) public returns (bool)
-
-    {
-        //Solo debería poder contratar un leasing el cliente
-        
-        users[msg.sender].PrecioAparcado = precioAparcado;
-        users[msg.sender].PrecioKmCarretera = precioKmCarretera;
-        users[msg.sender].PrecioKmCiudad = precioKmCiudad;
-
-      
-        return (true);
-    }
-
-
-   function RandomExample() public {
+  /* function RandomExample() public {
         oraclize_setProof(proofType_Ledger); // sets the Ledger authenticity proof in the constructor
         update(); // let's ask for N random bytes immediately when the contract is created!
     }
@@ -280,7 +270,7 @@ function deleteUser(address dir) public returns (bool)
         uint delay = 0; // number of seconds to wait before the execution takes place
         uint callbackGas = 20000; // amount of gas we want Oraclize to set for the callback function
         bytes32 queryId = oraclize_newRandomDSQuery(delay, N, callbackGas); // this function internally generates the correct oraclize_query and returns its queryId
-    } 
+    } */
 
     function asignaCreditoMaximo(uint maxCredit) public returns (uint){
     users[msg.sender].MaxCredito= maxCredit;

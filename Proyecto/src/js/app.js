@@ -727,7 +727,7 @@ App = {
                 var PrecioClienteA02 = Math.round(PrecioA / record);
                 var usuarioTemplate =
                   "<tr><td>" + PrecioClienteA02 + "</td></tr>";
-                ClienteAparcadoCiudad02 = PrecioClienteA02;
+                ClienteAparcadoAseguradora02 = PrecioClienteA02;
                 htmlAparcado01.append(usuarioTemplate);
               }).then(function () {
                 var htmlCiudad01 = $("#ClienteCiudadAseguradora02").empty();;
@@ -1381,6 +1381,7 @@ App = {
             KmCiudad: DatosSeguro[5],
             KmCarretera: DatosSeguro[6],
             TiempoAparcado: DatosSeguro[7],
+            Entregado: DatosSeguro[10],
           };
 
           var usuarioTemplate =
@@ -1388,12 +1389,13 @@ App = {
             "</td><td>" + Datos.KmCiudad +
             "</td><td>" + Datos.KmCarretera +
             "</td><td>" + Datos.TiempoAparcado +
+            "</td><td>" + Datos.Entregado +
             "</td></tr>";
           htmlclienteDatosSeguro.append(usuarioTemplate);
         })
     })
 
-    var htmlclienteDatos1 = $("#clienteDatos1").empty();
+    /*var htmlclienteDatos1 = $("#clienteDatos1").empty();
     var persona = {};
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
@@ -1401,14 +1403,14 @@ App = {
         .then(function (cliente) {
           persona = {
             nombre: cliente[0],
-            /*edad: cliente[1],
+            edad: cliente[1],
             idLicencia: cliente[2],
             AntiguedadLicencia: cliente[3],
             seguro: cliente[4],
             idCoche: cliente[5],
             credito: cliente[6],
             recordCliente: cliente[7],
-            leasing: cliente[8],*/
+            leasing: cliente[8],
           };
           var usuarioTemplate =
             "<tr><th>" + persona.nombre +
@@ -1417,7 +1419,7 @@ App = {
             "</td></tr>";
           htmlclienteDatos1.append(usuarioTemplate);
         })
-    })
+    })*/
 
     App.contracts.Token.deployed().then(function (instance) {
       TokenInstance = instance;
@@ -1592,7 +1594,7 @@ App = {
     })
   },
 
-  costoSeguro: function () {
+  EntregaCoche: function () {
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       infoInstance.users(App.account)
@@ -1600,10 +1602,14 @@ App = {
           CostoAparcado = Number(TiempoAparcadoArray[DatosSeguro[9]]) * Number([DatosSeguro[5]]);
           CostoMovCiudad = Number(TiempoKmCiudadArray[DatosSeguro[9]]) * Number([DatosSeguro[7]]);
           CostoMovCarretera = Number(TiempoKmCarreteraArray[DatosSeguro[9]]) * Number([DatosSeguro[6]]);
-          CostoSeguro = Number(CostoAparcado) + Number(CostoMovCiudad) + Number(CostoMovCarretera);
-          console.log(CostoSeguro);
+          TokensSeguro = Number(CostoAparcado) + Number(CostoMovCiudad) + Number(CostoMovCarretera);
+          console.log(TokensSeguro);
           App.contracts.CompraToken.deployed().then(function (instance) {
-            return instance.costoSeguro(CostoSeguro, { from: App.account });
+            return instance.PagoSeguro(TokensSeguro, {
+              from: App.account,
+              value: TokensSeguro * App.PrecioToken,
+              gas: 500000
+            });
           }).then(function (result) {
             $("#content").show();
             $("#loader").show();
@@ -2016,18 +2022,7 @@ App = {
   },
 
   contratarLeasing: function (a, b) {
-    console.log(a);
-    console.log(b);
-    console.log("entrando contrato Leasing")
-    var pago = PrecioPremium;
-    console.log(pago);
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      instance.pagarTokens(pago);
-      return [a, b];
-    }).then(function () {
-      console.log(a);
-      console.log(b);
-
+   console.log("entrando contrato Leasing")
       switch (a) {
         case 0:
           {
@@ -2038,6 +2033,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora01;
                   var precioKmCarretera = ClienteCarreteraAseguradora01;
                   var precioAparcado = ClienteAparcadoAseguradora01;
+                  var pago = PrecioPremium;
                 }
                 break;
               case 2:
@@ -2045,6 +2041,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora02;
                   var precioKmCarretera = ClienteCarreteraAseguradora02;
                   var precioAparcado = ClienteAparcadoAseguradora02;
+                  var pago = PrecioLuxure;
                 }
                 break;
               case 3:
@@ -2052,6 +2049,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora03;
                   var precioKmCarretera = ClienteCarreteraAseguradora03;
                   var precioAparcado = ClienteAparcadoAseguradora03;
+                  var pago = PrecioClassic;
 
                 }
                 break;
@@ -2060,6 +2058,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora04;
                   var precioKmCarretera = ClienteCarreteraAseguradora04;
                   var precioAparcado = ClienteAparcadoAseguradora04;
+                  var pago = PrecioCorriente;
                 }
                 break;
               case 5:
@@ -2067,6 +2066,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora05;
                   var precioKmCarretera = ClienteCarreteraAseguradora05;
                   var precioAparcado = ClienteAparcadoAseguradora05;
+                  var pago = PrecioFurgonetas;
                 }
 
             }
@@ -2081,6 +2081,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora11;
                   var precioKmCarretera = ClienteCarreteraAseguradora11;
                   var precioAparcado = ClienteAparcadoAseguradora11;
+                  var pago = PrecioPremium;
 
                 }
                 break;
@@ -2089,6 +2090,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora12;
                   var precioKmCarretera = ClienteCarreteraAseguradora12;
                   var precioAparcado = ClienteAparcadoAseguradora12;
+                  var pago = PrecioLuxure;
 
                 }
                 break;
@@ -2097,7 +2099,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora13;
                   var precioKmCarretera = ClienteCarreteraAseguradora13;
                   var precioAparcado = ClienteAparcadoAseguradora13;
-
+                  var pago = PrecioClassic;
                 }
                 break;
               case 4:
@@ -2105,6 +2107,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora14;
                   var precioKmCarretera = ClienteCarreteraAseguradora14;
                   var precioAparcado = ClienteAparcadoAseguradora14;
+                  var pago = PrecioCorriente;
 
                 }
                 break;
@@ -2113,6 +2116,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora15;
                   var precioKmCarretera = ClienteCarreteraAseguradora15;
                   var precioAparcado = ClienteAparcadoAseguradora15;
+                  var pago = PrecioFurgonetas;
 
                 }
 
@@ -2128,6 +2132,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora21;
                   var precioKmCarretera = ClienteCarreteraAseguradora21;
                   var precioAparcado = ClienteAparcadoAseguradora21;
+                  var pago = PrecioPremium;
                 }
                 break;
               case 2:
@@ -2135,6 +2140,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora22;
                   var precioKmCarretera = ClienteCarreteraAseguradora22;
                   var precioAparcado = ClienteAparcadoAseguradora22;
+                  var pago = PrecioLuxure;
                 }
                 break;
               case 3:
@@ -2142,6 +2148,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora23;
                   var precioKmCarretera = ClienteCarreteraAseguradora23;
                   var precioAparcado = ClienteAparcadoAseguradora23;
+                  var pago = PrecioClassic;
                 }
                 break;
               case 4:
@@ -2149,6 +2156,8 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora24;
                   var precioKmCarretera = ClienteCarreteraAseguradora24;
                   var precioAparcado = ClienteAparcadoAseguradora24;
+                  var pago = PrecioCorriente;
+
                 }
                 break;
               case 5:
@@ -2156,6 +2165,7 @@ App = {
                   var precioKmCiudad = ClienteCiudadAseguradora25;
                   var precioKmCarretera = ClienteCarreteraAseguradora25;
                   var precioAparcado = ClienteAparcadoAseguradora25;
+                  var pago = PrecioFurgonetas;
                 }
             }
             break;
@@ -2167,17 +2177,20 @@ App = {
       console.log(precioKmCiudad);
       console.log(precioKmCarretera);
       console.log(precioAparcado);
+      console.log(pago);
 
-
-      App.contracts.CompraToken.deployed().then(function (instance) {
-        return instance.actualizarSeguro(precioKmCiudad, precioKmCarretera, precioAparcado, { from: App.account });
+            App.contracts.CompraToken.deployed().then(function (instance) {
+        return instance.pagarTokens(pago, precioKmCiudad, precioKmCarretera, precioAparcado, {
+          from: App.account,
+          value: pago * App.PrecioToken,
+          gas: 500000
+        });
       }).then(function (result) {
         $("#content").show();
         $("#loader").show();
       }).catch(function (err) {
         console.error(err);
       });
-    })
   },
 
   ComprarTokens: function () {
