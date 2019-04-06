@@ -57,8 +57,9 @@ contract CompraToken is Owned, usingOraclize  {
         uint PrecioAparcado;
         uint PrecioKmCarretera;
         uint PrecioKmCiudad;        
-        uint MaxCredito;
+        uint MaxCredito;        
         uint IdCoche;
+        uint Prestamo;
        
  }
    
@@ -107,13 +108,14 @@ uint Estado;
       verifica que el contrato cuente con los tokens solicitados para comprar
       verifica que se haya realizado la transacción satisfactoriamente desde el contrato Token.sol.
       Actualiza el valor de los tokens vendidos
-      */require(_numeroTokens >= 10); 
+      */require(_numeroTokens > 0); 
         require(_numeroTokens <= users[msg.sender].MaxCredito);
         require(tokenContract.balanceOf(address(this)) >= _numeroTokens);
         require(tokenContract.transfer(msg.sender, _numeroTokens));
 
         tokensVendidos += _numeroTokens;
         users[msg.sender].MaxCredito -= _numeroTokens; 
+        users[msg.sender].Prestamo += _numeroTokens;
         /** @return devuelve el addres del que compra y la cantidad*/
         emit Prestamo(msg.sender, _numeroTokens);
     }
@@ -122,7 +124,7 @@ uint Estado;
         /**@param _contribucion cantidad a ahorrar.
        @param fechaEjecucion fecha en que se realiza el deposito.*/
       /** @dev verificar que el balance de quien envía sea mayor a la cantidad a enviar
-      verifica que se haya realizado la transacción satisfactoriamente desde el contrato Token.sol.
+     
       */ 
         require(tokenContract.balanceOf(msg.sender) >= _pago);
         require(tokenContract.transferFrom(msg.sender, address(this), _pago));
@@ -171,9 +173,9 @@ uint Estado;
 //** @title Compra de tokens. */
     function PagoSeguro(uint TokensSeguro) public payable {        
      
-        require(msg.value == SafeMath.mul(TokensSeguro, PrecioToken));
-        require(tokenContract.balanceOf(address(this)) >= TokensSeguro);
-        require(tokenContract.transfer(msg.sender, TokensSeguro));
+       
+        require(tokenContract.balanceOf(msg.sender) >= TokensSeguro);
+        require(tokenContract.transferFrom(msg.sender, address(this),TokensSeguro));
 
         tokensVendidos += TokensSeguro;
 
@@ -181,6 +183,23 @@ uint Estado;
         //emit CostoSeguro(users[msg.sender].Entregado);
         emit CostoSeguro(TokensSeguro);
     }
+    function PagoFinanciacion(uint TokensFinanciacion, uint TokensPrestamo) public payable {        
+     
+        
+        require(tokenContract.balanceOf(msg.sender) >= TokensFinanciacion);
+        require(tokenContract.transferFrom(msg.sender, address(this),TokensFinanciacion));
+
+        tokensVendidos += TokensFinanciacion;
+        users[msg.sender].Prestamo -= TokensPrestamo;
+
+        //users[msg.sender].Entregado = true;
+        //emit CostoSeguro(users[msg.sender].Entregado);
+        emit CostoSeguro(TokensFinanciacion);
+    }
+
+
+
+
 
     function CheckAdmin() public onlyOwner returns (bool)
     {   
@@ -210,7 +229,7 @@ uint Estado;
         require(Activo == false);
        //require((ownerCuentaLeasing[msg.sender]) == 0);      
        
-        users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0);
+        users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0,0);
         
         
         emit nuevoCliente(TypeUser); 

@@ -106,6 +106,7 @@ App = {
     $("#content5").show();
     $("#content6").show();
     $("#content7").show();
+    $("#content8").show();
 
 
 
@@ -1369,6 +1370,7 @@ App = {
 
 
     var htmlclienteDatosSeguro = $("#clienteDatosSeguro").empty();
+    var htmlclienteDatosPrestamo = $("#clienteDatos2").empty();
     var Datos = {};
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
@@ -1381,8 +1383,13 @@ App = {
             KmCiudad: DatosSeguro[5],
             KmCarretera: DatosSeguro[6],
             TiempoAparcado: DatosSeguro[7],
-            Entregado: DatosSeguro[10],
+            Prestamo: DatosSeguro[10],
           };
+
+          ValorPagoPrestamoInicial = Number(Datos.Prestamo);
+
+          ValorPagoPrestamo = Math.round(Number(Datos.Prestamo*1.10));
+          
 
           var usuarioTemplate =
             "<tr><th>" + Datos.CostoTotal +
@@ -1392,8 +1399,18 @@ App = {
             "</td><td>" + Datos.Entregado +
             "</td></tr>";
           htmlclienteDatosSeguro.append(usuarioTemplate);
+
+          var usuarioTemplate =
+            "<tr><th>" + Datos.Prestamo +
+            "</td><td>" + ValorPagoPrestamo +          
+            "</td></tr>";
+          htmlclienteDatosPrestamo.append(usuarioTemplate);
+
         })
     })
+
+    
+    
 
     /*var htmlclienteDatos1 = $("#clienteDatos1").empty();
     var persona = {};
@@ -2214,6 +2231,17 @@ App = {
       return instance.prestamoTokens(numeroTokens, {from: App.account});
     }).then(function (result) {
       $('form').trigger('reset')
+    });
+  },
+
+  PagarFinanciacion: function () {    
+    var PagoFinanciacionInicial = ValorPagoPrestamoInicial;
+    var PagoFinanciacion = ValorPagoPrestamo;
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      return instance.PagoFinanciacion(PagoFinanciacion,PagoFinanciacionInicial);
+    }).then(function (result) {
+      $('form1').trigger('reset')
+
     });
   },
 

@@ -74,54 +74,56 @@
               <div class="col-sm-12 text-left">
                 <div class="col-sm-12 text-left">
                   <div style="margin: 5px">
-                    <h3 class="text-center bg-primary">Mis Contratos</h3>
-                    <button id="DetenerContrato" onclick="App.contratarOraculo()"
-                      class="btn-lg btn-default btn-lg btn-block">Leasing</button>
-                    <table class="table table-bordered table-responsive">
-                      <div style="margin: 5px">
-                        <thead>
-                          <tr class="info">
-                            <th scope="col">ID Coche</th>
-                            <th scope="col">Costo mensual</th>
-                            <th scope="col">Fecha finalización contrato</th>
-                        </thead>
-                        <tbody id="clienteDatos1" class="success">
-                          <tr class="success"></tr>
-                        </tbody>
-                      </div>
-                    </table>
-                    <button id="DetenerContrato" onclick="App.costoSeguro()"
-                      class="btn-lg btn-default btn-lg btn-block">Seguro</button>
-                    <table class="table table-bordered table-responsive">
-                      <div style="margin: 5px">
-                        <thead>
-                          <tr class="info">
-                            <th scope="col">Id Coche</th>
-                            <th scope="col">Costo Seguro Km Ciudad</th>
-                            <th scope="col">Costo Seguro Km Carretera</th>
-                            <th scope="col">Costo Seguro Hora Aparcado</th>
-                            <th scope="col">Entregado</th>
-                          </tr>
-                        </thead>
-                        <tbody id="clienteDatosSeguro" class="success">
-                          <tr class="success"></tr>
-                        </tbody>
-                      </div>
-                    </table>
+                    <div class="panel panel-primary" id="content8" class="text-center" style="display: none;">
+                      <h3 class="text-center bg-primary">Mis Contratos</h3>
+                      <button id="DetenerContrato" onclick="App.contratarOraculo()"
+                        class="btn-lg btn-default btn-lg btn-block">Leasing</button>
+                      <table class="table table-bordered table-responsive">
+                        <div style="margin: 5px">
+                          <thead>
+                            <tr class="info">
+                              <th scope="col">Id Coche</th>
+                              <th scope="col">Costo Seguro Km Ciudad</th>
+                              <th scope="col">Costo Seguro Km Carretera</th>
+                              <th scope="col">Costo Seguro Hora Aparcado</th>
+                              <th scope="col">Entregado</th>
+                            </tr>
+                          </thead>
+                          <tbody id="clienteDatosSeguro" class="success">
+                            <tr class="success"></tr>
+                          </tbody>
+                        </div>
+                      </table>
+                      <table class="table table-bordered table-responsive">
+                        <div style="margin: 5px">
+                          <thead>
+                            <tr class="info">
+                              <th scope="col">ID Coche</th>
+                              <th scope="col">Km Carretera</th>
+                              <th scope="col">Km Ciudad</th>
+                              <th scope="col">Tiempo Aparcado</th>
+                              <th scope="col">Costo Seguro LST</th>
+                          </thead>
+                          <tbody id="clienteDatos1" class="success">
+                            <tr class="success"></tr>
+                          </tbody>
+                        </div>
+                      </table>
+                      <br></br>
 
-                    <button id="EntregaCoche" onclick="App.EntregaCoche(); return false;"
-                      class="btn btn-success btn-lg btn-block">Entrega coche</button>
-                    <br></br>
+                      <button id="EntregaCoche" onclick="App.EntregaCoche(); return false;"
+                        class="btn btn-success btn-lg btn-block">Entrega coche</button>
+                      <br></br>
+                    </div>
 
 
-                    <button id="Financiamiento" onclick="RedirigeFinanciamiento(); return false;"
-                      class="btn-lg btn-default btn-lg btn-block">Financiamiento</button>
+
                     <div class="row ">
                       <div class="col-md-12">
                         <div class="panel panel-primary" id="content3" class="text-center" style="display: none;">
-                          <h4 class="text-center bg-primary">
-                            Financiamiento
-                          </h4>
+                          <br></br>
+                          <button id="Financiamiento" onclick="RedirigeFinanciamiento(); return false;"
+                            class="btn-lg btn-secondary btn-lg btn-block">Solicitar Financiamiento</button>
 
                           <h4 class="text-center">
                             Puede financiar hasta un máximo de: <span class="tokens-maximo"></span> Ether.
@@ -140,6 +142,27 @@
                               </div>
                             </div>
                           </form>
+                          <br></br>
+                          <table class="table table-bordered table-responsive">
+                            <div style="margin: 5px">
+                              <thead>
+                                <tr class="info">
+                                  <th scope="col">Prestamo</th>
+                                  <th scope="col">Valor a Pagar</th>
+                              </thead>
+                              <tbody id="clienteDatos2" class="success">
+                                <tr class="success"></tr>
+                              </tbody>
+                            </div>
+                          </table>
+                          <br></br>
+                          <button id="PagoFinanciacion" onclick="App.PagarFinanciacion(); return false;"
+                            class="btn btn-success btn-lg btn-block">Pago Financiación</button>
+                          <br></br>
+
+
+
+
                         </div>
                       </div>
                     </div>
@@ -164,9 +187,10 @@
                 <div class="form-group">
                   <div class="col-sm-12 text-center">
 
-                    <button id="Consulta Coches" class="btn-lg btn-default btn-lg btn-block"><a
+                    <button id="Consulta Coches" class="btn-lg btn-warning btn-lg btn-block"><a
                         href="WebCoches.html">Ver
                         Coches</a></button>
+                    <br></br>
 
                     <div class="row ">
                       <div class="col-md-12">
