@@ -2389,12 +2389,11 @@ App = {
           persona_ = {
             IdUsuario: user[0],
             Type: user[4],
-            Time: user[5],
+           
           };
           var usuarioTemplate =
             "<tr><th>" + persona_.IdUsuario +
             "</td><td>" + persona_.Type +
-            "</td><td>" + persona_.Time +
             "</td></tr>";
           htmlUserDatos.append(usuarioTemplate);
         })

@@ -233,13 +233,13 @@ uint Estado;
     {
 //solo deberia poder darese de alta una vez el usuario
        
-        require(Activo == false);
-       require((ownerCuentaLeasing[msg.sender]) == 0);    
-       ownerCuentaLeasing[msg.sender] ++;       
-        users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0,0);
+    require(Activo == false);
+    require((ownerCuentaLeasing[msg.sender]) == 0);    
+    ownerCuentaLeasing[msg.sender] ++;       
+    users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0,0);
         
         
-        emit nuevoCliente(TypeUser); 
+    emit nuevoCliente(TypeUser); 
        
     }
 
