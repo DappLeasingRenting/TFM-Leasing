@@ -6,10 +6,6 @@ import "./Owned.sol";
 contract Token is Owned {
 
     uint256 public totalSupply;
-    uint public mes = 1;
-    uint public fechaComienzoAhorro = 2175806719; //fecha 12 de diciembre de 2038, para que nadie pueda generar una transacción u operativa antes de que
-                                                 //se hallan registrado la totalidad de usuarios
-    uint public tDosMinutos = 120;
     bool public Activo = false;
 
 
@@ -70,6 +66,7 @@ contract Token is Owned {
     }
     //** @title Activar el contrato. */
     function ActivarContratoToken() public onlyOwner returns (bool) {
+        
         Activo = false;
         /** @dev Modificar el valor de la vriable true activando el Smart contract.*/
     }
@@ -158,7 +155,7 @@ contract Token is Owned {
         Se actualizan los balances de las cuentas, a la que envía se le resta y a la otra se le suma, y se actualiza en el mapping ahorrador
         y BalanceOF*/
         //require(Activo == false);
-
+        require(Activo == false);
         
         totalSupply = SafeMath.add(totalSupply, _value);
         balanceOf[msg.sender] = SafeMath.add(balanceOf[msg.sender], _value);

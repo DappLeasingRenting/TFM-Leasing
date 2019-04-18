@@ -93,6 +93,7 @@ uint Estado;
       verifica que se haya realizado la transacción satisfactoriamente desde el contrato Token.sol.
       Actualiza el valor de los tokens vendidos
       */ 
+        require(Activo == false);
         require(msg.value == SafeMath.mul(_numeroTokens, PrecioToken));
         require(tokenContract.balanceOf(address(this)) >= _numeroTokens);
         require(tokenContract.transfer(msg.sender, _numeroTokens));
@@ -108,7 +109,10 @@ uint Estado;
       verifica que el contrato cuente con los tokens solicitados para comprar
       verifica que se haya realizado la transacción satisfactoriamente desde el contrato Token.sol.
       Actualiza el valor de los tokens vendidos
-      */require(_numeroTokens > 0); 
+      
+      */
+      require(Activo == false);
+      require(_numeroTokens > 0); 
         require(_numeroTokens <= users[msg.sender].MaxCredito);
         require(tokenContract.balanceOf(address(this)) >= _numeroTokens);
         require(tokenContract.transfer(msg.sender, _numeroTokens));
@@ -125,7 +129,7 @@ uint Estado;
        @param fechaEjecucion fecha en que se realiza el deposito.*/
       /** @dev verificar que el balance de quien envía sea mayor a la cantidad a enviar
      
-      */ 
+      */ require(Activo == false);
         require(tokenContract.balanceOf(msg.sender) >= _pago);
         require(tokenContract.transferFrom(msg.sender, address(this), _pago));
         users[msg.sender].PrecioAparcado = precioAparcado;
@@ -138,6 +142,7 @@ uint Estado;
     }
 
     function aumentarSupply(uint value) public onlyOwner returns (bool) {
+        require(Activo == false);
         tokenContract.transferAumentoSupply(value);
         return true;
     }
@@ -145,12 +150,12 @@ uint Estado;
 
     
     //** @title detener el contrato. */
-    function DetenerContratoToken() public onlyOwner returns (bool) {
+    function DetenerContratoCompraToken() public onlyOwner returns (bool) {
         Activo = true;
         /** @dev Modificar el valor de la variable true desactivando el Smart contract.*/
     }
     //** @title Activar el contrato. */
-    function ActivarContratoToken() public onlyOwner returns (bool) {
+    function ActivarContratoCompraToken() public onlyOwner returns (bool) {
         Activo = false;
         /** @dev Modificar el valor de la vriable true activando el Smart contract.*/
     }
@@ -158,12 +163,15 @@ uint Estado;
     
 
     function actualizarPrecioAparcado(uint idEmpresa, uint precioAparcado) public {
+        require(Activo == false);
         aseguradoraPrecioAparcado[idEmpresa] = precioAparcado;
     }
     function actualizarPrecioCarretera(uint idEmpresa, uint precioCarretera) public {
+        require(Activo == false);
         aseguradoraPrecioCarretera[idEmpresa] = precioCarretera;
     }
     function actualizarPrecioCiudad(uint idEmpresa, uint precioCiudad) public {
+        require(Activo == false);
         aseguradoraPrecioCiudad[idEmpresa] = precioCiudad;
     }
    
@@ -171,9 +179,8 @@ uint Estado;
 //** @title Constructor. */
     
 //** @title Compra de tokens. */
-    function PagoSeguro(uint TokensSeguro) public payable {        
-     
-       
+    function PagoSeguro(uint TokensSeguro) public payable {       
+        require(Activo == false);  
         require(tokenContract.balanceOf(msg.sender) >= TokensSeguro);
         require(tokenContract.transferFrom(msg.sender, address(this),TokensSeguro));
 
@@ -183,9 +190,8 @@ uint Estado;
         //emit CostoSeguro(users[msg.sender].Entregado);
         emit CostoSeguro(TokensSeguro);
     }
-    function PagoFinanciacion(uint TokensFinanciacion, uint TokensPrestamo) public payable {        
-     
-        
+    function PagoFinanciacion(uint TokensFinanciacion, uint TokensPrestamo) public payable {       
+     require(Activo == false);        
         require(tokenContract.balanceOf(msg.sender) >= TokensFinanciacion);
         require(tokenContract.transferFrom(msg.sender, address(this),TokensFinanciacion));
 
@@ -203,6 +209,7 @@ uint Estado;
 
     function CheckAdmin() public onlyOwner returns (bool)
     {   
+        require(Activo == false);
         IsAdmin = true; 
         return (IsAdmin);
         //returns true if it is the owner of the contract
@@ -211,7 +218,7 @@ uint Estado;
     function fetchUser() public view returns (string memory)
 
     {
-
+        require(Activo == false);
         return (users[msg.sender].IdUser);
     }
     
@@ -249,6 +256,7 @@ uint Estado;
 function deleteUser(address dir) public returns (bool)
 
     {
+        require(Activo == false);
         delete users[dir];
         return (true);
     }  
@@ -292,6 +300,7 @@ function deleteUser(address dir) public returns (bool)
     } */
 
     function asignaCreditoMaximo(uint maxCredit) public returns (uint){
+    require(Activo == false);
     users[msg.sender].MaxCredito= maxCredit;
     return users[msg.sender].MaxCredito;
     //asignación de crédito máximo por dirección de usuario

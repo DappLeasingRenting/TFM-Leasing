@@ -235,6 +235,13 @@
     <div class="row ">
       <div class="col-md-12">
         <div class="panel panel-primary" id="content4" class="text-center" style="display: none;">
+          <br></br>
+          <button id="Tranferencia inicial" onclick="App.TranferenciaInicialTokens()"
+            class="btn btn-primary">Transferencia
+            inicial</button>
+
+
+
           <h4 class="text-center bg-primary">
             Bienvenido "Aumentar Tokens" (TAC)!
           </h4>
@@ -264,11 +271,37 @@
               class="tokens-disponibles"></span>
             tokens disponibles</p>
           <hr>
-          <button id="Tranferencia inicial" onclick="App.TranferenciaInicialTokens()" class="btn">Transferencia
-            inicial</button>
+
+
+          <br></br>
+          <h4 class="text-center bg-warninng">
+            ¿Contrato 1 Desactivado?: <span id="estadoContratoCompraToken" class="estadoContratoCompraToken"></span>
+          </h4>
+          <div style="margin: 5px">
+            <button id="DetenerContrato" onclick="App.detenerContratoCompraToken()" class="btn btn-danger">Detener
+              contrato</button>
+          </div>
+          <div style="margin: 5px">
+            <button id="DetenerContrato" onclick="App.activarContratoCompraToken()" class="btn btn-success">Activar
+              contrato</button>
+          </div>
+          <h4 class="text-center bg-warninng">
+            ¿Contrato 2 Desactivado?: <span id="estadoContratoToken" class="estadoContratoToken"></span>
+          </h4>
+          <div style="margin: 5px">
+            <button id="DetenerContrato" onclick="App.detenerContratoToken()" class="btn btn-danger">Detener
+              contrato</button>
+          </div>
+          <div style="margin: 5px">
+            <button id="DetenerContrato" onclick="App.activarContratoToken()" class="btn btn-success">Activar
+              contrato</button>
+          </div>
+
+
         </div>
       </div>
     </div>
+
 
 
 
