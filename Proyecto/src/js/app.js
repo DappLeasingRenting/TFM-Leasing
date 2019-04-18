@@ -174,6 +174,7 @@ App = {
           var usuarioTemplate =
             "<tr><td>" + PrecioB + "</td></tr>";
           htmlCiudad01.append(usuarioTemplate);
+          console.log(PrecioB)
         })
     })
     var htmlCarretera01 = $("#CarreteraAseguradora01").empty();
@@ -183,6 +184,7 @@ App = {
         .then(function (PrecioC) {
           var usuarioTemplate =
             "<tr><td>" + PrecioC + "</td></tr>";
+            console.log(PrecioC);
           htmlCarretera01.append(usuarioTemplate);
         })
     })
@@ -1163,7 +1165,7 @@ App = {
         })
     })
 
-    var htmlCarretera01 = $("#ClienteCarreteraAseguradora22").empty();;
+    var htmlCarretera221 = $("#ClienteCarreteraAseguradora22").empty();;
     App.contracts.CompraToken.deployed().then(function (instance) {
       InstanceA = instance;
       InstanceA.aseguradoraPrecioCarretera(22)

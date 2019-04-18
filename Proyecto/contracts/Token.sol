@@ -7,6 +7,7 @@ contract Token is Owned {
 
     uint256 public totalSupply;
     bool public Activo = false;
+    bool public inicializacion = false;
 
 
     event Transfer(
@@ -77,9 +78,7 @@ contract Token is Owned {
     function transferInicial(address _to, uint256 _value) public onlyOwner returns (bool success) {
        /**   @param _to address de la cuenta a al que se quiere realizar la transacción.
              @param _value cantidad de tokens que van a ser trasnferido.
-        */
-        
-        
+        */       
         /** @dev verifica que el Smartcontract este activo
         Verifica que el balance de quien realiza la transferncia sean mayores o iguales a el valor que se desea enviar
         Se actualizan los balances de las cuentas, a la que envía se le resta y a la otra se le suma, y se actualiza en el mapping ahorrador
@@ -89,6 +88,7 @@ contract Token is Owned {
         balanceOf[msg.sender] = SafeMath.sub(balanceOf[msg.sender],_value);
         uint256  saldo = SafeMath.add(balanceOf[_to],_value);   
         balanceOf[_to] = saldo;   
+        inicializacion = true;
      
         /**@return Se emite el evento con las datos de address del que envía, el que recibe y la cantidad*/
         emit TransferInicial(msg.sender, _to, _value);
@@ -148,15 +148,13 @@ contract Token is Owned {
        /**   @param _to address de la cuenta a al que se quiere realizar la transacción.
              @param _value cantidad de tokens que van a ser trasnferido.
         */
-        
-        
+                
         /** @dev verifica que el Smartcontract este activo
         Verifica que el balance de quien realiza la transferncia sean mayores o iguales a el valor que se desea enviar
         Se actualizan los balances de las cuentas, a la que envía se le resta y a la otra se le suma, y se actualiza en el mapping ahorrador
         y BalanceOF*/
-        //require(Activo == false);
         require(Activo == false);
-        
+        require(inicializacion == true);
         totalSupply = SafeMath.add(totalSupply, _value);
         balanceOf[msg.sender] = SafeMath.add(balanceOf[msg.sender], _value);
         /**@return Se emite el evento con las datos de address del que envía, el que recibe y la cantidad*/
