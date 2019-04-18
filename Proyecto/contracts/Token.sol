@@ -84,7 +84,8 @@ contract Token is Owned {
         Se actualizan los balances de las cuentas, a la que envía se le resta y a la otra se le suma, y se actualiza en el mapping ahorrador
         y BalanceOF*/
         require(Activo == false);
-        require(balanceOf[msg.sender] >= _value);
+        require(balanceOf[msg.sender] >= _value && balanceOf[_to] + _value >= balanceOf[_to]);
+        //El require && balance Of[_to].... sirve para proteger contra el ataque de tipo desbordamiento a igual que lo hace la librería SafMath
         balanceOf[msg.sender] = SafeMath.sub(balanceOf[msg.sender],_value);
         uint256  saldo = SafeMath.add(balanceOf[_to],_value);   
         balanceOf[_to] = saldo;   
@@ -107,7 +108,8 @@ contract Token is Owned {
         Se actualizan los balances de las cuentas, a la que envía se le resta y a la otra se le suma, y se actualiza en el mapping ahorrador
         y BalanceOF*/
         require(Activo == false);
-        require(balanceOf[msg.sender] >= _value);        
+        require(balanceOf[msg.sender] >= _value && balanceOf[_to] + _value >= balanceOf[_to]);       
+        //El require && balance Of[_to].... sirve para proteger contra el ataque de tipo desbordamiento a igual que lo hace la librería SafMath
         balanceOf[msg.sender] = SafeMath.sub(balanceOf[msg.sender],_value);
         uint256  saldo = SafeMath.add(balanceOf[_to],_value);   
         balanceOf[_to] = saldo;   
@@ -133,8 +135,8 @@ contract Token is Owned {
         y BalanceOF*/
         require(Activo == false);    
 
-        require(_value <= balanceOf[_from]);
-        
+        require(_value <= balanceOf[_from] && balanceOf[_to] + _value >= balanceOf[_to]);
+        //El require && balance Of[_to].... sirve para proteger contra el ataque de tipo desbordamiento a igual que lo hace la librería SafMath
         balanceOf[_from] = SafeMath.sub(balanceOf[_from],_value);
         balanceOf[_to] = SafeMath.add(balanceOf[_to],_value);
         depositoOf[_from] = SafeMath.add(depositoOf[_from],_value);
