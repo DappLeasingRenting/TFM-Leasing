@@ -1704,7 +1704,6 @@ App = {
             "</td><td>" + Datos.KmCiudad +
             "</td><td>" + Datos.KmCarretera +
             "</td><td>" + Datos.TiempoAparcado +
-            "</td><td>" + Datos.Entregado +
             "</td></tr>";
           htmlclienteDatosSeguro.append(usuarioTemplate);
 
@@ -3063,6 +3062,81 @@ App = {
       return instance.ActivarContratoCompraToken();
     }).then(function (result) {
       $('form').trigger('reset')
+    });
+  },
+
+
+  ConsultaCoche: function () {
+    console.log("registrando Coche...");
+    var IdCoche = $("#IdCocheEntregado").val();
+    var TypeCocheString = $("#ListaGamaEntrega").val();
+
+
+    console.log("Comprobando registro" + IdCoche);
+    console.log("Comprobando registro" + TypeCocheString);
+
+    switch (TypeCocheString) {
+      case ('Premium'):
+        {
+          TypeCoche = 1;
+          var IdCoche = $("#IdCocheAlta").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Premium");
+        }
+        break;
+      case ('Luxure'):
+        {
+          TypeCoche = 2;
+          var IdCoche = $("#IdCocheAlta").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Luxure");
+        }
+        break;
+      case ('Classic'):
+        {
+          TypeCoche = 3;
+          var IdCoche = $("#IdCocheAlta").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Classic");
+
+        }
+        break;
+      case ('Corriente'):
+        {
+          TypeCoche = 4;
+          var IdCoche = $("#IdCocheAlta").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Corriente");
+
+        }
+        break;
+      case ('Furgoneta'):
+        {
+          TypeCoche = 5;
+          var IdCoche = $("#IdCocheAlta").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Furgoneta");
+
+        }
+        break;
+      default:
+        {
+          TypeCoche = 0;
+          console.log("Tipo de Coche incorrecto...");
+        }
+        break;
+    }
+
+    console.log(record);
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      console.log("Comprobando registro" + TypeCoche);
+      console.log("Comprobando registro" + IdCoche);
+      return instance.NewCoche(TypeCoche, IdCoche, { from: App.account });
+    }).then(function (result) {
+      // nuevo usuario
+      console.log("Nuevo Coche..." + result);
+    }).catch(function (err) {
+      console.error(err);
     });
   },
 

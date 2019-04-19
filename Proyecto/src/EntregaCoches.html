@@ -35,17 +35,17 @@
               <div class="form-group">
                 <label class="control-label col-sm-4 text-right" for="UsuarioLabelAlta">ID coche</label>
                 <div class="col-sm-4">
-                  <input class="form-control" type="text" name="IdCocheAlta" id="IdCocheAlta">
+                  <input class="form-control" type="text" name="IdCocheAlta" id="IdCocheEntregado">
                 </div>
                 
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-4 text-right" for="TipoUsuarioLabel" >Gama</label>
                 <div class="col-sm-4">
-                    <select id="ListaGama" name="ListaGama">
+                    <select id="ListaGama" name="ListaGamaEntrega">
                         <option value="" selected disabled hidden>Elija opción</option>
                         <option value="Premium">Premium</option>
-                        <option value="Luxury">Luxury</option>
+                        <option value="Luxury">Luxure</option>
                         <option value="Classic">Classic</option>
                         <option value="Corriente">Corriente</option>
                         <option value="Furgoneta">Furgoneta</option>
@@ -53,10 +53,29 @@
     
                 </div>
               </div>
-              <button id="EntregaCoche" onclick="App.EntregaCoche(); return false;"
+              
+            </form>
+            <br></br>
+            <button id="EntregaCoche" onclick="App.ConsultaCoche(); return false;"
+                        class="btn btn-info btn-lg">Consultar Coche</button>
+                      <br></br>
+
+            <table class="table table-bordered table-responsive">
+              <div style="margin: 5px">
+                <thead>
+                  <tr class="info">
+                    <th scope="col">Id Coche</th>                    
+                    <th scope="col">Entregado</th>
+                  </tr>
+                </thead>
+                <tbody id="DatosCoche" class="success">
+                  <tr class="success"></tr>
+                </tbody>
+              </div>
+            </table>
+            <button id="EntregaCoche" onclick="App.EntregaCoche(); return false;"
               class="btn btn-success btn-lg btn-block">Entrega coche</button>
             <br></br>
-            </form>
         </div>
       </div>
     </div>
