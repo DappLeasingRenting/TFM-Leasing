@@ -219,13 +219,20 @@ uint IdSeguro;
         //returns true if it is the owner of the contract
     }
 
+    function fetchTypeUser() public view returns (uint)
+
+    {
+        require(Activo == false);
+        return (users[msg.sender].TypeUser);
+    }
+    
     function fetchUser() public view returns (string memory)
 
     {
         require(Activo == false);
         return (users[msg.sender].IdUser);
     }
-    
+
     /*function RegistraTime() public returns (bool)
 
     {
