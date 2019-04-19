@@ -26,7 +26,7 @@ App = {
   },
 
   initContracts: function () {
-    
+
     $.getJSON("CompraToken.json", function (CompraToken) {
       App.contracts.CompraToken = TruffleContract(CompraToken);
       App.contracts.CompraToken.setProvider(App.web3Provider);
@@ -1530,7 +1530,6 @@ App = {
       infoInstance = instance;
       console.log(App.account);
       infoInstance.users(App.account)
-
         .then(function (DatosCliente) {
           MaximoPrestamo = DatosCliente[8].toNumber();
           console.log(MaximoPrestamo);
@@ -1538,6 +1537,71 @@ App = {
           MaximoPrestamoUsuario = MaximoPrestamo;
         })
     })
+
+    //Recoger los valores que son almacenados en el Array
+
+    /*App.contracts.CompraToken.deployed().then(function (instance) {
+      infoInstance = instance;
+      console.log(App.account);
+      infoInstance.Coches(0)
+        .then(function (DatosCoches) {
+          IDCoches0 = DatosCoches[0].toNumber();
+          console.log(IDCoches0);
+        })
+    })*/
+
+    //Verificar la cantidad de Coches dados de alta en la categoría Premium
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      infoInstance = instance;     
+      infoInstance.consultaArray(1)
+        .then(function (Size1) {
+          console.log(Size1[0]);
+        })
+    })
+    //Verificar la cantidad de Coches dados de alta en la categoría Premium
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      infoInstance = instance;      
+      infoInstance.consultaArray(2)
+        .then(function (Size2) {
+          console.log(Size2[0]);
+        })
+    })
+    //Verificar la cantidad de Coches dados de alta en la categoría Premium
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      infoInstance = instance;      
+      infoInstance.consultaArray(3)
+        .then(function (Size3) {
+          console.log(Size3[0]);
+        })
+    })
+
+    //Verificar la cantidad de Coches dados de alta en la categoría Premium
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      infoInstance = instance;      
+      infoInstance.consultaArray(4)
+        .then(function (Size4) {
+          console.log(Size4[0]);
+        })
+    })
+    //Verificar la cantidad de Coches dados de alta en la categoría Premium
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      infoInstance = instance;      
+      infoInstance.consultaArray(5)
+        .then(function (Size5) {
+          console.log(Size5[0]);
+        })
+    })
+    //Recoger info de un coche con un ID Particular
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      infoInstance = instance;
+      console.log("Consulta ID Cochen array")
+      infoInstance.CochesDisponibles(1,0)
+        .then(function (Datos) {
+          console.log(Datos[0]);
+        })
+    })
+
+
 
 
 
@@ -1561,14 +1625,14 @@ App = {
           };
 
           ValorPagoPrestamoInicial = Number(Datos.Prestamo);
-          if(ValorPagoPrestamoInicial < 10 && ValorPagoPrestamoInicial > 0 ){
+          if (ValorPagoPrestamoInicial < 10 && ValorPagoPrestamoInicial > 0) {
             X = 1;
             ValorPagoPrestamo = ValorPagoPrestamoInicial + X;
             console.log(ValorPagoPrestamo);
 
-          }else{
-          ValorPagoPrestamo = Math.round(Number(Datos.Prestamo * 1.10));
-          console.log(ValorPagoPrestamo);
+          } else {
+            ValorPagoPrestamo = Math.round(Number(Datos.Prestamo * 1.10));
+            console.log(ValorPagoPrestamo);
           }
 
           var usuarioTemplate =
@@ -1683,7 +1747,7 @@ App = {
     })
 
 
-   
+
 
 
 
@@ -2436,7 +2500,20 @@ App = {
     });
   },
 
+
   PagarFinanciacion: function () {
+    var PagoFinanciacionInicial = ValorPagoPrestamoInicial;
+    var PagoFinanciacion = ValorPagoPrestamo;
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      return instance.PagoFinanciacion(PagoFinanciacion, PagoFinanciacionInicial);
+    }).then(function (result) {
+      $('form1').trigger('reset')
+
+    });
+  },
+
+
+  /*PagarFinanciacion: function () {
     var CIFEmpresa = $('#CIFEmpresa').val();
     var Hash256 = SHA256(CIFEmpresa);
     console.log(Hash256);
@@ -2446,6 +2523,7 @@ App = {
       console.log(result);
       var PagoFinanciacionInicial = ValorPagoPrestamoInicial;
       var PagoFinanciacion = ValorPagoPrestamo;
+      Address = result
       App.contracts.CompraToken.deployed().then(function (instance) {
         return instance.PagoFinanciacion(PagoFinanciacion, PagoFinanciacionInicial);
       }).then(function (result) {
@@ -2453,7 +2531,7 @@ App = {
 
       });
     })
-  },
+  },*/
 
 
 
@@ -2529,8 +2607,8 @@ App = {
         {
           TypeUser = 2;
           var VATNumber1 = $("#VATNumber").val();
-          
-          var VATNumber = web3.sha3(VATNumber1, {encoding:'hex'});
+
+          var VATNumber = web3.sha3(VATNumber1, { encoding: 'hex' });
           var DNI = 'N/A';
           var antiguedadLicencia = 'N/A';
           console.log("dos");
@@ -2540,7 +2618,7 @@ App = {
         {
           TypeUser = 3;
           var VATNumber2 = $("#VATNumber").val();
-          var VATNumber = web3.sha3(VATNumber2, {encoding:'hex'});
+          var VATNumber = web3.sha3(VATNumber2, { encoding: 'hex' });
           var DNI = 'N/A';
           var antiguedadLicencia = 'N/A';
           console.log("tres");
@@ -2598,6 +2676,87 @@ App = {
       console.error(err);
     });
   },
+
+  RegistroCoche: function () {
+    console.log("registrando Coche...");
+    var IdCoche = $("#IdCocheAlta").val();
+    var TypeCocheString = $("#ListaGama").val();
+
+
+    console.log("Comprobando registro" + IdCoche);
+    console.log("Comprobando registro" + TypeCocheString);
+
+    switch (TypeCocheString) {
+      case ('Premium'):
+        {
+          TypeCoche = 1;
+          var IdCoche = $("#IdCocheAlta").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Premium");
+        }
+        break;
+      case ('Luxure'):
+        {
+          TypeCoche = 2;
+          var IdCoche = $("#IdCocheAlta").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Luxure");
+        }
+        break;
+      case ('Classic'):
+        {
+          TypeCoche = 3;
+          var IdCoche = $("#IdCocheAlta").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Classic");
+
+        }
+        break;
+      case ('Corriente'):
+        {
+          TypeCoche = 4;
+          var IdCoche = $("#IdCocheAlta").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Corriente");
+
+        }
+        break;
+      case ('Furgoneta'):
+        {
+          TypeCoche = 5;
+          var IdCoche = $("#IdCocheAlta").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Furgoneta");
+
+        }
+        break;
+      default:
+        {
+          TypeCoche = 0;
+          console.log("Tipo de Coche incorrecto...");
+        }
+        break;
+    }
+
+    console.log(record);
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      console.log("Comprobando registro" + TypeCoche);
+      console.log("Comprobando registro" + IdCoche);
+      return instance.NewCoche(TypeCoche, IdCoche, { from: App.account });
+    }).then(function (result) {
+      // nuevo usuario
+      console.log("Nuevo Coche..." + result);
+    }).catch(function (err) {
+      console.error(err);
+    });
+  },
+
+
+
+
+
+
+
 
 
   IngresoUsuario: function () {
@@ -2705,9 +2864,35 @@ App = {
       $('form').trigger('reset')
     });
   },
+  BotonAltaCoche: function () {
+
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      return instance.CheckAdmin.call({ from: App.account });
+    }).then(function (result) {
+      if (result == true) {
+        console.log(result);
+        window.location.href = "../AltaCoches.html";
+      };
+    }).catch(function (err) {
+      console.error(err);
+    });
+  },
+
+  BotonEntregaCoche: function () {
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      return instance.CheckAdmin.call({ from: App.account });
+    }).then(function (result) {
+      if (result == true) {
+        console.log(result);
+        window.location.href = "../EntregaCoches.html";
+      };
+    }).catch(function (err) {
+      console.error(err);
+    });
+  },
 
 
-  
+
 
   detenerContratoCompraToken: function () {
     App.contracts.CompraToken.deployed().then(function (instance) {

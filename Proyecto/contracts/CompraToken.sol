@@ -46,7 +46,7 @@ contract CompraToken is Owned, usingOraclize  {
     mapping(uint => uint) public aseguradoraPrecioCarretera;
     mapping(uint => uint) public aseguradoraPrecioCiudad;
     mapping(address => user) public users;
-    mapping(uint => coche) public coches;
+    mapping(uint => mapping(uint => coche)) public coches;
     mapping(address => uint) public ownerCuentaLeasing;
     mapping(bytes32 => address) public maestroEmpresas;
     mapping(uint => uint[]) public CochesDisponibles;
@@ -72,6 +72,7 @@ uint KmCarretera;
 uint KmCiudad;
 uint TiempoAparcado;
 uint Estado;
+uint IdSeguro;
 } 
 
 
@@ -256,6 +257,16 @@ uint Estado;
     
        
     }
+    function NewCoche(uint tipoCoche, uint IdCoche) public 
+    {       
+    require(Activo == false);           
+    coches[tipoCoche][IdCoche] = coche(IdCoche,0, 0, 0, 0);
+    CochesDisponibles[tipoCoche].push(IdCoche);
+       }
+
+    function consultaArray(uint tipoCoche) public view returns(uint count) {
+    return CochesDisponibles[tipoCoche].length;
+}
 
 
     /*function getUser(address dir) public view returns (string memory ,uint ,uint)
