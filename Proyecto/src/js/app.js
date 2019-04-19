@@ -84,7 +84,6 @@ App = {
 
     console.log("pruebacuenta");
     console.log({ from: App.account });
-
     //Función para recargar la Daap cada vez que cambie de address en Metamask
     account = web3.eth.accounts[0];
     setInterval(function () {
@@ -97,42 +96,48 @@ App = {
     App.account = account;
     App.admin = web3.eth.accounts[0];
 
-   App.contracts.CompraToken.deployed().then(function (instance) {
+    web3.eth.getCoinbase(function (err, account) {
+      if (err === null) {
+        var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:9545'));
+        console.log("Primera cuenta: " + web3.eth.accounts[0]);
+        console.log("Segunda cuenta: " + account);
+        console.log("No hay direccion nula");
+        if (web3.eth.accounts[0] == account)
+          {
+      console.log("Es el adminnnnn");
+      $("#loader").show();
+      $("#contentOwner").show();
+      $("#contentOwner").show(); //Bienvenido zona clientes
+      $("#content").show(); 
+     $("#content0").show();
+     $("#content1").show(); //mapfre
+      $("#content2").show();
+      $("#content3").show(); //Puede financiar hasta un máximo de
+      $("#content4").show(); //Bienvenido aumentar tokens
+      $("#content5").show(); //allianz
+     $("#content6").show(); //AXA
+       $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
+      $("#content8").show(); //mis contratos "Leasing"
+      $("#content0Alta").show();
+        }
+   
+   else
+   {
+    console.log("No es el admin");
+     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.fetchTypeUser({ from: App.account });
     }).then(function (result) {
       console.log(result + " Tipo Usuario");
       switch (parseInt(result)) {
-        case 0: //caso default
-          {
-           $("#loader").show();
-           $("#contentOwner").show();
-           $("#contentOwner").show(); //Bienvenido zona clientes
-           $("#content").show(); 
-          $("#content0").show();
-          $("#content1").show(); //mapfre
-           $("#content2").show();
-           $("#content3").show(); //Puede financiar hasta un máximo de
-           $("#content4").show(); //Bienvenido aumentar tokens
-           $("#content5").show(); //allianz
-          $("#content6").show(); //AXA
-            $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
-           $("#content8").show(); //mis contratos "Leasing"
-           $("#content0Alta").show();
-
-          }
-          break;
         case 1: //caso cliente
           {
             $("#loader").show();
             $("#contentOwner").show(); //Bienvenido zona clientes
             $("#content").show(); 
             $("#content0").show();
-            $("#content1").show(); //mapfre
             $("#content2").show();
             $("#content3").show(); //Puede financiar hasta un máximo de
             $("#content4").show(); //Bienvenido aumentar tokens
-            $("#content5").show(); //allianz
-            $("#content6").show(); //AXA
             $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
             $("#content8").show(); //mis contratos "Leasing"
             $("#content0Alta").show();
@@ -153,13 +158,34 @@ App = {
             $("#content0Alta").show();
           }
           break;
-        
-      };
+        default: //caso default
+          {
+           $("#loader").show();
+           $("#content0Alta").show();
+
+          }
+          break;
     
-      
+        }
+     
     }).catch(function (err) {
       console.error(err);
     });
+  };
+
+      }
+      else
+      {
+        console.log("La direccion es nula");
+        $("#loader").show();
+        $("#content0Alta").show();
+      }
+    });
+
+
+
+    
+
     
   // $("#loader").show();
   // $("#contentOwner").show(); //Bienvenido zona clientes
@@ -173,6 +199,22 @@ App = {
    // $("#content6").show(); //AXA
    // $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
    // $("#content8").show(); //mis contratos "Leasing"
+
+/*
+   $("#loader").show();
+   $("#contentOwner").show();
+   $("#contentOwner").show(); //Bienvenido zona clientes
+   $("#content").show(); 
+  $("#content0").show();
+  $("#content1").show(); //mapfre
+   $("#content2").show();
+   $("#content3").show(); //Puede financiar hasta un máximo de
+   $("#content4").show(); //Bienvenido aumentar tokens
+   $("#content5").show(); //allianz
+  $("#content6").show(); //AXA
+    $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
+   $("#content8").show(); //mis contratos "Leasing"
+   $("#content0Alta").show(); */
 
 
 
