@@ -97,7 +97,7 @@
             <div class="form-group col-sm-8 text-left">
               <label class="control-label col-sm-4" for="ApellidosLabelAlta">Puntos Licencia de Conducción</label>
               <div class="col-sm-4">
-                <input class="form-control" type="text-left" name="Puntos Licencia de conducir" id="PuntosLicenciaAlta">
+                <input type="number" name="Puntos Licencia de conducir" id="PuntosLicenciaAlta" onchange="MaxPuntos(this);">
               </div>
           </div>
 
@@ -181,6 +181,17 @@
           }
         }
       </script>
+
+
+<script>
+  function MaxPuntos(input) {
+    if ((input.value < 0) || (input.value > 15))
+    {
+    alert("Los puntos tienen que estar entre 0 y 15");
+    }
+  }
+</script>
+
 
 <script>
     function TypeUser(input) {
