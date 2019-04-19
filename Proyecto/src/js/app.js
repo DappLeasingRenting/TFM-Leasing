@@ -3079,7 +3079,7 @@ App = {
       case ('Premium'):
         {
           TypeCoche = 1;
-          var IdCoche = $("#IdCocheAlta").val();
+          var IdCoche = $("#IdCocheEntregado").val();
           console.log("Comprobando registro" + IdCoche);
           console.log("Premium");
         }
@@ -3087,7 +3087,7 @@ App = {
       case ('Luxure'):
         {
           TypeCoche = 2;
-          var IdCoche = $("#IdCocheAlta").val();
+          var IdCoche = $("#IdCocheEntregado").val();
           console.log("Comprobando registro" + IdCoche);
           console.log("Luxure");
         }
@@ -3095,7 +3095,7 @@ App = {
       case ('Classic'):
         {
           TypeCoche = 3;
-          var IdCoche = $("#IdCocheAlta").val();
+          var IdCoche = $("#IdCocheEntregado").val();
           console.log("Comprobando registro" + IdCoche);
           console.log("Classic");
 
@@ -3104,7 +3104,7 @@ App = {
       case ('Corriente'):
         {
           TypeCoche = 4;
-          var IdCoche = $("#IdCocheAlta").val();
+          var IdCoche = $("#IdCocheEntregado").val();
           console.log("Comprobando registro" + IdCoche);
           console.log("Corriente");
 
@@ -3113,7 +3113,7 @@ App = {
       case ('Furgoneta'):
         {
           TypeCoche = 5;
-          var IdCoche = $("#IdCocheAlta").val();
+          var IdCoche = $("#IdCocheEntregado").val();
           console.log("Comprobando registro" + IdCoche);
           console.log("Furgoneta");
 
@@ -3130,11 +3130,22 @@ App = {
     console.log(record);
     App.contracts.CompraToken.deployed().then(function (instance) {
       console.log("Comprobando registro" + TypeCoche);
-      console.log("Comprobando registro" + IdCoche);
-      return instance.NewCoche(TypeCoche, IdCoche, { from: App.account });
+      console.log("Comprobando registro" + IdCoche);      
+      return instance.coches(TypeCoche, IdCoche, { from: App.account });
     }).then(function (result) {
-      // nuevo usuario
-      console.log("Nuevo Coche..." + result);
+      var htmlDatosCoche = $("#DatosCoche").empty();
+      var Datos1 = {};
+      Datos1 = {
+        IdCoche: result[0],        
+        Entregado: result[5],
+      };      
+
+      var usuarioTemplate =
+        "<tr><th>" + Datos1.IdCoche +      
+        "</td><td>" + Datos1.Entregado+
+        "</td></tr>";
+      htmlDatosCoche.append(usuarioTemplate);
+      
     }).catch(function (err) {
       console.error(err);
     });
