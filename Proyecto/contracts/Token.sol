@@ -45,7 +45,7 @@ contract Token is Owned {
     mapping(address => uint256) public balanceOf;
     mapping(address => uint256) public depositoOf;
     mapping(address => uint) public ownerCuentaAhorro;
-    mapping(address => uint) public mesCount;
+   
        
     
     constructor(uint _initialSupply) public {
@@ -141,7 +141,7 @@ contract Token is Owned {
         balanceOf[_to] = SafeMath.add(balanceOf[_to],_value);
         depositoOf[_from] = SafeMath.add(depositoOf[_from],_value);
         /**@return Se emite el evento con las datos de address del que envía, el que recibe y el mes del quién realiza el envío*/
-        emit Transfer(_from, _to, mesCount[_from]);
+        emit Transfer(_from, _to, _value);
         /**@return Si se ha realizado la transacción devueleve al contrato CompraToken el valor true*/
         return true;
     }

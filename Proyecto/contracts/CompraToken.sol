@@ -49,6 +49,7 @@ contract CompraToken is Owned, usingOraclize  {
     mapping(uint => coche) public coches;
     mapping(address => uint) public ownerCuentaLeasing;
     mapping(bytes32 => address) public maestroEmpresas;
+    mapping(uint => uint[]) public CochesDisponibles;
 
  struct user {
         string IdUser;
@@ -245,10 +246,9 @@ uint Estado;
     }
     function NewEmpresa(string memory IdUsuario, uint TypeUser, string memory DNI, bytes32 VATNumber, uint record) public 
     {
-//solo deberia poder darese de alta una vez el usuario
        
-    //require(Activo == false);
-    //require((ownerCuentaLeasing[msg.sender]) == 0);    
+    require(Activo == false);
+    require((ownerCuentaLeasing[msg.sender]) == 0);    
     ownerCuentaLeasing[msg.sender] ++;       
     users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0,0);
     maestroEmpresas[VATNumber] = msg.sender;
