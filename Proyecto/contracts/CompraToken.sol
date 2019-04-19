@@ -39,7 +39,7 @@ contract CompraToken is Owned, usingOraclize  {
        uint entregado
     );    
     event newRandomNumber_bytes(bytes);
-    event newRandomNumber_uint(uint);   
+    event newRandomNumber_uint(uint); 
 
     mapping(address => uint) public CostSeguro;
     mapping(uint => uint) public aseguradoraPrecioAparcado;
@@ -50,9 +50,11 @@ contract CompraToken is Owned, usingOraclize  {
     mapping(address => uint) public ownerCuentaLeasing;
     mapping(bytes32 => address) public maestroEmpresas;
     mapping(uint => uint[]) public CochesDisponibles;
+    mapping(uint => address) public mappingSeguros;
+
 
  struct user {
-        string IdUser;
+        uint TipoCoche;
         string DNI;
         bytes32 VATNumber;
         uint TypeUser;
@@ -72,8 +74,8 @@ uint IdCoche;
 uint KmCarretera;
 uint KmCiudad;
 uint TiempoAparcado;
-uint Estado;
 uint IdSeguro;
+bool entregado;
 } 
 
 
@@ -129,7 +131,7 @@ uint IdSeguro;
         emit Prestamo(msg.sender, _numeroTokens);
     }
 //** @title Depotio de tokens. */
-    function pagarTokens(uint _pago, uint precioKmCiudad, uint precioKmCarretera, uint precioAparcado) public payable {
+   function pagarTokens(uint _pago, uint precioKmCiudad, uint precioKmCarretera, uint precioAparcado, uint tipoCoche, uint IdSeguro) public payable {
         /**@param _contribucion cantidad a ahorrar.
        @param fechaEjecucion fecha en que se realiza el deposito.*/
       /** @dev verificar que el balance de quien envía sea mayor a la cantidad a enviar
@@ -140,6 +142,13 @@ uint IdSeguro;
         users[msg.sender].PrecioAparcado = precioAparcado;
         users[msg.sender].PrecioKmCarretera = precioKmCarretera;
         users[msg.sender].PrecioKmCiudad = precioKmCiudad;     
+        uint IdCoche = CochesDisponibles[tipoCoche][0];
+        users[msg.sender].TipoCoche = tipoCoche;
+        users[msg.sender].IdCoche = IdCoche;
+        coches[tipoCoche][IdCoche].IdSeguro = IdSeguro;
+        EliminarValorArray(tipoCoche);
+
+
          
        
        /** @return devuelve el address del que solicita el deposito y la cantidad.*/
@@ -184,10 +193,11 @@ uint IdSeguro;
 //** @title Constructor. */
     
 //** @title Compra de tokens. */
-    function PagoSeguro(uint TokensSeguro) public payable {       
+   function PagoSeguro(uint TokensSeguro, uint tipoCoche, uint IdCoche) public payable {       
      require(Activo == false);  
      require(tokenContract.balanceOf(msg.sender) >= TokensSeguro);
      require(tokenContract.transferFrom(msg.sender, address(this),TokensSeguro));
+    coches[tipoCoche][IdCoche].entregado = true;
 
      tokensVendidos += TokensSeguro;
 
@@ -226,12 +236,7 @@ uint IdSeguro;
         return (users[msg.sender].TypeUser);
     }
     
-    function fetchUser() public view returns (string memory)
-
-    {
-        require(Activo == false);
-        return (users[msg.sender].IdUser);
-    }
+    
 
     /*function RegistraTime() public returns (bool)
 
@@ -240,35 +245,36 @@ uint IdSeguro;
         return (true);
     }*/
 
-   function NewUser(string memory IdUsuario, uint TypeUser, string memory DNI, bytes32 VATNumber, uint record) public 
+ 
+   function NewUser(uint TypeUser, string memory DNI, bytes32 VATNumber, uint record) public 
     {
 //solo deberia poder darese de alta una vez el usuario
        
     require(Activo == false);
     require((ownerCuentaLeasing[msg.sender]) == 0);    
     ownerCuentaLeasing[msg.sender] ++;       
-    users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0,0);
+    users[msg.sender] = user(0, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0,0);
    
         
     emit nuevoCliente(TypeUser); 
        
     }
-    function NewEmpresa(string memory IdUsuario, uint TypeUser, string memory DNI, bytes32 VATNumber, uint record) public 
+   function NewEmpresa(uint TypeUser, string memory DNI, bytes32 VATNumber, uint record) public 
     {
        
     require(Activo == false);
     require((ownerCuentaLeasing[msg.sender]) == 0);    
     ownerCuentaLeasing[msg.sender] ++;       
-    users[msg.sender] = user(IdUsuario, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0,0);
+    users[msg.sender] = user(0, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0,0);
     maestroEmpresas[VATNumber] = msg.sender;
 
     
        
     }
-    function NewCoche(uint tipoCoche, uint IdCoche) public 
+   function NewCoche(uint tipoCoche, uint IdCoche) public 
     {       
     require(Activo == false);           
-    coches[tipoCoche][IdCoche] = coche(IdCoche,0, 0, 0, 0,0);
+    coches[tipoCoche][IdCoche] = coche(IdCoche,0, 0, 0, 0,false);
     CochesDisponibles[tipoCoche].push(IdCoche);
        }
 
@@ -279,6 +285,16 @@ function consultaArray(uint tipoCoche) public view returns(uint count) {
 function consultaArrayDatos(uint tipoCoche, uint posicion) public view returns(uint valor) {
     return CochesDisponibles[tipoCoche][posicion];
 }
+
+function EliminarValorArray(uint tipoCoche) public  returns( uint[] memory array){
+            
+uint index = 0;
+        for (uint i = index; i<CochesDisponibles[tipoCoche].length-1; i++){
+            CochesDisponibles[tipoCoche][i] = CochesDisponibles[tipoCoche][i+1];
+        }
+        CochesDisponibles[tipoCoche].length--;
+        return CochesDisponibles[tipoCoche];
+    }
 
 
 
