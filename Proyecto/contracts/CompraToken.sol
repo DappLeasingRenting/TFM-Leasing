@@ -198,7 +198,8 @@ bool entregado;
      require(tokenContract.balanceOf(msg.sender) >= TokensSeguro);
      require(tokenContract.transferFrom(msg.sender, address(this),TokensSeguro));
     coches[tipoCoche][IdCoche].entregado = true;
-
+    users[msg.sender].TipoCoche = 0;
+    users[msg.sender].IdCoche = 0;
      tokensVendidos += TokensSeguro;
 
         
