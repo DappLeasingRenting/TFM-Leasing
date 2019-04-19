@@ -1664,6 +1664,22 @@ App = {
           console.log(Datos.toNumber());
         })
     })
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      infoInstance = instance;
+      console.log("Consulta ID Cochen array")
+      infoInstance.CochesDisponibles(1,1)
+        .then(function (Datos) {
+          console.log(Datos.toNumber());
+        })
+    })
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      infoInstance = instance;
+      console.log("Consulta ID Cochen array")
+      infoInstance.CochesDisponibles(1,2)
+        .then(function (Datos) {
+          console.log(Datos.toNumber());
+        })
+    })
 
 
 
@@ -3146,6 +3162,82 @@ App = {
         "</td></tr>";
       htmlDatosCoche.append(usuarioTemplate);
       
+    }).catch(function (err) {
+      console.error(err);
+    });
+  },
+
+  
+
+  ValidarCoche: function () {
+    console.log("registrando Coche...");
+    var IdCoche = $("#IdCocheEntregado").val();
+    var TypeCocheString = $("#ListaGamaEntrega").val();
+
+
+    console.log("Comprobando registro" + IdCoche);
+    console.log("Comprobando registro" + TypeCocheString);
+
+    switch (TypeCocheString) {
+      case ('Premium'):
+        {
+          TypeCoche = 1;
+          var IdCoche = $("#IdCocheEntregado").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Premium");
+        }
+        break;
+      case ('Luxure'):
+        {
+          TypeCoche = 2;
+          var IdCoche = $("#IdCocheEntregado").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Luxure");
+        }
+        break;
+      case ('Classic'):
+        {
+          TypeCoche = 3;
+          var IdCoche = $("#IdCocheEntregado").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Classic");
+
+        }
+        break;
+      case ('Corriente'):
+        {
+          TypeCoche = 4;
+          var IdCoche = $("#IdCocheEntregado").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Corriente");
+
+        }
+        break;
+      case ('Furgoneta'):
+        {
+          TypeCoche = 5;
+          var IdCoche = $("#IdCocheEntregado").val();
+          console.log("Comprobando registro" + IdCoche);
+          console.log("Furgoneta");
+
+        }
+        break;
+      default:
+        {
+          TypeCoche = 0;
+          console.log("Tipo de Coche incorrecto...");
+        }
+        break;
+    }
+
+    
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      console.log("Comprobando registro" + TypeCoche);
+      console.log("Comprobando registro" + IdCoche);
+      return instance.ValidarCoche(TypeCoche, IdCoche, { from: App.account });
+    }).then(function (result) {
+      // nuevo usuario
+      console.log("Nuevo Coche..." + result);
     }).catch(function (err) {
       console.error(err);
     });

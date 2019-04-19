@@ -279,6 +279,14 @@ bool entregado;
     CochesDisponibles[tipoCoche].push(IdCoche);
        }
 
+       function ValidarCoche(uint tipoCoche, uint IdCoche) public 
+    {       
+    require(Activo == false);           
+    coches[tipoCoche][IdCoche].entregado = false;
+    CochesDisponibles[tipoCoche].push(IdCoche);
+       }
+
+
 
 function consultaArray(uint tipoCoche) public view returns(uint count) {
     return CochesDisponibles[tipoCoche].length;
