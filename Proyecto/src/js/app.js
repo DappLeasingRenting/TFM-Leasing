@@ -1595,9 +1595,9 @@ App = {
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       console.log("Consulta ID Cochen array")
-      infoInstance.CochesDisponibles(1,0)
+      infoInstance.CochesDisponibles(1,2)
         .then(function (Datos) {
-          console.log(Datos[0]);
+          console.log(Datos.toNumber());
         })
     })
 

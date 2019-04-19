@@ -65,6 +65,7 @@ contract CompraToken is Owned, usingOraclize  {
         uint Prestamo;
        
  }
+ 
    
    struct coche {
 uint IdCoche;
@@ -260,13 +261,18 @@ uint IdSeguro;
     function NewCoche(uint tipoCoche, uint IdCoche) public 
     {       
     require(Activo == false);           
-    coches[tipoCoche][IdCoche] = coche(IdCoche,0, 0, 0, 0);
+    coches[tipoCoche][IdCoche] = coche(IdCoche,0, 0, 0, 0,0);
     CochesDisponibles[tipoCoche].push(IdCoche);
        }
 
-    function consultaArray(uint tipoCoche) public view returns(uint count) {
+
+function consultaArray(uint tipoCoche) public view returns(uint count) {
     return CochesDisponibles[tipoCoche].length;
 }
+function consultaArrayDatos(uint tipoCoche, uint posicion) public view returns(uint valor) {
+    return CochesDisponibles[tipoCoche][posicion];
+}
+
 
 
     /*function getUser(address dir) public view returns (string memory ,uint ,uint)
