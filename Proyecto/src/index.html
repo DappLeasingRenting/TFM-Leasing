@@ -99,10 +99,7 @@
                         <div style="margin: 5px">
                           <thead>
                             <tr class="info">
-                              <th scope="col">ID Coche</th>
-                              <th scope="col">Km Carretera</th>
-                              <th scope="col">Km Ciudad</th>
-                              <th scope="col">Tiempo Aparcado</th>
+                              <th scope="col">ID Coche</th>                              
                               <th scope="col">ID Seguro</th>
                               <th scope="col">Entregado</th>
                             </tr>
@@ -1811,11 +1808,11 @@
                   El precio de este token es <span class="token-price"></span> Ether. Actualmente posees
                   <span class="dapp-balance"></span>&nbsp;LST.
                 </h4>
-                <form onSubmit="App.ComprarTokens(); return false;" role="form">
+                <form onSubmit="App.ComprarTokensFinanciera(); return false;" role="form">
 
                   <div class="form-group">
                     <div class="input-group">
-                      <input id="numeroTokens" class="form-control input-lg" type="number" name="number"
+                      <input id="numeroTokens1" class="form-control input-lg" type="number" name="number"
                         value="1" min="1" pattern="[0-9]"><br>
                       <span class="input-group-btn">
                         <button type="submit" class="btn btn-success btn-lg">Comprar Tokens</button>

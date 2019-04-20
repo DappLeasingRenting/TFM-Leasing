@@ -41,7 +41,7 @@ contract CompraToken is Owned, usingOraclize  {
     event newRandomNumber_bytes(bytes);
     event newRandomNumber_uint(uint); 
 
-    mapping(address => uint) public CostSeguro;
+  
     mapping(uint => uint) public aseguradoraPrecioAparcado;
     mapping(uint => uint) public aseguradoraPrecioCarretera;
     mapping(uint => uint) public aseguradoraPrecioCiudad;
@@ -67,15 +67,14 @@ contract CompraToken is Owned, usingOraclize  {
         uint Prestamo;
        
  }
- 
    
    struct coche {
-uint IdCoche;
-uint KmCarretera;
-uint KmCiudad;
-uint TiempoAparcado;
-uint IdSeguro;
-bool entregado;
+        uint IdCoche;
+        uint KmCarretera;
+        uint KmCiudad;
+        uint TiempoAparcado;
+        uint IdSeguro;
+        bool entregado;
 } 
 
 
@@ -194,9 +193,9 @@ bool entregado;
     
 //** @title Compra de tokens. */
    function PagoSeguro(uint TokensSeguro, uint tipoCoche, uint IdCoche) public payable {       
-     require(Activo == false);  
-     require(tokenContract.balanceOf(msg.sender) >= TokensSeguro);
-     require(tokenContract.transferFrom(msg.sender, address(this),TokensSeguro));
+    require(Activo == false);  
+    require(tokenContract.balanceOf(msg.sender) >= TokensSeguro);
+    require(tokenContract.transferFrom(msg.sender, address(this),TokensSeguro));
     coches[tipoCoche][IdCoche].entregado = true;
     users[msg.sender].TipoCoche = 0;
     users[msg.sender].IdCoche = 0;
@@ -208,6 +207,7 @@ bool entregado;
         
      emit CostoSeguro(TokensSeguro);
     }
+
     function PagoFinanciacion(uint TokensFinanciacion, uint TokensPrestamo, address addressEmpresa ) public payable {       
      require(Activo == false);           
      require(tokenContract.balanceOf(msg.sender) >= TokensFinanciacion);     
@@ -219,10 +219,6 @@ bool entregado;
         //emit CostoSeguro(users[msg.sender].Entregado);
      emit CostoSeguro(TokensFinanciacion);
     }
-
-
-
-
 
     function CheckAdmin() public onlyOwner returns (bool)
     {   
@@ -237,22 +233,11 @@ bool entregado;
     {
         require(Activo == false);
         return (users[msg.sender].TypeUser);
-    }
+    } 
     
-    
 
-    /*function RegistraTime() public returns (bool)
-
-    {
-        users[msg.sender].timestamp=now;
-        return (true);
-    }*/
-
- 
    function NewUser(uint TypeUser, string memory DNI, bytes32 VATNumber, uint record) public 
-    {
-//solo deberia poder darese de alta una vez el usuario
-       
+    {       
     require(Activo == false);
     require((ownerCuentaLeasing[msg.sender]) == 0);    
     ownerCuentaLeasing[msg.sender] ++;       
@@ -287,38 +272,19 @@ bool entregado;
     coches[tipoCoche][IdCoche].entregado = false;
     CochesDisponibles[tipoCoche].push(IdCoche);
        }
-
-
-
-function consultaArray(uint tipoCoche) public view returns(uint count) {
-    return CochesDisponibles[tipoCoche].length;
-}
-function consultaArrayDatos(uint tipoCoche, uint posicion) public view returns(uint valor) {
-    return CochesDisponibles[tipoCoche][posicion];
-}
-
-function EliminarValorArray(uint tipoCoche) public  returns( uint[] memory array){
-            
-uint index = 0;
+       
+    function EliminarValorArray(uint tipoCoche) public  returns( uint[] memory array){
+    require(Activo == false);
+    uint index = 0;
+    
         for (uint i = index; i<CochesDisponibles[tipoCoche].length-1; i++){
             CochesDisponibles[tipoCoche][i] = CochesDisponibles[tipoCoche][i+1];
         }
         CochesDisponibles[tipoCoche].length--;
         return CochesDisponibles[tipoCoche];
-    }
+    }  
 
-
-
-    /*function getUser(address dir) public view returns (string memory ,uint ,uint)
-
-    {
-
-        return (users[dir].IdUser,users[dir].TypeUser,users[dir].timestamp);
-    }*/
-
-
-
-function deleteUser(address dir) public returns (bool)
+    function deleteUser(address dir) public returns (bool)
 
     {
         require(Activo == false);

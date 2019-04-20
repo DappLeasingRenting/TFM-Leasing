@@ -99,11 +99,11 @@ App = {
     web3.eth.getCoinbase(function (err, account) {
       if (err === null) {
         var web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:9545'));
-        console.log("Primera cuenta: " + web3.eth.accounts[0]);
-        console.log("Segunda cuenta: " + account);
-        console.log("No hay direccion nula");
+        //console.log("Primera cuenta: " + web3.eth.accounts[0]);
+        //console.log("Segunda cuenta: " + account);
+        //console.log("No hay direccion nula");
         if (web3.eth.accounts[0] == account) {
-          console.log("Es el adminnnnn");
+          //console.log("Es el adminnnnn");
           $("#loader").show();
           $("#contentOwner").show();
           $("#contentOwner").show(); //Bienvenido zona clientes
@@ -121,11 +121,11 @@ App = {
         }
 
         else {
-          console.log("No es el admin");
+          //console.log("No es el admin");
           App.contracts.CompraToken.deployed().then(function (instance) {
             return instance.fetchTypeUser({ from: App.account });
           }).then(function (result) {
-            console.log(result + " Tipo Usuario");
+            //console.log(result + " Tipo Usuario");
             switch (parseInt(result)) {
               case 1: //caso cliente
                 {
@@ -133,6 +133,7 @@ App = {
                   $("#contentOwner").show(); //Bienvenido zona clientes
                   $("#content").show();
                   $("#content0").show();
+                  $("#content1").show();
                   $("#content2").show();
                   $("#content3").show(); //Puede financiar hasta un máximo de
                   $("#content4").show(); //Bienvenido aumentar tokens
@@ -174,7 +175,7 @@ App = {
 
       }
       else {
-        console.log("La direccion es nula");
+        //console.log("La direccion es nula");
         $("#loader").show();
         $("#content0Alta").show();
       }
@@ -255,9 +256,9 @@ App = {
     TiempoKmCiudadArray = new Array(100, 313612, 73317, 124328, 78296, 558883, 521653, 75777, 100, 219484, 100, 31070, 481577, 10774, 170515, 63111, 305285, 258683, 109814, 519422, 20295, 235418, 533894, 390006, 246544, 71403, 51565, 328477, 477193, 157426, 222323, 436023, 551782, 531217, 384385, 351176, 450820, 179260, 319585, 578028, 145944, 277339, 252841, 531389, 218492, 342418, 40757, 79584, 444305, 273675, 566967, 223934, 133772, 322051, 331210, 368660, 313596, 145457, 394691, 205801, 440487, 80795, 226094, 566938, 46917, 194221, 180765, 476859, 335315, 157608, 339837, 484000, 259509, 341939, 436723, 138347, 260977, 117379, 405199, 39681, 362375, 5056, 296404, 387405, 162067, 437097, 131403, 427859, 220817, 49239, 481573, 415943, 385535, 54368, 200872, 484971, 354892, 325599, 372167, 152132);
     TiempoKmCarreteraArray = new Array(100, 314116, 48487, 304343, 279758, 425999, 424192, 226395, 205730, 17043, 100, 82952, 312747, 283458, 451653, 262119, 92940, 237407, 459708, 471848, 488702, 310919, 58655, 443378, 214021, 413886, 220002, 172159, 109820, 578741, 457419, 317438, 347732, 353092, 569579, 588468, 248941, 236556, 426310, 358426, 393090, 499262, 398347, 366434, 556895, 266923, 198767, 393691, 443046, 1124, 528203, 231524, 537071, 543403, 596200, 497295, 163274, 77941, 327605, 98391, 100498, 500100, 55669, 195156, 164352, 256806, 352534, 570419, 364704, 269695, 153088, 376384, 405628, 363175, 89651, 98979, 409651, 497006, 372772, 455334, 419040, 196710, 427414, 221917, 254014, 385103, 224076, 278914, 291175, 334423, 230948, 250809, 65090, 281010, 555935, 223670, 291854, 173195, 546442, 126516);
 
-    console.log(TiempoAparcadoArray[0]);
-    console.log(TiempoKmCiudadArray[0]);
-    console.log(TiempoKmCarreteraArray[0]);
+    //console.log(TiempoAparcadoArray[0]);
+    //console.log(TiempoKmCiudadArray[0]);
+    //console.log(TiempoKmCarreteraArray[0]);
 
 
 
@@ -280,7 +281,7 @@ App = {
           var usuarioTemplate =
             "<tr><td>" + PrecioB + "</td></tr>";
           htmlCiudad01.append(usuarioTemplate);
-          console.log(PrecioB)
+          //console.log(PrecioB)
         })
     })
     var htmlCarretera01 = $("#CarreteraAseguradora01").empty();
@@ -290,7 +291,7 @@ App = {
         .then(function (PrecioC) {
           var usuarioTemplate =
             "<tr><td>" + PrecioC + "</td></tr>";
-          console.log(PrecioC);
+          //console.log(PrecioC);
           htmlCarretera01.append(usuarioTemplate);
         })
     })
@@ -1632,110 +1633,25 @@ App = {
 
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
-      console.log(App.account);
+      //console.log(App.account);
       infoInstance.users(App.account)
         .then(function (DatosCliente) {
           MaximoPrestamo = DatosCliente[8].toNumber();
-          console.log(MaximoPrestamo);
+          //console.log(MaximoPrestamo);
           $('.tokens-maximo').html(MaximoPrestamo);
           MaximoPrestamoUsuario = MaximoPrestamo;
         })
     })
-
-    //Recoger los valores que son almacenados en el Array
-
-    /*App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;
-      console.log(App.account);
-      infoInstance.Coches(0)
-        .then(function (DatosCoches) {
-          IDCoches0 = DatosCoches[0].toNumber();
-          console.log(IDCoches0);
-        })
-    })*/
-
-    //Verificar la cantidad de Coches dados de alta en la categoría Premium
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;
-      infoInstance.consultaArray(1)
-        .then(function (Size1) {
-          console.log(Size1[0]);
-        })
-    })
-    //Verificar la cantidad de Coches dados de alta en la categoría Premium
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;
-      infoInstance.consultaArray(2)
-        .then(function (Size2) {
-          console.log(Size2[0]);
-        })
-    })
-    //Verificar la cantidad de Coches dados de alta en la categoría Premium
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;
-      infoInstance.consultaArray(3)
-        .then(function (Size3) {
-          console.log(Size3[0]);
-        })
-    })
-
-    //Verificar la cantidad de Coches dados de alta en la categoría Premium
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;
-      infoInstance.consultaArray(4)
-        .then(function (Size4) {
-          console.log(Size4[0]);
-        })
-    })
-    //Verificar la cantidad de Coches dados de alta en la categoría Premium
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;
-      infoInstance.consultaArray(5)
-        .then(function (Size5) {
-          console.log(Size5[0]);
-        })
-    })
-    //Recoger info de un coche con un ID Particular
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;
-      console.log("Consulta ID Cochen array")
-      infoInstance.CochesDisponibles(1, 0)
-        .then(function (Datos) {
-          console.log(Datos.toNumber());
-        })
-    })
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;
-      console.log("Consulta ID Cochen array")
-      infoInstance.CochesDisponibles(1, 1)
-        .then(function (Datos) {
-          console.log(Datos.toNumber());
-        })
-    })
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;
-      console.log("Consulta ID Cochen array")
-      infoInstance.CochesDisponibles(1, 2)
-        .then(function (Datos) {
-          console.log(Datos.toNumber());
-        })
-    })
-
-
-
-
-
-
 
     var htmlclienteDatosSeguro = $("#clienteDatosSeguro").empty();
     var htmlclienteDatosPrestamo = $("#clienteDatos2").empty();
     var Datos = {};
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
-      console.log(App.account);
+      //console.log(App.account);
       infoInstance.users(App.account)
         .then(function (DatosSeguro) {
-          console.log(DatosSeguro.toString());
+          //console.log(DatosSeguro.toString());
           Datos = {
             CostoTotal: DatosSeguro[9],
             KmCiudad: DatosSeguro[5],
@@ -1748,11 +1664,11 @@ App = {
           if (ValorPagoPrestamoInicial < 10 && ValorPagoPrestamoInicial > 0) {
             X = 1;
             ValorPagoPrestamo = ValorPagoPrestamoInicial + X;
-            console.log(ValorPagoPrestamo);
+            //console.log(ValorPagoPrestamo);
 
           } else {
             ValorPagoPrestamo = Math.round(Number(Datos.Prestamo * 1.10));
-            console.log(ValorPagoPrestamo);
+            //console.log(ValorPagoPrestamo);
           }
 
           var usuarioTemplate =
@@ -1777,7 +1693,7 @@ App = {
     var Datos1 = {};
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
-      console.log(App.account);
+      //console.log(App.account);
       infoInstance.users(App.account)
         .then(function (DatosUsuario) {
           //console.log(Number(DatosSeguro));
@@ -1785,29 +1701,23 @@ App = {
             tipoCoche: DatosUsuario[0].toNumber(),
             IdCoche: DatosUsuario[9].toNumber(),
           };
-          console.log(Datos1.tipoCoche);
-          console.log(Datos1.IdCoche);
+          //console.log(Datos1.tipoCoche);
+          //console.log(Datos1.IdCoche);
 
           App.contracts.CompraToken.deployed().then(function (instance) {
             infoInstance = instance;
             var Datos2 = {};
             infoInstance.coches(Datos1.tipoCoche, Datos1.IdCoche)
               .then(function (DatosCoche) {
-                console.log(DatosCoche[1].toNumber());
+                //console.log(DatosCoche[1].toNumber());
                 Datos2 = {
-                  IdCoche: DatosCoche[0],
-                  KmCiudad: DatosCoche[1],
-                  KmCarretera: DatosCoche[2],
-                  TiempoAparcado: DatosCoche[3],
+                  IdCoche: DatosCoche[0],                  
                   IdSeguro: DatosCoche[4],
                   Entregado: DatosCoche[5],
                 };
                 
                 var usuarioTemplate =
-                  "<tr><th>" + Datos2.IdCoche +
-                  "</td><td>" + Datos2.KmCiudad +
-                  "</td><td>" + Datos2.KmCarretera +
-                  "</td><td>" + Datos2.TiempoAparcado +
+                  "<tr><th>" + Datos2.IdCoche +                
                   "</td><td>" + Datos2.IdSeguro +
                   "</td><td>" + Datos2.Entregado +
                   "</td></tr>";
@@ -2012,34 +1922,7 @@ App = {
           htmlclienteDatos.append(usuarioTemplate);
         })
     })
-  },
-
-  infoAsegurador: function () {
-    App.costoSeguro();
-    var htmlclienteDatosSeguro = $("#clienteDatosSeguro").empty();
-    var Datos = {};
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;
-      infoInstance.CostSeguro(App.account)
-        .then(function (DatosSeguro) {
-          ;
-          Datos = {
-            CostoTotal: DatosSeguro[0],
-            KmCiudad: DatosSeguro[1],
-            KmCarretera: DatosSeguro[2],
-            TiempoAparcado: DatosSeguro[3],
-          };
-          console.log(DatosSeguro[0]);
-          var usuarioTemplate =
-            "<tr><th>" + Datos.CostoTotal +
-            "</td><td>" + Datos.KmCiudad +
-            "</td><td>" + Datos.KmCarretera +
-            "</td><td>" + Datos.TiempoAparcado +
-            "</td></tr>";
-          htmlclienteDatosSeguro.append(usuarioTemplate);
-        })
-    })
-  },
+  }, 
 
   ConsultaSeguro: function () {
     App.contracts.CompraToken.deployed().then(function (instance) {
@@ -2050,7 +1933,7 @@ App = {
           CostoMovCiudad = Number(TiempoKmCiudadArray[DatosSeguro[9]]) * Number([DatosSeguro[7]]);
           CostoMovCarretera = Number(TiempoKmCarreteraArray[DatosSeguro[9]]) * Number([DatosSeguro[6]]);
           TokensSeguro = Number(CostoAparcado) + Number(CostoMovCiudad) + Number(CostoMovCarretera);
-          console.log(TokensSeguro);
+          //console.log(TokensSeguro);
           //$('.estadoContratoCompraToken').html(Activo.toString());
           $('.PrecioSeguro').html(TokensSeguro);                    
           }).catch(function (err) {
@@ -2058,13 +1941,6 @@ App = {
           });
         })    
   },
-
-
-
-
-
-
-
 
 
   EntregaCoche: function () {
@@ -2078,7 +1954,7 @@ App = {
           TokensSeguro = Number(CostoAparcado) + Number(CostoMovCiudad) + Number(CostoMovCarretera);
           TipoCoche = DatosSeguro[0];
           IdCoche = DatosSeguro[9];
-          console.log(TokensSeguro);
+          //console.log(TokensSeguro);
           App.contracts.CompraToken.deployed().then(function (instance) {
             return instance.PagoSeguro(TokensSeguro, TipoCoche, IdCoche, {
               from: App.account,
@@ -2497,7 +2373,7 @@ App = {
   },
 
   contratarLeasing: function (a, b) {
-    console.log("entrando contrato Leasing")
+    //console.log("entrando contrato Leasing")
     switch (a) {
       case 0:
         {
@@ -2680,12 +2556,12 @@ App = {
 
     }
 
-    console.log(precioKmCiudad);
+    /*console.log(precioKmCiudad);
     console.log(precioKmCarretera);
     console.log(precioAparcado);
     console.log(pago);
     console.log(IdSeguro);
-    console.log(tipoCoche);
+    console.log(tipoCoche);*/
 
 
     App.contracts.CompraToken.deployed().then(function (instance) {
@@ -2704,6 +2580,27 @@ App = {
 
   ComprarTokens: function () {
     var numeroTokens = $('#numeroTokens').val();
+    /*console.log(numeroTokens);
+    console.log(App.account);*/
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      return instance.compraTokens(numeroTokens, {
+        from: App.account,
+        value: numeroTokens * App.PrecioToken,
+        gas: 500000
+      });
+    }).then(function (result) {
+      $('form').trigger('reset')
+
+    });
+  },
+
+
+
+
+  ComprarTokensFinanciera: function () {
+    var numeroTokens = $('#numeroTokens1').val();
+    /*console.log(numeroTokens);
+    console.log(App.account);*/
     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.compraTokens(numeroTokens, {
         from: App.account,
@@ -2720,11 +2617,11 @@ App = {
   Financiar: function () {
     var CIFEmpresa = $('#CIFEmpresa').val();
     var Hash256 = web3.sha3(CIFEmpresa, { encoding: 'hex' });
-    console.log(Hash256);
+    //console.log(Hash256);
     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.maestroEmpresas(Hash256);
     }).then(function (result) {
-      console.log(result);
+      //console.log(result);
       Address = result;
     var numeroTokens = $('#numeroTokensFinanciar').val();
     App.contracts.CompraToken.deployed().then(function (instance) {
@@ -2733,10 +2630,7 @@ App = {
       $('form').trigger('reset')
     });
   })
-  },
-
-
- 
+  }, 
 
   EliminarValorArray: function () {
     App.contracts.CompraToken.deployed().then(function (instance) {
@@ -2750,11 +2644,11 @@ App = {
   PagarFinanciacion: function () {
     var CIFEmpresa = $('#CIFEmpresa').val();
     var Hash256 = web3.sha3(CIFEmpresa, { encoding: 'hex' });
-    console.log(Hash256);
+    //console.log(Hash256);
     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.maestroEmpresas(Hash256);
     }).then(function (result) {
-      console.log(result);
+      //console.log(result);
       var PagoFinanciacionInicial = ValorPagoPrestamoInicial;
       var PagoFinanciacion = ValorPagoPrestamo;
       Address = result
@@ -2782,7 +2676,9 @@ App = {
       return App.contracts.CompraToken.deployed();
     }).then(function (instance) {
       CompraTokenInstance = instance;
-      return TokenInstance.transferInicial(CompraTokenInstance.address, App.tokensDisponibles);
+      numeroTokens = (App.tokensDisponibles * 0.75);
+      console.log(numeroTokens);
+      return TokenInstance.transferInicial(CompraTokenInstance.address, numeroTokens);
     }).then(function (result) {
       $('form').trigger('reset')
 
@@ -2790,7 +2686,7 @@ App = {
   },
 
   contratarOraculo: function () {
-    console.log("entrando Oraculo")
+    //console.log("entrando Oraculo")
     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.update({ from: App.account });
     }).then(function (result) {
@@ -2816,13 +2712,13 @@ App = {
   },
 
   RegistroUsuario: function () {
-    console.log("registrando usuario...");
+    //console.log("registrando usuario...");
     var IdUsuario = $("#IdUsuarioAlta").val();
     var TypeUserString = $("#ListaTipoUsuario").val();
     var PuntosLicencia = $("#PuntosLicenciaAlta").val();
 
-    console.log("Comprobando registro" + IdUsuario);
-    console.log("Comprobando registro" + TypeUserString);
+    /*console.log("Comprobando registro" + IdUsuario);
+    console.log("Comprobando registro" + TypeUserString);*/
 
     switch (TypeUserString) {
       case ('Cliente'):
@@ -2832,8 +2728,8 @@ App = {
           var VATNumber = 'N/A';
           var antiguedadLicencia = $("#AntiguedadLicenciaAlta").val();
           var PuntosLicencia = $("#PuntosLicenciaAlta").val();
-          console.log("Comprobando registro" + antiguedadLicencia);
-          console.log("uno");
+          /*console.log("Comprobando registro" + antiguedadLicencia);
+          console.log("uno");*/
         }
         break;
       case ('Empresa Aseguradora'):
@@ -2844,7 +2740,7 @@ App = {
           var VATNumber = web3.sha3(VATNumber1, { encoding: 'hex' });
           var DNI = 'N/A';
           var antiguedadLicencia = 'N/A';
-          console.log("dos");
+          //console.log("dos");
         }
         break;
       case ('Empresa Financiera'):
@@ -2854,7 +2750,7 @@ App = {
           var VATNumber = web3.sha3(VATNumber2, { encoding: 'hex' });
           var DNI = 'N/A';
           var antiguedadLicencia = 'N/A';
-          console.log("tres");
+          //console.log("tres");
 
         }
         break;
@@ -2864,7 +2760,7 @@ App = {
           var DNI = 'N/A';
           var VATNumber = 'N/A';
           var antiguedadLicencia = 'N/A';
-          console.log("Tipo de usuario incorrecto...");
+          //console.log("Tipo de usuario incorrecto...");
         }
         break;
     }
@@ -2888,10 +2784,10 @@ App = {
 
 
 
-    console.log(record);
+    //console.log(record);
     App.contracts.CompraToken.deployed().then(function (instance) {
-      console.log("Comprobando registro" + TypeUser);
-      console.log("Comprobando registro" + VATNumber);
+      /*console.log("Comprobando registro" + TypeUser);
+      console.log("Comprobando registro" + VATNumber);*/
       if (TypeUser == 1) {
         return instance.NewUser(TypeUser, DNI, VATNumber, record, { from: App.account });
       }
@@ -2911,37 +2807,37 @@ App = {
   },
 
   RegistroCoche: function () {
-    console.log("registrando Coche...");
+    //console.log("registrando Coche...");
     var IdCoche = $("#IdCocheAlta").val();
     var TypeCocheString = $("#ListaGama").val();
 
 
-    console.log("Comprobando registro" + IdCoche);
-    console.log("Comprobando registro" + TypeCocheString);
+    /*console.log("Comprobando registro" + IdCoche);
+    console.log("Comprobando registro" + TypeCocheString);*/
 
     switch (TypeCocheString) {
       case ('Premium'):
         {
           TypeCoche = 1;
           var IdCoche = $("#IdCocheAlta").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Premium");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Premium");*/
         }
         break;
       case ('Luxure'):
         {
           TypeCoche = 2;
           var IdCoche = $("#IdCocheAlta").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Luxure");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Luxure");*/
         }
         break;
       case ('Classic'):
         {
           TypeCoche = 3;
           var IdCoche = $("#IdCocheAlta").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Classic");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Classic");*/
 
         }
         break;
@@ -2949,8 +2845,8 @@ App = {
         {
           TypeCoche = 4;
           var IdCoche = $("#IdCocheAlta").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Corriente");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Corriente");*/
 
         }
         break;
@@ -2958,23 +2854,23 @@ App = {
         {
           TypeCoche = 5;
           var IdCoche = $("#IdCocheAlta").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Furgoneta");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Furgoneta");*/
 
         }
         break;
       default:
         {
           TypeCoche = 0;
-          console.log("Tipo de Coche incorrecto...");
+          //console.log("Tipo de Coche incorrecto...");
         }
         break;
     }
 
-    console.log(record);
+    //console.log(record);
     App.contracts.CompraToken.deployed().then(function (instance) {
-      console.log("Comprobando registro" + TypeCoche);
-      console.log("Comprobando registro" + IdCoche);
+      /*console.log("Comprobando registro" + TypeCoche);
+      console.log("Comprobando registro" + IdCoche);*/
       return instance.NewCoche(TypeCoche, IdCoche, { from: App.account });
     }).then(function (result) {
       // nuevo usuario
@@ -2984,20 +2880,16 @@ App = {
     });
   },
 
-
-
-
-
   IngresoUsuario: function () {
-    console.log("verificando usuario...")
+    //console.log("verificando usuario...")
     var IdUsuario = $("#IdUsuario").val();
     var Password = $("#Contraseña").val();
     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.fetchUser({ from: App.account });
     }).then(function (result) {
-      console.log(result + "fetch");
+      //console.log(result + "fetch");
       if ((result[0] == IdUsuario) && (result[1] == Password)) {
-        console.log("Autenticación realizada con éxito");
+        //console.log("Autenticación realizada con éxito");
         return instance.RegistraTime({ from: App.account });
 
         //OMAR: Introducir aquí el front siguiente al de login que quieres que aparezca: window.location.href = "../XXX.html";
@@ -3032,13 +2924,13 @@ App = {
   },
 
   removeInfo: function () {
-    console.log("borrando usuario...")
+    //console.log("borrando usuario...")
     var dir = $("#AddressUsuarioAdmin").val();
     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.deleteUser(dir, { from: App.account });
     }).then(function (result) {
 
-      console.log("Borrado realizado con éxito" + result);
+      //console.log("Borrado realizado con éxito" + result);
 
 
     }).catch(function (err) {
@@ -3048,12 +2940,12 @@ App = {
 
 
   actualizaLimiteCredito: function () {
-    console.log("actualizando el crédito máximo...");
+    //console.log("actualizando el crédito máximo...");
     var VolumenCredito = $("#VolumenCredito").val();
     var Demora = $("#Demora").val();
     var modificadorText = $("#ClienteNuevo").val();
-    console.log("Comprobando volumen crédito " + VolumenCredito);
-    console.log("Comprobando demora en días " + Demora);
+    //console.log("Comprobando volumen crédito " + VolumenCredito);
+    //console.log("Comprobando demora en días " + Demora);
     if (modificadorText == 'Si') {
 
       modificador = 0.5;
@@ -3068,9 +2960,9 @@ App = {
 
     }
 
-    console.log("Comprobando si es nuevo cliente " + modificador);
+    //console.log("Comprobando si es nuevo cliente " + modificador);
     maxCredito = VolumenCredito * (Demora / 360) * modificador;
-    console.log("Maxcredito " + maxCredito);
+    //console.log("Maxcredito " + maxCredito);
 
     App.contracts.CompraToken.deployed().then(function (instance) {
       window.location.href = "../index.html";
@@ -3081,20 +2973,7 @@ App = {
       console.error(err);
     });
   },
-
-  detenerContratoToken: function () {
-    App.contracts.Token.deployed().then(function (instance) {
-      TokenInstance = instance;
-      return App.contracts.CompraToken.deployed();
-    }).then(function (instance) {
-      CompraTokenInstance = instance;
-      return TokenInstance.DetenerContratoToken();
-    }).then(function (result) {
-      $('form').trigger('reset')
-    });
-  },
   BotonAltaCoche: function () {
-
     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.CheckAdmin.call({ from: App.account });
     }).then(function (result) {
@@ -3120,8 +2999,17 @@ App = {
     });
   },
 
-
-
+  detenerContratoToken: function () {
+    App.contracts.Token.deployed().then(function (instance) {
+      TokenInstance = instance;
+      return App.contracts.CompraToken.deployed();
+    }).then(function (instance) {
+      CompraTokenInstance = instance;
+      return TokenInstance.DetenerContratoToken();
+    }).then(function (result) {
+      $('form').trigger('reset')
+    });
+  }, 
 
   detenerContratoCompraToken: function () {
     App.contracts.CompraToken.deployed().then(function (instance) {
@@ -3130,6 +3018,7 @@ App = {
       $('form').trigger('reset')
     });
   },
+  
 
   activarContratoToken: function () {
     App.contracts.Token.deployed().then(function (instance) {
@@ -3153,37 +3042,37 @@ App = {
 
 
   ConsultaCoche: function () {
-    console.log("registrando Coche...");
+    //console.log("registrando Coche...");
     var IdCoche = $("#IdCocheEntregado").val();
     var TypeCocheString = $("#ListaGamaEntrega").val();
 
 
-    console.log("Comprobando registro" + IdCoche);
-    console.log("Comprobando registro" + TypeCocheString);
+    //console.log("Comprobando registro" + IdCoche);
+    //console.log("Comprobando registro" + TypeCocheString);
 
     switch (TypeCocheString) {
       case ('Premium'):
         {
           TypeCoche = 1;
           var IdCoche = $("#IdCocheEntregado").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Premium");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Premium");*/
         }
         break;
       case ('Luxure'):
         {
           TypeCoche = 2;
           var IdCoche = $("#IdCocheEntregado").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Luxure");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Luxure");*/
         }
         break;
       case ('Classic'):
         {
           TypeCoche = 3;
           var IdCoche = $("#IdCocheEntregado").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Classic");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Classic");*/
 
         }
         break;
@@ -3191,8 +3080,8 @@ App = {
         {
           TypeCoche = 4;
           var IdCoche = $("#IdCocheEntregado").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Corriente");
+         /*console.log("Comprobando registro" + IdCoche);
+          console.log("Corriente");*/
 
         }
         break;
@@ -3200,23 +3089,23 @@ App = {
         {
           TypeCoche = 5;
           var IdCoche = $("#IdCocheEntregado").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Furgoneta");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Furgoneta");*/
 
         }
         break;
       default:
         {
           TypeCoche = 0;
-          console.log("Tipo de Coche incorrecto...");
+          //console.log("Tipo de Coche incorrecto...");
         }
         break;
     }
 
-    console.log(record);
+    //console.log(record);
     App.contracts.CompraToken.deployed().then(function (instance) {
-      console.log("Comprobando registro" + TypeCoche);
-      console.log("Comprobando registro" + IdCoche);
+      /*console.log("Comprobando registro" + TypeCoche);
+      console.log("Comprobando registro" + IdCoche);*/
       return instance.coches(TypeCoche, IdCoche, { from: App.account });
     }).then(function (result) {
       var htmlDatosCoche = $("#DatosCoche").empty();
@@ -3240,37 +3129,37 @@ App = {
 
 
   ValidarCoche: function () {
-    console.log("registrando Coche...");
+    //console.log("registrando Coche...");
     var IdCoche = $("#IdCocheEntregado").val();
     var TypeCocheString = $("#ListaGamaEntrega").val();
 
 
-    console.log("Comprobando registro" + IdCoche);
-    console.log("Comprobando registro" + TypeCocheString);
+    /*console.log("Comprobando registro" + IdCoche);
+    console.log("Comprobando registro" + TypeCocheString);*/
 
     switch (TypeCocheString) {
       case ('Premium'):
         {
           TypeCoche = 1;
           var IdCoche = $("#IdCocheEntregado").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Premium");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Premium");*/
         }
         break;
       case ('Luxure'):
         {
           TypeCoche = 2;
           var IdCoche = $("#IdCocheEntregado").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Luxure");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Luxure");*/
         }
         break;
       case ('Classic'):
         {
           TypeCoche = 3;
           var IdCoche = $("#IdCocheEntregado").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Classic");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Classic");*/
 
         }
         break;
@@ -3278,8 +3167,8 @@ App = {
         {
           TypeCoche = 4;
           var IdCoche = $("#IdCocheEntregado").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Corriente");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Corriente");*/
 
         }
         break;
@@ -3287,23 +3176,23 @@ App = {
         {
           TypeCoche = 5;
           var IdCoche = $("#IdCocheEntregado").val();
-          console.log("Comprobando registro" + IdCoche);
-          console.log("Furgoneta");
+          /*console.log("Comprobando registro" + IdCoche);
+          console.log("Furgoneta");*/
 
         }
         break;
       default:
         {
           TypeCoche = 0;
-          console.log("Tipo de Coche incorrecto...");
+          //console.log("Tipo de Coche incorrecto...");
         }
         break;
     }
 
 
     App.contracts.CompraToken.deployed().then(function (instance) {
-      console.log("Comprobando registro" + TypeCoche);
-      console.log("Comprobando registro" + IdCoche);
+      /*console.log("Comprobando registro" + TypeCoche);
+      console.log("Comprobando registro" + IdCoche);*/
       return instance.ValidarCoche(TypeCoche, IdCoche, { from: App.account });
     }).then(function (result) {
       // nuevo usuario
@@ -3312,62 +3201,6 @@ App = {
       console.error(err);
     });
   },
-
-
-
-  /*
-    TranferenciaInicialTokens: function () {
-      App.contracts.Token.deployed().then(function (instance) {
-        TokenInstance = instance;
-        return App.contracts.CompraToken.deployed();
-      }).then(function (instance) {
-        CompraTokenInstance = instance;
-        return TokenInstance.transferInicial(CompraTokenInstance.address, App.tokensDisponibles);
-      }).then(function (result) {
-        $('form').trigger('reset')
-  
-      });
-    },
-  
-    ComprarTokens: function () {
-      var numeroTokens = $('#numeroTokens').val();
-      App.contracts.CompraToken.deployed().then(function (instance) {
-        return instance.compraTokens(numeroTokens, {
-          from: App.account,
-          value: numeroTokens * App.PrecioToken,
-          gas: 500000
-        });
-      }).then(function (result) {
-        $('form').trigger('reset')
-  
-      });
-    },
-    depositarTokens: function () {
-      let fecha = (new Date()).getTime();
-      let fechaParaSolidity = fecha / 1000;
-      let fechaSolidity = parseInt(fechaParaSolidity);
-      $('#content').hide();
-      $('#loader').hide();
-      var contribucion = $('#depositoTokens').val();
-      App.contracts.CompraToken.deployed().then(function (instance) {
-        return instance.depositoAhorro(contribucion, fechaSolidity);
-      }).then(function (result) {
-        $('form1').trigger('reset')
-  
-      });
-    },
-    retiroTokens: function () {
-      let fecha = (new Date()).getTime();
-      let fechaParaSolidity = fecha / 1000;
-      let fechaSolidity = parseInt(fechaParaSolidity);
-      var prestamo = $('#retiroTokens').val();
-      App.contracts.CompraToken.deployed().then(function (instance) {
-        return instance.retiroTokens(prestamo, fechaSolidity);
-      }).then(function (result) {
-        $('form2').trigger('reset')
-  
-      });
-    },*/
 
 };
 
