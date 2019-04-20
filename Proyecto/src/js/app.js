@@ -1944,10 +1944,17 @@ App = {
 
 
   EntregaCoche: function () {
+    var CIFEmpresa = $('#CIFEmpresaSeguro').val();
+    var Hash256 = web3.sha3(CIFEmpresa, { encoding: 'hex' });
+    //console.log(Hash256);
     App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;
+      return instance.maestroEmpresas(Hash256);
+    }).then(function (result) {
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      infoInstance = instance; 
+      Address = result;       
       infoInstance.users(App.account)
-        .then(function (DatosSeguro) {
+        .then(function (DatosSeguro) {          
           CostoAparcado = Number(TiempoAparcadoArray[DatosSeguro[9]]) * Number([DatosSeguro[5]]);
           CostoMovCiudad = Number(TiempoKmCiudadArray[DatosSeguro[9]]) * Number([DatosSeguro[7]]);
           CostoMovCarretera = Number(TiempoKmCarreteraArray[DatosSeguro[9]]) * Number([DatosSeguro[6]]);
@@ -1956,7 +1963,7 @@ App = {
           IdCoche = DatosSeguro[9];
           //console.log(TokensSeguro);
           App.contracts.CompraToken.deployed().then(function (instance) {
-            return instance.PagoSeguro(TokensSeguro, TipoCoche, IdCoche, {
+            return instance.PagoSeguro(TokensSeguro, TipoCoche, IdCoche, Address, {
               from: App.account,
               gas: 500000
             });
@@ -1968,6 +1975,7 @@ App = {
           });
         })
     })
+  })
   },
 
 

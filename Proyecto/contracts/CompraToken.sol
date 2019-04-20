@@ -50,7 +50,7 @@ contract CompraToken is Owned, usingOraclize  {
     mapping(address => uint) public ownerCuentaLeasing;
     mapping(bytes32 => address) public maestroEmpresas;
     mapping(uint => uint[]) public CochesDisponibles;
-    mapping(uint => address) public mappingSeguros;
+   
 
 
  struct user {
@@ -192,10 +192,10 @@ contract CompraToken is Owned, usingOraclize  {
 //** @title Constructor. */
     
 //** @title Compra de tokens. */
-   function PagoSeguro(uint TokensSeguro, uint tipoCoche, uint IdCoche) public payable {       
+   function PagoSeguro(uint TokensSeguro, uint tipoCoche, uint IdCoche, address EmpresaAseguradora) public payable {       
     require(Activo == false);  
     require(tokenContract.balanceOf(msg.sender) >= TokensSeguro);
-    require(tokenContract.transferFrom(msg.sender, address(this),TokensSeguro));
+    require(tokenContract.transferFrom(msg.sender, EmpresaAseguradora,TokensSeguro));
     coches[tipoCoche][IdCoche].entregado = true;
     users[msg.sender].TipoCoche = 0;
     users[msg.sender].IdCoche = 0;
