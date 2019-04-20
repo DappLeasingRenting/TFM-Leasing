@@ -109,7 +109,7 @@ bool entregado;
         /** @return devuelve el addres del que compra y la cantidad*/
         emit Venta(msg.sender, _numeroTokens);
     }
-    function prestamoTokens(uint256 _numeroTokens) public payable {
+    function prestamoTokens(uint256 _numeroTokens, address AddressEmpresa) public payable {
           /**@param _numeroTokens cantidad a comprarr.
  
       /** @dev verificar que el precio a pagar sea el precio estblecido
@@ -121,10 +121,10 @@ bool entregado;
         require(Activo == false);
         require(_numeroTokens > 0); 
         require(_numeroTokens <= users[msg.sender].MaxCredito);
-        require(tokenContract.balanceOf(address(this)) >= _numeroTokens);
-        require(tokenContract.transfer(msg.sender, _numeroTokens));
+        require(tokenContract.balanceOf(AddressEmpresa) >= _numeroTokens);
+        require(tokenContract.transferFrom(AddressEmpresa, msg.sender, _numeroTokens));
 
-        tokensVendidos += _numeroTokens;
+        
         users[msg.sender].MaxCredito -= _numeroTokens; 
         users[msg.sender].Prestamo += _numeroTokens;
         /** @return devuelve el addres del que compra y la cantidad*/
@@ -208,12 +208,11 @@ bool entregado;
         
      emit CostoSeguro(TokensSeguro);
     }
-    function PagoFinanciacion(uint TokensFinanciacion, uint TokensPrestamo) public payable {       
-     require(Activo == false);        
-     require(tokenContract.balanceOf(msg.sender) >= TokensFinanciacion);
-     require(tokenContract.transferFrom(msg.sender, address(this),TokensFinanciacion));
+    function PagoFinanciacion(uint TokensFinanciacion, uint TokensPrestamo, address addressEmpresa ) public payable {       
+     require(Activo == false);           
+     require(tokenContract.balanceOf(msg.sender) >= TokensFinanciacion);     
+     require(tokenContract.transferFrom(msg.sender, addressEmpresa,TokensFinanciacion));
 
-     tokensVendidos += TokensFinanciacion;
      users[msg.sender].Prestamo -= TokensPrestamo;
 
         //users[msg.sender].Entregado = true;

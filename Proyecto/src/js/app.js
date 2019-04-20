@@ -2717,25 +2717,25 @@ App = {
 
 
   Financiar: function () {
+    var CIFEmpresa = $('#CIFEmpresa').val();
+    var Hash256 = web3.sha3(CIFEmpresa, { encoding: 'hex' });
+    console.log(Hash256);
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      return instance.maestroEmpresas(Hash256);
+    }).then(function (result) {
+      console.log(result);
+      Address = result;
     var numeroTokens = $('#numeroTokensFinanciar').val();
     App.contracts.CompraToken.deployed().then(function (instance) {
-      return instance.prestamoTokens(numeroTokens, { from: App.account });
+      return instance.prestamoTokens(numeroTokens, Address, { from: App.account });
     }).then(function (result) {
       $('form').trigger('reset')
     });
+  })
   },
 
 
-  PagarFinanciacion: function () {
-    var PagoFinanciacionInicial = ValorPagoPrestamoInicial;
-    var PagoFinanciacion = ValorPagoPrestamo;
-    App.contracts.CompraToken.deployed().then(function (instance) {
-      return instance.PagoFinanciacion(PagoFinanciacion, PagoFinanciacionInicial);
-    }).then(function (result) {
-      $('form1').trigger('reset')
-
-    });
-  },
+ 
 
   EliminarValorArray: function () {
     App.contracts.CompraToken.deployed().then(function (instance) {
@@ -2746,9 +2746,9 @@ App = {
     });
   },
 
-  /*PagarFinanciacion: function () {
+  PagarFinanciacion: function () {
     var CIFEmpresa = $('#CIFEmpresa').val();
-    var Hash256 = SHA256(CIFEmpresa);
+    var Hash256 = web3.sha3(CIFEmpresa, { encoding: 'hex' });
     console.log(Hash256);
     App.contracts.CompraToken.deployed().then(function (instance) {
       return instance.maestroEmpresas(Hash256);
@@ -2758,14 +2758,13 @@ App = {
       var PagoFinanciacion = ValorPagoPrestamo;
       Address = result
       App.contracts.CompraToken.deployed().then(function (instance) {
-        return instance.PagoFinanciacion(PagoFinanciacion, PagoFinanciacionInicial);
+        return instance.PagoFinanciacion(PagoFinanciacion, PagoFinanciacionInicial,Address);
       }).then(function (result) {
         $('form1').trigger('reset')
 
       });
     })
-  },*/
-
+  },
 
 
   aumentarSupply: function () {
