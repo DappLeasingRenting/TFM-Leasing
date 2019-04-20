@@ -124,12 +124,25 @@
                             </div>
                   </div>
 
-                  <div class="form-group col-sm-8 text-left">
+     <!--             <div class="form-group col-sm-8 text-left">
                       <label class="control-label col-sm-4" for="NombreEmpresaLabelAlta">Nombre empresa</label>
                       <div class="col-sm-4">
                         <input class="form-control" type="text-left" name="NombreEmpresa" id="NombreEmpresa">
                       </div>
-                  </div>
+                  </div> -->
+
+                  <div class="form-group col-sm-8 text-left">
+                      <label class="control-label col-sm-4 text-left" for="NombreEmpresaLabelAlta" >Nombre empresa</label>
+                      <div class="col-sm-4">
+                          <select id="NombreEmpresa" name="NombreEmpresa" >
+                         <!--     <option value="" selected disabled hidden>Elija opción</option> -->
+                         <!--      <option value=></option> -->
+                            </select>
+          
+                      </div>
+                    </div>
+
+
 
                   <div class="form-group col-sm-8 text-left">
                       <label class="control-label col-sm-4" for="VatNumberLabel">CIF Empresa</label>
@@ -195,8 +208,15 @@
 
 <script>
     function TypeUser(input) {
-      if (input.value != 'Cliente')
+      if (input.value == 'Empresa Financiera')
       {
+        LimpiaCombo();
+        document.getElementById("NombreEmpresa").options[0] = null;
+        var x = document.getElementById("NombreEmpresa");
+        var option = document.createElement("option");
+        option.text = "Mi Financiera SL";
+        x.add(option, x[0]);
+
         document.getElementById("Nombre").value='';
         document.getElementById("Apellidos").value='';
         document.getElementById("Edad").value='';
@@ -223,8 +243,52 @@
         document.getElementById("VATNumber").removeAttribute("disabled");
         document.getElementById("LinkAlta").removeAttribute("disabled");
       }
-      else
+      else if (input.value == 'Empresa Aseguradora')
       {
+        LimpiaCombo();
+        var x = document.getElementById("NombreEmpresa");
+        var option = document.createElement("option");
+        option.text = "MAPFRE";
+        x.add(option, x[0]);
+        var option = document.createElement("option");
+        option.text = "ALLIANZ";
+        x.add(option, x[1]);
+        var option = document.createElement("option");
+        option.text = "AXA";
+        x.add(option, x[2]);
+        
+        
+        
+        document.getElementById("Nombre").value='';
+        document.getElementById("Apellidos").value='';
+        document.getElementById("Edad").value='';
+        document.getElementById("Licencia").value='';
+        document.getElementById("AntiguedadLicenciaAlta").value='';
+        document.getElementById("PuntosLicenciaAlta").value='';
+        document.getElementById("Telefono").value='';
+        document.getElementById("Email").value='';
+        document.getElementById("DNI").value='';
+        document.getElementById("NombreEmpresa").value='';
+        document.getElementById("VATNumber").value='';
+        document.getElementById("LinkAlta").value='';
+
+        document.getElementById("Nombre").setAttribute("disabled","disabled");
+        document.getElementById("Apellidos").setAttribute("disabled","disabled");
+        document.getElementById("Edad").setAttribute("disabled","disabled");
+        document.getElementById("Licencia").setAttribute("disabled","disabled");
+        document.getElementById("AntiguedadLicenciaAlta").setAttribute("disabled","disabled");
+        document.getElementById("PuntosLicenciaAlta").setAttribute("disabled","disabled");
+        document.getElementById("Telefono").setAttribute("disabled","disabled");
+        document.getElementById("Email").setAttribute("disabled","disabled");
+        document.getElementById("DNI").setAttribute("disabled","disabled");
+        document.getElementById("NombreEmpresa").removeAttribute("disabled");
+        document.getElementById("VATNumber").removeAttribute("disabled");
+        document.getElementById("LinkAlta").removeAttribute("disabled");
+      }
+
+      else if(input.value == 'Cliente' )
+      {
+        document.getElementById("NombreEmpresa").options[0] = null;
         document.getElementById("Nombre").value='';
         document.getElementById("Apellidos").value='';
         document.getElementById("Telefono").value='';
@@ -237,6 +301,7 @@
         document.getElementById("AntiguedadLicenciaAlta").value='';
         document.getElementById("VATNumber").value='';
         document.getElementById("LinkAlta").value='';
+        LimpiaCombo();
 
         document.getElementById("NombreEmpresa").setAttribute("disabled","disabled");
         document.getElementById("VATNumber").setAttribute("disabled","disabled");
@@ -252,6 +317,20 @@
         document.getElementById("DNI").removeAttribute("disabled");
       }
     }
+
+    function LimpiaCombo()
+    {
+    var select = document.getElementById("NombreEmpresa");
+    var length = select.options.length;
+    for (i = 0; i < length; i++) 
+      {
+      select.options[i] = null;
+      //select.options[i].remove();
+      }
+    }
+
+
+
   </script>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
