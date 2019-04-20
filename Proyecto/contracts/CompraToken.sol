@@ -3,9 +3,9 @@ pragma solidity >= 0.5.0 < 0.6.0;
 import "./Token.sol";
 import "./SafeMath.sol";
 import "./Owned.sol";
-import "installed_contracts/oraclize-api/contracts/usingOraclize.sol";
 
-contract CompraToken is Owned, usingOraclize  {
+
+contract CompraToken is Owned {
     address admin;
     Token public tokenContract;
     uint256 public PrecioToken;
