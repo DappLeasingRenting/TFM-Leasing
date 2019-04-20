@@ -154,6 +154,7 @@ App = {
                 {
                   //poner módulo financiero
                   $("#content0Alta").show();
+                  $("#contentFinanciera").show();
                 }
                 break;
               default: //caso default
