@@ -143,8 +143,8 @@ bool entregado;
         users[msg.sender].PrecioKmCarretera = precioKmCarretera;
         users[msg.sender].PrecioKmCiudad = precioKmCiudad;     
         uint IdCoche = CochesDisponibles[tipoCoche][0];
-        users[msg.sender].TipoCoche = tipoCoche;
         users[msg.sender].IdCoche = IdCoche;
+        users[msg.sender].TipoCoche = tipoCoche;
         coches[tipoCoche][IdCoche].IdSeguro = IdSeguro;
         EliminarValorArray(tipoCoche);
 
@@ -155,11 +155,11 @@ bool entregado;
         emit Pago(msg.sender, _pago);
     }
 
-    function aumentarSupply(uint value) public onlyOwner returns (bool) {
+   /* function aumentarSupply(uint value) public onlyOwner returns (bool) {
         require(Activo == false);
         tokenContract.transferAumentoSupply(value);
         return true;
-    }
+    }*/
 
 
     
@@ -200,6 +200,9 @@ bool entregado;
     coches[tipoCoche][IdCoche].entregado = true;
     users[msg.sender].TipoCoche = 0;
     users[msg.sender].IdCoche = 0;
+    users[msg.sender].PrecioAparcado = 0;
+    users[msg.sender].PrecioKmCarretera = 0;
+    users[msg.sender].PrecioKmCiudad = 0;
      tokensVendidos += TokensSeguro;
 
         

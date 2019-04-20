@@ -102,80 +102,77 @@ App = {
         console.log("Primera cuenta: " + web3.eth.accounts[0]);
         console.log("Segunda cuenta: " + account);
         console.log("No hay direccion nula");
-        if (web3.eth.accounts[0] == account)
-          {
-      console.log("Es el adminnnnn");
-      $("#loader").show();
-      $("#contentOwner").show();
-      $("#contentOwner").show(); //Bienvenido zona clientes
-      $("#content").show(); 
-     $("#content0").show();
-     $("#content1").show(); //mapfre
-      $("#content2").show();
-      $("#content3").show(); //Puede financiar hasta un máximo de
-      $("#content4").show(); //Bienvenido aumentar tokens
-      $("#content5").show(); //allianz
-     $("#content6").show(); //AXA
-       $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
-      $("#content8").show(); //mis contratos "Leasing"
-      $("#content0Alta").show();
+        if (web3.eth.accounts[0] == account) {
+          console.log("Es el adminnnnn");
+          $("#loader").show();
+          $("#contentOwner").show();
+          $("#contentOwner").show(); //Bienvenido zona clientes
+          $("#content").show();
+          $("#content0").show();
+          $("#content1").show(); //mapfre
+          $("#content2").show();
+          $("#content3").show(); //Puede financiar hasta un máximo de
+          $("#content4").show(); //Bienvenido aumentar tokens
+          $("#content5").show(); //allianz
+          $("#content6").show(); //AXA
+          $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
+          $("#content8").show(); //mis contratos "Leasing"
+          $("#content0Alta").show();
         }
-   
-   else
-   {
-    console.log("No es el admin");
-     App.contracts.CompraToken.deployed().then(function (instance) {
-      return instance.fetchTypeUser({ from: App.account });
-    }).then(function (result) {
-      console.log(result + " Tipo Usuario");
-      switch (parseInt(result)) {
-        case 1: //caso cliente
-          {
-            $("#loader").show();
-            $("#contentOwner").show(); //Bienvenido zona clientes
-            $("#content").show(); 
-            $("#content0").show();
-            $("#content2").show();
-            $("#content3").show(); //Puede financiar hasta un máximo de
-            $("#content4").show(); //Bienvenido aumentar tokens
-            $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
-            $("#content8").show(); //mis contratos "Leasing"
-            $("#content0Alta").show();
-          }
-          break;
-        case 2:
-          {
-            $("#loader").show();
-            $("#content1").show(); //mapfre
-            $("#content5").show(); //allianz
-            $("#content6").show(); //AXA
-            $("#content0Alta").show();
-          }
-          break;
-        case 3:
-          {
-            //poner módulo financiero
-            $("#content0Alta").show();
-          }
-          break;
-        default: //caso default
-          {
-           $("#loader").show();
-           $("#content0Alta").show();
 
-          }
-          break;
-    
-        }
-     
-    }).catch(function (err) {
-      console.error(err);
-    });
-  };
+        else {
+          console.log("No es el admin");
+          App.contracts.CompraToken.deployed().then(function (instance) {
+            return instance.fetchTypeUser({ from: App.account });
+          }).then(function (result) {
+            console.log(result + " Tipo Usuario");
+            switch (parseInt(result)) {
+              case 1: //caso cliente
+                {
+                  $("#loader").show();
+                  $("#contentOwner").show(); //Bienvenido zona clientes
+                  $("#content").show();
+                  $("#content0").show();
+                  $("#content2").show();
+                  $("#content3").show(); //Puede financiar hasta un máximo de
+                  $("#content4").show(); //Bienvenido aumentar tokens
+                  $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
+                  $("#content8").show(); //mis contratos "Leasing"
+                  $("#content0Alta").show();
+                }
+                break;
+              case 2:
+                {
+                  $("#loader").show();
+                  $("#content1").show(); //mapfre
+                  $("#content5").show(); //allianz
+                  $("#content6").show(); //AXA
+                  $("#content0Alta").show();
+                }
+                break;
+              case 3:
+                {
+                  //poner módulo financiero
+                  $("#content0Alta").show();
+                }
+                break;
+              default: //caso default
+                {
+                  $("#loader").show();
+                  $("#content0Alta").show();
+
+                }
+                break;
+
+            }
+
+          }).catch(function (err) {
+            console.error(err);
+          });
+        };
 
       }
-      else
-      {
+      else {
         console.log("La direccion es nula");
         $("#loader").show();
         $("#content0Alta").show();
@@ -184,37 +181,37 @@ App = {
 
 
 
-    
 
-    
-  // $("#loader").show();
-  // $("#contentOwner").show(); //Bienvenido zona clientes
-  // $("#content").show(); 
-  //  $("#content0").show();
-   // $("#content1").show(); //mapfre
-   // $("#content2").show();
-   // $("#content3").show(); //Puede financiar hasta un máximo de
-   // $("#content4").show(); //Bienvenido aumentar tokens
-   // $("#content5").show(); //allianz
-   // $("#content6").show(); //AXA
-   // $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
-   // $("#content8").show(); //mis contratos "Leasing"
 
-/*
-   $("#loader").show();
-   $("#contentOwner").show();
-   $("#contentOwner").show(); //Bienvenido zona clientes
-   $("#content").show(); 
-  $("#content0").show();
-  $("#content1").show(); //mapfre
-   $("#content2").show();
-   $("#content3").show(); //Puede financiar hasta un máximo de
-   $("#content4").show(); //Bienvenido aumentar tokens
-   $("#content5").show(); //allianz
-  $("#content6").show(); //AXA
-    $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
-   $("#content8").show(); //mis contratos "Leasing"
-   $("#content0Alta").show(); */
+
+    // $("#loader").show();
+    // $("#contentOwner").show(); //Bienvenido zona clientes
+    // $("#content").show(); 
+    //  $("#content0").show();
+    // $("#content1").show(); //mapfre
+    // $("#content2").show();
+    // $("#content3").show(); //Puede financiar hasta un máximo de
+    // $("#content4").show(); //Bienvenido aumentar tokens
+    // $("#content5").show(); //allianz
+    // $("#content6").show(); //AXA
+    // $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
+    // $("#content8").show(); //mis contratos "Leasing"
+
+    /*
+       $("#loader").show();
+       $("#contentOwner").show();
+       $("#contentOwner").show(); //Bienvenido zona clientes
+       $("#content").show(); 
+      $("#content0").show();
+      $("#content1").show(); //mapfre
+       $("#content2").show();
+       $("#content3").show(); //Puede financiar hasta un máximo de
+       $("#content4").show(); //Bienvenido aumentar tokens
+       $("#content5").show(); //allianz
+      $("#content6").show(); //AXA
+        $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
+       $("#content8").show(); //mis contratos "Leasing"
+       $("#content0Alta").show(); */
 
 
 
@@ -1658,7 +1655,7 @@ App = {
 
     //Verificar la cantidad de Coches dados de alta en la categoría Premium
     App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;     
+      infoInstance = instance;
       infoInstance.consultaArray(1)
         .then(function (Size1) {
           console.log(Size1[0]);
@@ -1666,7 +1663,7 @@ App = {
     })
     //Verificar la cantidad de Coches dados de alta en la categoría Premium
     App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;      
+      infoInstance = instance;
       infoInstance.consultaArray(2)
         .then(function (Size2) {
           console.log(Size2[0]);
@@ -1674,7 +1671,7 @@ App = {
     })
     //Verificar la cantidad de Coches dados de alta en la categoría Premium
     App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;      
+      infoInstance = instance;
       infoInstance.consultaArray(3)
         .then(function (Size3) {
           console.log(Size3[0]);
@@ -1683,7 +1680,7 @@ App = {
 
     //Verificar la cantidad de Coches dados de alta en la categoría Premium
     App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;      
+      infoInstance = instance;
       infoInstance.consultaArray(4)
         .then(function (Size4) {
           console.log(Size4[0]);
@@ -1691,7 +1688,7 @@ App = {
     })
     //Verificar la cantidad de Coches dados de alta en la categoría Premium
     App.contracts.CompraToken.deployed().then(function (instance) {
-      infoInstance = instance;      
+      infoInstance = instance;
       infoInstance.consultaArray(5)
         .then(function (Size5) {
           console.log(Size5[0]);
@@ -1701,7 +1698,7 @@ App = {
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       console.log("Consulta ID Cochen array")
-      infoInstance.CochesDisponibles(1,0)
+      infoInstance.CochesDisponibles(1, 0)
         .then(function (Datos) {
           console.log(Datos.toNumber());
         })
@@ -1709,7 +1706,7 @@ App = {
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       console.log("Consulta ID Cochen array")
-      infoInstance.CochesDisponibles(1,1)
+      infoInstance.CochesDisponibles(1, 1)
         .then(function (Datos) {
           console.log(Datos.toNumber());
         })
@@ -1717,7 +1714,7 @@ App = {
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       console.log("Consulta ID Cochen array")
-      infoInstance.CochesDisponibles(1,2)
+      infoInstance.CochesDisponibles(1, 2)
         .then(function (Datos) {
           console.log(Datos.toNumber());
         })
@@ -1737,7 +1734,7 @@ App = {
       console.log(App.account);
       infoInstance.users(App.account)
         .then(function (DatosSeguro) {
-          //console.log(Number(DatosSeguro));
+          console.log(DatosSeguro.toString());
           Datos = {
             CostoTotal: DatosSeguro[9],
             KmCiudad: DatosSeguro[5],
@@ -1774,48 +1771,50 @@ App = {
         })
     })
 
-  
- var htmlclienteDatos1= $("#clienteDatos1").empty();
-    var Datos = {};
+
+    var htmlclienteDatos1 = $("#clienteDatos1").empty();
+    var Datos1 = {};
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
       console.log(App.account);
       infoInstance.users(App.account)
         .then(function (DatosUsuario) {
           //console.log(Number(DatosSeguro));
-          Datos = {
+          Datos1 = {
             tipoCoche: DatosUsuario[0].toNumber(),
             IdCoche: DatosUsuario[9].toNumber(),
-          };     
+          };
+          console.log(Datos1.tipoCoche);
+          console.log(Datos1.IdCoche);
+
           App.contracts.CompraToken.deployed().then(function (instance) {
-            infoInstance = instance;    
-            var Datos1 = {};      
-            infoInstance.coches(Datos.tipoCoche,Datos.IdCoche)
-            .then(function (DatosCoche){
-          Datos1 = {
-            IdCoche: DatosCoche[0],
-            KmCiudad: DatosCoche[1],
-            KmCarretera: DatosCoche[2],
-            TiempoAparcado: DatosCoche[3],
-            IdSeguro: DatosCoche[4],
-            Entregado: DatosCoche[5],
-          };      
-
-          var usuarioTemplate =
-            "<tr><th>" + Datos1.IdCoche +
-            "</td><td>" + Datos1.KmCiudad +
-            "</td><td>" + Datos1.KmCarretera +
-            "</td><td>" + Datos1.TiempoAparcado +
-            "</td><td>" + Datos1.IdSeguro +
-            "</td><td>" + Datos1.Entregado+
-            "</td></tr>";
-          htmlclienteDatos1.append(usuarioTemplate);
-
-
+            infoInstance = instance;
+            var Datos2 = {};
+            infoInstance.coches(Datos1.tipoCoche, Datos1.IdCoche)
+              .then(function (DatosCoche) {
+                console.log(DatosCoche[1].toNumber());
+                Datos2 = {
+                  IdCoche: DatosCoche[0],
+                  KmCiudad: DatosCoche[1],
+                  KmCarretera: DatosCoche[2],
+                  TiempoAparcado: DatosCoche[3],
+                  IdSeguro: DatosCoche[4],
+                  Entregado: DatosCoche[5],
+                };
+                
+                var usuarioTemplate =
+                  "<tr><th>" + Datos2.IdCoche +
+                  "</td><td>" + Datos2.KmCiudad +
+                  "</td><td>" + Datos2.KmCarretera +
+                  "</td><td>" + Datos2.TiempoAparcado +
+                  "</td><td>" + Datos2.IdSeguro +
+                  "</td><td>" + Datos2.Entregado +
+                  "</td></tr>";
+                htmlclienteDatos1.append(usuarioTemplate);
+              })
+          })
         })
     })
-  })
-})
 
 
 
@@ -2041,6 +2040,32 @@ App = {
     })
   },
 
+  ConsultaSeguro: function () {
+    App.contracts.CompraToken.deployed().then(function (instance) {
+      infoInstance = instance;
+      infoInstance.users(App.account)
+        .then(function (DatosSeguro) {
+          CostoAparcado = Number(TiempoAparcadoArray[DatosSeguro[9]]) * Number([DatosSeguro[5]]);
+          CostoMovCiudad = Number(TiempoKmCiudadArray[DatosSeguro[9]]) * Number([DatosSeguro[7]]);
+          CostoMovCarretera = Number(TiempoKmCarreteraArray[DatosSeguro[9]]) * Number([DatosSeguro[6]]);
+          TokensSeguro = Number(CostoAparcado) + Number(CostoMovCiudad) + Number(CostoMovCarretera);
+          console.log(TokensSeguro);
+          //$('.estadoContratoCompraToken').html(Activo.toString());
+          $('.PrecioSeguro').html(TokensSeguro);                    
+          }).catch(function (err) {
+            console.error(err);
+          });
+        })    
+  },
+
+
+
+
+
+
+
+
+
   EntregaCoche: function () {
     App.contracts.CompraToken.deployed().then(function (instance) {
       infoInstance = instance;
@@ -2067,6 +2092,9 @@ App = {
         })
     })
   },
+
+
+
   actualizarPrecioAparcado: function (a, b) {
     switch (a) {
       case 0:
@@ -2583,7 +2611,7 @@ App = {
                 var pago = PrecioFurgonetas;
                 var IdSeguro = 1;
                 var tipoCoche = 5;
-                
+
 
               }
 
@@ -2660,7 +2688,7 @@ App = {
 
 
     App.contracts.CompraToken.deployed().then(function (instance) {
-      return instance.pagarTokens(pago, precioKmCiudad, precioKmCarretera, precioAparcado,tipoCoche,IdSeguro,{
+      return instance.pagarTokens(pago, precioKmCiudad, precioKmCarretera, precioAparcado, tipoCoche, IdSeguro, {
         from: App.account,
         value: pago * App.PrecioToken,
         gas: 500000
@@ -2708,10 +2736,10 @@ App = {
 
     });
   },
-  
-  EliminarValorArray: function () {    
+
+  EliminarValorArray: function () {
     App.contracts.CompraToken.deployed().then(function (instance) {
-      return instance.EliminarValorArray(2,0);
+      return instance.EliminarValorArray(2, 0);
     }).then(function (result) {
       $('form1').trigger('reset')
 
@@ -3188,28 +3216,28 @@ App = {
     console.log(record);
     App.contracts.CompraToken.deployed().then(function (instance) {
       console.log("Comprobando registro" + TypeCoche);
-      console.log("Comprobando registro" + IdCoche);      
+      console.log("Comprobando registro" + IdCoche);
       return instance.coches(TypeCoche, IdCoche, { from: App.account });
     }).then(function (result) {
       var htmlDatosCoche = $("#DatosCoche").empty();
       var Datos1 = {};
       Datos1 = {
-        IdCoche: result[0],        
+        IdCoche: result[0],
         Entregado: result[5],
-      };      
+      };
 
       var usuarioTemplate =
-        "<tr><th>" + Datos1.IdCoche +      
-        "</td><td>" + Datos1.Entregado+
+        "<tr><th>" + Datos1.IdCoche +
+        "</td><td>" + Datos1.Entregado +
         "</td></tr>";
       htmlDatosCoche.append(usuarioTemplate);
-      
+
     }).catch(function (err) {
       console.error(err);
     });
   },
 
-  
+
 
   ValidarCoche: function () {
     console.log("registrando Coche...");
@@ -3272,7 +3300,7 @@ App = {
         break;
     }
 
-    
+
     App.contracts.CompraToken.deployed().then(function (instance) {
       console.log("Comprobando registro" + TypeCoche);
       console.log("Comprobando registro" + IdCoche);

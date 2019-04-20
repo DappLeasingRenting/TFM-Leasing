@@ -43,18 +43,18 @@
           <div class="form-group">
             <!--  <label class="control-label col-sm-4 text-right" for="UsuarioLabel">Nombre de Usuario</label>-->
             <div class="col-sm-4">
-           <!--   <input class="form-control" type="text" name="IdUsuario" id="IdUsuario"> -->
+              <!--   <input class="form-control" type="text" name="IdUsuario" id="IdUsuario"> -->
             </div>
           </div>
           <div class="form-group">
-          <!--  <label class="control-label col-sm-4 text-right" for="ContraseñaLabel">Contraseña</label> -->
+            <!--  <label class="control-label col-sm-4 text-right" for="ContraseñaLabel">Contraseña</label> -->
             <div class="col-sm-4">
-          <!--    <input class="form-control" type="password" value="FakePSW" id="Contraseña"> -->
+              <!--    <input class="form-control" type="password" value="FakePSW" id="Contraseña"> -->
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-12 text-center">
-              <!-- <button id="Ingreso" onclick="App.IngresoUsuario()" class="btn">Ingreso</button> -->              
+              <!-- <button id="Ingreso" onclick="App.IngresoUsuario()" class="btn">Ingreso</button> -->
               <button id="Alta" class="btn"><a href="Alta.html">Alta</a></button>
               <button id="ZonaAdmin" onclick="App.ZonaAdmin()" class="btn">Zona Admin Clientes</button>
               <button id="AltaCoche" onclick="App.BotonAltaCoche()" class="btn">Alta de coches</button>
@@ -87,7 +87,7 @@
                               <th scope="col">Id Coche</th>
                               <th scope="col">Costo Seguro Km Ciudad</th>
                               <th scope="col">Costo Seguro Km Carretera</th>
-                              <th scope="col">Costo Seguro Hora Aparcado</th>                            
+                              <th scope="col">Costo Seguro Hora Aparcado</th>
                             </tr>
                           </thead>
                           <tbody id="clienteDatosSeguro" class="success">
@@ -105,18 +105,23 @@
                               <th scope="col">Tiempo Aparcado</th>
                               <th scope="col">ID Seguro</th>
                               <th scope="col">Entregado</th>
+                            </tr>
                           </thead>
                           <tbody id="clienteDatos1" class="success">
                             <tr class="success"></tr>
                           </tbody>
                         </div>
                       </table>
-                      <br></br>
-
+                      <button id="PrecioSeguro" onclick="App.ConsultaSeguro(); return false;"
+                        class="btn btn-info">Consultar Precio Seguro</button>
+                      <h4 class="text-center bg-warninng">
+                        El precio de tu seguro en LST es: <span id="PrecioSeguro" class="PrecioSeguro"></span>
+                      </h4>
                       <button id="EntregaCoche" onclick="App.EntregaCoche(); return false;"
-                        class="btn btn-success btn-lg btn-block">Pago Seguro/Entrega coche</button>
+                        class="btn btn-success btn-block">Pago Seguro/Entrega coche</button>
                       <br></br>
                     </div>
+
 
 
 
@@ -151,13 +156,14 @@
                                 <tr class="info">
                                   <th scope="col">Prestamo</th>
                                   <th scope="col">Valor a Pagar</th>
+                                </tr>
                               </thead>
                               <tbody id="clienteDatos2" class="success">
                                 <tr class="success"></tr>
                               </tbody>
                             </div>
                           </table>
-                          <br></br>                          
+                          <br></br>
                           <br></br>
                           <button id="ciacion" onclick="App.PagarFinanciacion(); return false;"
                             class="btn btn-success btn-lg btn-block">Pago Financiación</button>
@@ -238,32 +244,18 @@
     <div class="row ">
       <div class="col-md-12">
         <div class="panel panel-primary" id="content4" class="text-center" style="display: none;">
+          <h4 class="text-center bg-primary">
+            Bienvenido "ZonaAdmin" (LST)!
+          </h4>
           <br></br>
           <button id="Tranferencia inicial" onclick="App.TranferenciaInicialTokens()"
             class="btn btn-primary">Transferencia
             inicial</button>
-
-
-
-          <h4 class="text-center bg-primary">
-            Bienvenido "Aumentar Tokens" (TAC)!
-          </h4>
           <h4 class="text-center">
             El precio de este token es <span class="token-price"></span> Ether. Actualmente posees <span
               class="dapp-balance"></span>&nbsp;TAC.
           </h4>
-          <form onSubmit="App.aumentarSupply(); return false;" role="form">
 
-            <div class="form-group">
-              <div class="input-group">
-                <input id="numeroTokensAumentar" class="form-control input-lg" type="number" name="number" value="1"
-                  min="1" pattern="[0-9]"><br>
-                <span class="input-group-btn">
-                  <button type="submit" class="btn btn-success btn-lg">Aumentar Tokens</button>
-                </span>
-              </div>
-            </div>
-          </form>
           <br>
           <div class="progress text-center">
             <div id="progress" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuemin="0"
