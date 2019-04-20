@@ -131,10 +131,17 @@
                           <br></br>
                           <button id="Financiamiento" onclick="RedirigeFinanciamiento(); return false;"
                             class="btn-lg btn-secondary btn-lg btn-block">Solicitar Financiamiento</button>
+                            
 
                           <h4 class="text-center">
+                              <div class="form-group col-sm-8 text-left">
+                                  <label class="control-label col-sm-4" for="CIFEmpresaL">CIF empresa financiera</label>
+                                  <div class="col-sm-4">
+                                    <input class="form-control" type="text-left" name="CIFEmpresa" id="CIFEmpresa">
+                                  </div>
+                              
                             Puede financiar hasta un máximo de: <span class="tokens-maximo"></span> Ether.
-
+                          </div>
                           </h4>
 
                           <form onSubmit="App.Financiar(); return false;" role="form">
