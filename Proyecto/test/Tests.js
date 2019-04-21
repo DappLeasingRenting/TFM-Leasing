@@ -261,7 +261,7 @@ contract('CompraToken', function (accounts) {
   });
 
 
-//con el siguiente test ya estamos verificando la función de transfer desde el contrato al admin
+
 
   it('Revisión de la compra de Tokens y transferencia inicial', function () {
         return Token.deployed().then(function (instance) {
