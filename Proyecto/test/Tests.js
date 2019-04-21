@@ -279,9 +279,17 @@ contract('CompraToken', function (accounts) {
         }).then(function (Compra) {
           //Se verifica que los datos generado en el evento sean correctos
           assert.equal(Compra.logs.length, 1, 'Se registra el evento');
-          assert.equal(Compra.logs[0].event, 'Venta', 'Debe generarse le evento Venta');
+          assert.equal(Compra.logs[0].event, 'Venta', 'Debe generarse el evento Venta');
           assert.equal(Compra.logs[0].args._comprador, admin, 'Se registra el addres de quien realiza la compra');
           assert.equal(Compra.logs[0].args._tokens, numeroTokens, 'Se muestra en el evento el número de Tokens comprado');
+          return TokenInstance.transferInicial(CompraToken.address, 100, { from: admin })
+                  }).then(function (Compra) {
+          //Se verifica que los datos generado en el evento sean correctos
+          assert.equal(Compra.logs.length, 1, 'Se registra el evento');
+          assert.equal(Compra.logs[0].event, 'TransferInicial', 'Debe generarse le evento Venta');
+          assert.equal(Compra.logs[0].args._from, admin, 'Se registra el addres de quien realiza la compra');
+          assert.equal(Compra.logs[0].args._to, CompraToken.address, 'destino');
+          assert.equal(Compra.logs[0].args._value, 100, 'valor');
      })
       });
 
@@ -290,16 +298,14 @@ contract('CompraToken', function (accounts) {
     //     return Token.deployed().then(function (instance) {
     //       tokensDisponibles=10000;
     //       TokenInstance = instance; 
-    //       return CompraToken.deployed();
-    //     }).then(function (instance) {
     //       CompraToken = instance;
-    //       return TokenInstance.transferInicial(admin, 100, { from: CompraToken.address })
+    //       return TokenInstance.transferInicial(CompraToken.address, 100, { from: admin })
     //     }).then(function (Compra) {
     //       //Se verifica que los datos generado en el evento sean correctos
     //       assert.equal(Compra.logs.length, 1, 'Se registra el evento');
     //       assert.equal(Compra.logs[0].event, 'TransferInicial', 'Debe generarse le evento Venta');
-    //       assert.equal(Compra.logs[0].args._from, CompraToken.address, 'Se registra el addres de quien realiza la compra');
-    //       assert.equal(Compra.logs[0].args._to, admin, 'destino');
+    //       assert.equal(Compra.logs[0].args._from, admin, 'Se registra el addres de quien realiza la compra');
+    //       assert.equal(Compra.logs[0].args._to, CompraToken.address, 'destino');
     //       assert.equal(Compra.logs[0].args._value, 100, 'valor');
     //  })
     //   });
