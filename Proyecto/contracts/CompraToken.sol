@@ -33,13 +33,21 @@ contract CompraToken is Owned {
          );   
     
     event nuevoCliente(
-        uint record
+        uint TypeUser,
+        string DNI
     );  
+
+    event nuevaEmpresa(
+        uint TypeUser,
+        bytes32 VATNumber
+    );
     event CostoSeguro(         
        uint entregado
     );    
     event newRandomNumber_bytes(bytes);
     event newRandomNumber_uint(uint); 
+
+    event CocheAsignado (uint tipoCoche, uint IdCoche);
 
   
     mapping(uint => uint) public aseguradoraPrecioAparcado;
@@ -244,7 +252,7 @@ contract CompraToken is Owned {
     users[msg.sender] = user(0, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0,0);
    
         
-    emit nuevoCliente(TypeUser); 
+    emit nuevoCliente(TypeUser,DNI); 
        
     }
    function NewEmpresa(uint TypeUser, string memory DNI, bytes32 VATNumber, uint record) public 
@@ -256,7 +264,7 @@ contract CompraToken is Owned {
     users[msg.sender] = user(0, DNI, VATNumber, TypeUser, record, 0, 0, 0, 0, 0,0);
     maestroEmpresas[VATNumber] = msg.sender;
 
-    
+    emit nuevaEmpresa(TypeUser, VATNumber); 
        
     }
    function NewCoche(uint tipoCoche, uint IdCoche) public 
@@ -264,6 +272,7 @@ contract CompraToken is Owned {
     require(Activo == false);           
     coches[tipoCoche][IdCoche] = coche(IdCoche,0, 0, 0, 0,false);
     CochesDisponibles[tipoCoche].push(IdCoche);
+    emit CocheAsignado(tipoCoche, IdCoche);
        }
 
        function ValidarCoche(uint tipoCoche, uint IdCoche) public 

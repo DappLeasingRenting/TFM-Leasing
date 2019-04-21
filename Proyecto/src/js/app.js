@@ -125,7 +125,7 @@ App = {
           App.contracts.CompraToken.deployed().then(function (instance) {
             return instance.fetchTypeUser({ from: App.account });
           }).then(function (result) {
-            //console.log(result + " Tipo Usuario");
+            console.log(result + " Tipo Usuario mi prueba");
             switch (parseInt(result)) {
               case 1: //caso cliente
                 {
@@ -140,6 +140,7 @@ App = {
                   $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
                   $("#content8").show(); //mis contratos "Leasing"
                   $("#content0Alta").show();
+                  console.log(result + " Mi caso cliente");
                 }
                 break;
               case 2:
@@ -149,19 +150,22 @@ App = {
                   $("#content5").show(); //allianz
                   $("#content6").show(); //AXA
                   $("#content0Alta").show();
+                  console.log(result + " Mi caso aseguradora");
                 }
                 break;
               case 3:
                 {
                   //poner módulo financiero
                   $("#content0Alta").show();
-                  $("#contentFinanciera").show();
+                  $("#contentFinanciera33").show();
+                  console.log(result + " Mi caso financiera");
                 }
                 break;
               default: //caso default
                 {
                   $("#loader").show();
                   $("#content0Alta").show();
+                 
 
                 }
                 break;
@@ -2918,7 +2922,7 @@ App = {
       infoInstance.users(dir)
         .then(function (user) {
           persona_ = {
-            IdUsuario: user[0],
+            IdUsuario: user[1],
             Type: user[4],
 
           };
