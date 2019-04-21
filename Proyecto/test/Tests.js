@@ -13,7 +13,7 @@ contract('CompraToken', function (accounts) {
   var cuenta4 = accounts[5];
   var cuenta5 = accounts[6];
   var PrecioToken = 1000000000000000; // en wei
-  var tokensDisponibles = 1000000;
+  var tokenContract = 1000000;
   var numeroTokens;
 
 
@@ -228,6 +228,87 @@ contract('CompraToken', function (accounts) {
       assert.equal(ResultadoPrecio, 40, 'En el mapping el precio está correctamente registrado');
     });
   });
+
+
+  it('Verificamos que el pago del seguro se realiza de forma correcta ', function () {
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.PagoSeguro(100, 1, 1, cuenta3,{ from: admin });
+    }).then(function (ResultadoUsuario) {
+      assert.equal(ResultadoUsuario.logs[0].event, 'CostoSeguro', 'El evento se ha generado');
+      assert.equal(ResultadoUsuario.logs[0].args.entregado, 100, 'El número de tokens coincide');
+    });
+  });
+
+  it('Verificamos que el pago de la financiación se realiza de forma correcta ', function () {
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.PagoFinanciacion(100, 50, cuenta3,{ from: admin });
+    }).then(function (ResultadoUsuario) {
+      assert.equal(ResultadoUsuario.logs[0].event, 'CostoSeguro', 'El evento se ha generado');
+      assert.equal(ResultadoUsuario.logs[0].args.entregado, 100, 'El número de tokens coincide');
+    });
+  });
+
+  it('Comprobamos que CheckAdmin devuelve false si no es el admin', function () {
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.CheckAdmin({ from: cuenta4 }); 
+    }).then(assert.fail).catch(function (error) {
+      assert(error.message.indexOf('revert') >= 0, 'es correcto al no ser admin'); 
+    });
+
+  });
+
+
+  it('Se incializa el contrato CompraToken con los valores correctos y se verifica las address de Token y CompraToken', function () {
+    return CompraToken.deployed().then(function (instance) {
+      // Se graba la instancia
+      CompraTokenInstance = instance;
+      //Se solicita el address del contrato Compratoken
+      return CompraTokenInstance.address
+    }).then(function (address) {
+      assert.notEqual(address, 0x0, 'el contrato devuelve una address válida diferente de la 0X0');
+      return CompraTokenInstance.tokenContract();
+    }).then(function (address) {
+      assert.notEqual(address, 0x0, 'El contrato devuelve una address válida diferente de la 0X0 para el address del contrato Token');
+      return CompraTokenInstance.PrecioToken();
+    }).then(function (price) {
+      assert.equal(price, PrecioToken, 'El precio de los Token (LST)');
+      return CompraTokenInstance.compraTokens(10, { from: admin });
+    }).then(function (ResultadoCompra) {
+      assert.equal(ResultadoCompra.logs[0].event, 'Venta', 'El evento se ha generado');
+      assert.equal(ResultadoCompra.logs[0].args._comprador, admin, 'El address coincide con el del sender');
+      //assert.equal(ResultadoCompra.logs[0].args._tokens, 10000000000000000, 'El número de tokens es correcto');
+    });
+    
+  });
+
+
+
+  // it('Verificamos que la compra de tokens es correcta ', function () {
+  //   return CompraToken.deployed().then(function (instance) {
+  //     CompraTokenInstance = instance;
+  //     return CompraTokenInstance.compraTokens(10, { from: admin });
+  //   }).then(function (ResultadoCompra) {
+  //     assert.equal(ResultadoCompra.logs[0].event, 'Venta', 'El evento se ha generado');
+  //     assert.equal(ResultadoCompra.logs[0].args._comprador, admin, 'El address coincide con el del sender');
+  //     assert.equal(ResultadoCompra.logs[0].args._tokens, 10000000000000000, 'El número de tokens es correcto');
+  //   });
+  // });
+
+  // it('Verificamos que la compra de tokens es correcta ', function () {
+  //   return CompraToken.deployed().then(function (instance) {
+  //     CompraTokenInstance = instance;
+  //     //console.log(PrecioToken + " Precio token");
+  //     return CompraTokenInstance.prestamoTokens(10, cuenta4, { from: admin });
+  //   }).then(function (ResultadoCompra) {
+  //     assert.equal(ResultadoCompra.logs[0].event, 'Venta', 'El evento se ha generado');
+  //     assert.equal(ResultadoCompra.logs[0].args._comprador, admin, 'El address coincide con el del sender');
+  //     assert.equal(ResultadoCompra.logs[0].args._tokens, 1000000000000000, 'El address coincide con el del sender');
+  //   });
+  // });
+
 
 
 //   it('Revisión de la compra y Depostito de Tokens', function () {
