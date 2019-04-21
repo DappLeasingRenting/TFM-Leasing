@@ -140,7 +140,6 @@ App = {
                   $("#content7").show(); //Bienvenido "Leasing Smart Token" (LST)!
                   $("#content8").show(); //mis contratos "Leasing"
                   $("#content0Alta").show();
-                  console.log(result + " Mi caso cliente");
                 }
                 break;
               case 2:
@@ -150,22 +149,19 @@ App = {
                   $("#content5").show(); //allianz
                   $("#content6").show(); //AXA
                   $("#content0Alta").show();
-                  console.log(result + " Mi caso aseguradora");
                 }
                 break;
               case 3:
                 {
                   //poner módulo financiero
                   $("#content0Alta").show();
-                  $("#contentFinanciera33").show();
-                  console.log(result + " Mi caso financiera");
+                  $("#contentFinanciera").show();
                 }
                 break;
               default: //caso default
                 {
                   $("#loader").show();
                   $("#content0Alta").show();
-                 
 
                 }
                 break;
@@ -182,6 +178,8 @@ App = {
         //console.log("La direccion es nula");
         $("#loader").show();
         $("#content0Alta").show();
+        $("#contentFinanciera").show();
+        console.log(result + " Mi caso financiera else");
       }
     });
 

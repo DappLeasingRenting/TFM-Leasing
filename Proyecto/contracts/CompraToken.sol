@@ -49,6 +49,11 @@ contract CompraToken is Owned {
 
     event CocheAsignado (uint tipoCoche, uint IdCoche);
 
+    event CocheValidado (uint tipoCoche, uint IdCoche);
+
+    event EliminaCochesArray(uint NumeroCoches);
+
+    event UsuarioEliminado(bool salida);
   
     mapping(uint => uint) public aseguradoraPrecioAparcado;
     mapping(uint => uint) public aseguradoraPrecioCarretera;
@@ -280,6 +285,8 @@ contract CompraToken is Owned {
     require(Activo == false);           
     coches[tipoCoche][IdCoche].entregado = false;
     CochesDisponibles[tipoCoche].push(IdCoche);
+    emit CocheValidado(tipoCoche, IdCoche);
+
        }
        
     function EliminarValorArray(uint tipoCoche) public  returns( uint[] memory array){
@@ -290,7 +297,11 @@ contract CompraToken is Owned {
             CochesDisponibles[tipoCoche][i] = CochesDisponibles[tipoCoche][i+1];
         }
         CochesDisponibles[tipoCoche].length--;
+        emit EliminaCochesArray(CochesDisponibles[tipoCoche].length);
         return CochesDisponibles[tipoCoche];
+
+        
+
     }  
 
     function deleteUser(address dir) public returns (bool)
@@ -298,6 +309,7 @@ contract CompraToken is Owned {
     {
         require(Activo == false);
         delete users[dir];
+        emit UsuarioEliminado(true);
         return (true);
     }  
 

@@ -83,16 +83,68 @@ contract('CompraToken', function (accounts) {
   it('La asignación de un coche nuevo se hace de la manera correcta', function () {
     return CompraToken.deployed().then(function (instance) {
       CompraTokenInstance = instance;
-      return CompraTokenInstance.NewCoche(1,"76921645Q", cuenta5,10, { from: cuenta4 }); 
+      return CompraTokenInstance.NewCoche(1,1,{ from: cuenta4 }); 
+    }).then(function (Resultado1) {
+      assert.equal(Resultado1.logs[0].event, 'CocheAsignado', 'El evento se ha generado');
+      assert.equal(Resultado1.logs[0].args.tipoCoche, 1, 'El tipo de coche es correcto');
+      assert.equal(Resultado1.logs[0].args.IdCoche, 1, 'El ID de coche es correcto');
+      
+    });
+  });
+
+  it('La validación de un coche se hace de la manera correcta', function () {
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.ValidarCoche(1,1,{ from: cuenta4 }); 
+    }).then(function (Resultado1) {
+      assert.equal(Resultado1.logs[0].event, 'CocheValidado', 'El evento se ha generado');
+      assert.equal(Resultado1.logs[0].args.tipoCoche, 1, 'El tipo de coche es correcto');
+      assert.equal(Resultado1.logs[0].args.IdCoche, 1, 'El ID de coche es correcto');
+      
+    });
+  });
+
+
+  it('La actualización del número de coches se hace de la manera correcta', function () { //asignamos 3 coches: con el inicial el resultado sería 4
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.NewCoche(1,1,{ from: cuenta4 }); 
+    }).then(function (Resultado1) {
+      assert.equal(Resultado1.logs[0].event, 'CocheAsignado', 'El evento se ha generado');
+      assert.equal(Resultado1.logs[0].args.tipoCoche, 1, 'El tipo de coche es correcto');
+      assert.equal(Resultado1.logs[0].args.IdCoche, 1, 'El ID de coche es correcto');
+      return CompraTokenInstance.NewCoche(1,2,{ from: cuenta3 }); 
+    }).then(function (Resultado1) {
+      assert.equal(Resultado1.logs[0].event, 'CocheAsignado', 'El evento se ha generado');
+      assert.equal(Resultado1.logs[0].args.tipoCoche, 1, 'El tipo de coche es correcto');
+      assert.equal(Resultado1.logs[0].args.IdCoche, 2, 'El ID de coche es correcto');
+      return CompraTokenInstance.NewCoche(1,3,{ from: cuenta1 }); 
+    }).then(function (Resultado1) {
+      assert.equal(Resultado1.logs[0].event, 'CocheAsignado', 'El evento se ha generado');
+      assert.equal(Resultado1.logs[0].args.tipoCoche, 1, 'El tipo de coche es correcto');
+      assert.equal(Resultado1.logs[0].args.IdCoche, 3, 'El ID de coche es correcto');
+      return CompraTokenInstance.EliminarValorArray(1,{ from: admin }); 
+    }).then(function (Resultado1) {
+      assert.equal(Resultado1.logs[0].event, 'EliminaCochesArray', 'El evento se ha generado');
+      assert.equal(Resultado1.logs[0].args.NumeroCoches, 4, 'El número de coches es el correcto');
+      
+    });
+  });
+
+  it('Creamos usuario y verificamos que se ha eliminado con éxito', function () {
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.NewUser(1,"76921645L", cuenta3,10, { from: cuenta2 }); 
     }).then(function (Resultado1) {
       assert.equal(Resultado1.logs[0].event, 'nuevoCliente', 'El evento se ha generado');
       assert.equal(Resultado1.logs[0].args.TypeUser, 1, 'El tipo de usuario es el correcto');
-      assert.equal(Resultado1.logs[0].args.DNI, "76921645Q", 'El DNI de usuario es el correcto');
-      return CompraTokenInstance.fetchTypeUser({ from: cuenta4 });
-    }).then(function (ResultadoTypeUsuario) {
-      assert.equal(ResultadoTypeUsuario, 1, 'El fetch del usuario se hace de la manera correcta');
+      assert.equal(Resultado1.logs[0].args.DNI, "76921645L", 'El DNI de usuario es el correcto');
+      return CompraTokenInstance.deleteUser(cuenta2);
+    }).then(function (ResultadoUsuario) {
+      assert.equal(ResultadoUsuario, true, 'El usuario se ha eliminado correctamente');
     });
   });
+
 
 
 //   it('Revisión de la compra y Depostito de Tokens', function () {
