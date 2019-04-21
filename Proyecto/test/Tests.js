@@ -13,7 +13,7 @@ contract('CompraToken', function (accounts) {
   var cuenta4 = accounts[5];
   var cuenta5 = accounts[6];
   var PrecioToken = 1000000000000000; // en wei
-  var tokenContract = 1000000;
+  var tokensDisponibles = 1000000;
   var numeroTokens;
 
 
@@ -261,30 +261,48 @@ contract('CompraToken', function (accounts) {
   });
 
 
-  it('Se incializa el contrato CompraToken con los valores correctos y se verifica las address de Token y CompraToken', function () {
-    return CompraToken.deployed().then(function (instance) {
-      // Se graba la instancia
-      CompraTokenInstance = instance;
-      //Se solicita el address del contrato Compratoken
-      return CompraTokenInstance.address
-    }).then(function (address) {
-      assert.notEqual(address, 0x0, 'el contrato devuelve una address válida diferente de la 0X0');
-      return CompraTokenInstance.tokenContract();
-    }).then(function (address) {
-      assert.notEqual(address, 0x0, 'El contrato devuelve una address válida diferente de la 0X0 para el address del contrato Token');
-      return CompraTokenInstance.PrecioToken();
-    }).then(function (price) {
-      assert.equal(price, PrecioToken, 'El precio de los Token (LST)');
-      return CompraTokenInstance.compraTokens(10, { from: admin });
-    }).then(function (ResultadoCompra) {
-      assert.equal(ResultadoCompra.logs[0].event, 'Venta', 'El evento se ha generado');
-      assert.equal(ResultadoCompra.logs[0].args._comprador, admin, 'El address coincide con el del sender');
-      //assert.equal(ResultadoCompra.logs[0].args._tokens, 10000000000000000, 'El número de tokens es correcto');
-    });
-    
-  });
+//con el siguiente test ya estamos verificando la función de transfer desde el contrato al admin
+
+  it('Revisión de la compra de Tokens', function () {
+        return Token.deployed().then(function (instance) {
+          tokensDisponibles=10000;
+          TokenInstance = instance;
+          return CompraToken.deployed();
+        }).then(function (instance) {
+          CompraToken = instance;
+          return TokenInstance.transfer(CompraToken.address, tokensDisponibles, { from: admin })
+        
+          //Se realiza el despliegue de la función indicandole los valores requeridos para su debido funcionamiento, e indicando que el ejecutor es la cuenta Admin 
+        }).then(function (respuestatransfer1) {
+          numeroTokens = 10;
+          return CompraToken.compraTokens(numeroTokens, { from: admin, value: numeroTokens * PrecioToken })
+        }).then(function (Compra) {
+          //Se verifica que los datos generado en el evento sean correctos
+          assert.equal(Compra.logs.length, 1, 'Se registra el evento');
+          assert.equal(Compra.logs[0].event, 'Venta', 'Debe generarse le evento Venta');
+          assert.equal(Compra.logs[0].args._comprador, admin, 'Se registra el addres de quien realiza la compra');
+          assert.equal(Compra.logs[0].args._tokens, numeroTokens, 'Se muestra en el evento el número de Tokens comprado');
+     })
+      });
 
 
+    //   it('Revisión de la transferencia inicial de Tokens', function () {
+    //     return Token.deployed().then(function (instance) {
+    //       tokensDisponibles=10000;
+    //       TokenInstance = instance; 
+    //       return CompraToken.deployed();
+    //     }).then(function (instance) {
+    //       CompraToken = instance;
+    //       return TokenInstance.transferInicial(admin, 100, { from: CompraToken.address })
+    //     }).then(function (Compra) {
+    //       //Se verifica que los datos generado en el evento sean correctos
+    //       assert.equal(Compra.logs.length, 1, 'Se registra el evento');
+    //       assert.equal(Compra.logs[0].event, 'TransferInicial', 'Debe generarse le evento Venta');
+    //       assert.equal(Compra.logs[0].args._from, CompraToken.address, 'Se registra el addres de quien realiza la compra');
+    //       assert.equal(Compra.logs[0].args._to, admin, 'destino');
+    //       assert.equal(Compra.logs[0].args._value, 100, 'valor');
+    //  })
+    //   });
 
   // it('Verificamos que la compra de tokens es correcta ', function () {
   //   return CompraToken.deployed().then(function (instance) {
