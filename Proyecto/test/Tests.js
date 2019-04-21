@@ -134,17 +134,100 @@ contract('CompraToken', function (accounts) {
   it('Creamos usuario y verificamos que se ha eliminado con éxito', function () {
     return CompraToken.deployed().then(function (instance) {
       CompraTokenInstance = instance;
-      return CompraTokenInstance.NewUser(1,"76921645L", cuenta3,10, { from: cuenta2 }); 
+      return CompraTokenInstance.NewUser(1,"76921645L", cuenta3,10, { from: admin }); 
     }).then(function (Resultado1) {
       assert.equal(Resultado1.logs[0].event, 'nuevoCliente', 'El evento se ha generado');
       assert.equal(Resultado1.logs[0].args.TypeUser, 1, 'El tipo de usuario es el correcto');
       assert.equal(Resultado1.logs[0].args.DNI, "76921645L", 'El DNI de usuario es el correcto');
-      return CompraTokenInstance.deleteUser(cuenta2);
+      return CompraTokenInstance.deleteUser(admin);
     }).then(function (ResultadoUsuario) {
-      assert.equal(ResultadoUsuario, true, 'El usuario se ha eliminado correctamente');
+      assert.equal(ResultadoUsuario.logs[0].event, 'UsuarioEliminado', 'El evento se ha generado');
+      assert.equal(ResultadoUsuario.logs[0].args.salida, true, 'El usuario se ha eliminado correctamente');
+
     });
   });
 
+
+  it('Creamos usuario y comprobamos que el crédito se ha asignado con éxito', function () {
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.NewUser(1,"76921645L", cuenta4,10, { from: cuenta5 }); 
+    }).then(function (Resultado1) {
+      assert.equal(Resultado1.logs[0].event, 'nuevoCliente', 'El evento se ha generado');
+      assert.equal(Resultado1.logs[0].args.TypeUser, 1, 'El tipo de usuario es el correcto');
+      assert.equal(Resultado1.logs[0].args.DNI, "76921645L", 'El DNI de usuario es el correcto');
+      return CompraTokenInstance.asignaCreditoMaximo(1000, { from: cuenta5 });
+    }).then(function (ResultadoUsuario) {
+      assert.equal(ResultadoUsuario.logs[0].event, 'CreditoMaxAsignado', 'El evento se ha generado');
+      assert.equal(ResultadoUsuario.logs[0].args.maxCredit, 1000, 'El crédito se ha asignado correctamente');
+      return CompraTokenInstance.users(cuenta5);
+    }).then(function (ResultadoUsuario) {
+      assert.equal(ResultadoUsuario[8], 1000, 'En el mapping el crédito está correctamente registrado');
+    });
+
+  });
+
+
+  it('Comprobamos si la DetenerContrato funciona con un address que no es el admin', function () {
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.DetenerContratoCompraToken({ from: cuenta5 }); 
+    }).then(assert.fail).catch(function (error) {
+      assert(error.message.indexOf('revert') >= 0, 'es correcto al no ser admin'); 
+    });
+
+  });
+
+  it('Comprobamos si la ActivarContrato funciona con un address que no es el admin', function () {
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.ActivarContratoCompraToken({ from: cuenta4 }); 
+    }).then(assert.fail).catch(function (error) {
+      assert(error.message.indexOf('revert') >= 0, 'es correcto al no ser admin'); 
+    });
+
+  });
+
+
+  it('Verificamos que el precio por km aparcado se registra de forma correcta ', function () {
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.actualizarPrecioAparcado(1, 40, { from: admin });
+    }).then(function (ResultadoUsuario) {
+      assert.equal(ResultadoUsuario.logs[0].event, 'actualizarPrecioAparcadoE', 'El evento se ha generado');
+      assert.equal(ResultadoUsuario.logs[0].args.PrecioAparcado, 40, 'El precio del kilómetro aparcado es correcto');
+      return CompraTokenInstance.aseguradoraPrecioAparcado(1);
+    }).then(function (ResultadoPrecio) {
+      assert.equal(ResultadoPrecio, 40, 'En el mapping el precio está correctamente registrado');
+    });
+  });
+
+
+  it('Verificamos que el precio por km por carretera se registra de forma correcta ', function () {
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.actualizarPrecioCarretera(1, 40, { from: admin });
+    }).then(function (ResultadoUsuario) {
+      assert.equal(ResultadoUsuario.logs[0].event, 'actualizarPrecioCarreteraE', 'El evento se ha generado');
+      assert.equal(ResultadoUsuario.logs[0].args.PrecioCarretera, 40, 'El precio del kilómetro carretera es correcto');
+      return CompraTokenInstance.aseguradoraPrecioCarretera(1);
+    }).then(function (ResultadoPrecio) {
+      assert.equal(ResultadoPrecio, 40, 'En el mapping el precio está correctamente registrado');
+    });
+  });
+
+  it('Verificamos que el precio por km ciudad se registra de forma correcta ', function () {
+    return CompraToken.deployed().then(function (instance) {
+      CompraTokenInstance = instance;
+      return CompraTokenInstance.actualizarPrecioCiudad(1, 40, { from: admin });
+    }).then(function (ResultadoUsuario) {
+      assert.equal(ResultadoUsuario.logs[0].event, 'actualizarPrecioCiudadE', 'El evento se ha generado');
+      assert.equal(ResultadoUsuario.logs[0].args.PrecioCiudad, 40, 'El precio del kilómetro ciudad es correcto');
+      return CompraTokenInstance.aseguradoraPrecioCiudad(1);
+    }).then(function (ResultadoPrecio) {
+      assert.equal(ResultadoPrecio, 40, 'En el mapping el precio está correctamente registrado');
+    });
+  });
 
 
 //   it('Revisión de la compra y Depostito de Tokens', function () {

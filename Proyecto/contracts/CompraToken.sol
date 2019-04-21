@@ -54,7 +54,15 @@ contract CompraToken is Owned {
     event EliminaCochesArray(uint NumeroCoches);
 
     event UsuarioEliminado(bool salida);
+
+    event CreditoMaxAsignado(uint maxCredit);
   
+    event actualizarPrecioAparcadoE(uint PrecioAparcado);
+    event actualizarPrecioCarreteraE(uint PrecioCarretera);
+    event actualizarPrecioCiudadE(uint PrecioCiudad);
+    
+    
+    
     mapping(uint => uint) public aseguradoraPrecioAparcado;
     mapping(uint => uint) public aseguradoraPrecioCarretera;
     mapping(uint => uint) public aseguradoraPrecioCiudad;
@@ -191,14 +199,17 @@ contract CompraToken is Owned {
     function actualizarPrecioAparcado(uint idEmpresa, uint precioAparcado) public {
         require(Activo == false);
         aseguradoraPrecioAparcado[idEmpresa] = precioAparcado;
+        emit actualizarPrecioAparcadoE(aseguradoraPrecioAparcado[idEmpresa]);
     }
     function actualizarPrecioCarretera(uint idEmpresa, uint precioCarretera) public {
         require(Activo == false);
         aseguradoraPrecioCarretera[idEmpresa] = precioCarretera;
+        emit actualizarPrecioCarreteraE(aseguradoraPrecioCarretera[idEmpresa]);
     }
     function actualizarPrecioCiudad(uint idEmpresa, uint precioCiudad) public {
         require(Activo == false);
         aseguradoraPrecioCiudad[idEmpresa] = precioCiudad;
+        emit actualizarPrecioCiudadE(aseguradoraPrecioCiudad[idEmpresa]);
     }
    
 
@@ -309,7 +320,8 @@ contract CompraToken is Owned {
     {
         require(Activo == false);
         delete users[dir];
-        emit UsuarioEliminado(true);
+        bool salida=true;
+        emit UsuarioEliminado(salida);
         return (true);
     }  
 
@@ -354,6 +366,7 @@ contract CompraToken is Owned {
     function asignaCreditoMaximo(uint maxCredit) public returns (uint){
     require(Activo == false);
     users[msg.sender].MaxCredito= maxCredit;
+    emit CreditoMaxAsignado(users[msg.sender].MaxCredito);
     return users[msg.sender].MaxCredito;
     //asignación de crédito máximo por dirección de usuario
     }
