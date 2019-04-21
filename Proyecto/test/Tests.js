@@ -30,7 +30,7 @@ contract('CompraToken', function (accounts) {
       assert.notEqual(address, 0x0, 'El contrato devuelve una address válida diferente de la 0X0 para el address del contrato Token');
       return CompraTokenInstance.PrecioToken();
     }).then(function (price) {
-      assert.equal(price, PrecioToken, 'El precio de los Token (TAC)');
+      assert.equal(price, PrecioToken, 'El precio de los Token (LST)');
     });
   });
   
